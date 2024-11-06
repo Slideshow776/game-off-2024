@@ -17,7 +17,7 @@ var current_selected_card_index := -1
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 
-func _process(delta: float) -> void:		
+func _process(delta: float) -> void:
 	for card in cards:
 		current_selected_card_index = -1
 		card.unhighlight()
@@ -39,10 +39,17 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("mouse_click") and current_selected_card_index >= 0:
-		var card = remove(current_selected_card_index)
-		#card.queue_free()
+		var card = cards[current_selected_card_index]
 		card_activated.emit(card)
 		current_selected_card_index = -1
+
+
+func empty():
+	current_selected_card_index = -1
+	for card in cards:
+		card.queue_free()
+	cards.clear()
+	touched.clear()
 
 
 func get_card_position(angle_in_degree: float) -> Vector2:
@@ -58,6 +65,11 @@ func remove(index: int) -> UsableCard:
 	touched.remove_at(touched.find(card))
 	_reposition_cards()
 	return card
+
+
+func remove_by_entity(card: Node2D):
+	var remove_index = cards.find(card)
+	remove(remove_index)
 
 
 func add(card: Node2D) -> void:

@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5oliard7acm0"]
+[gd_scene load_steps=5 format=3 uid="uid://c5oliard7acm0"]
 
 [ext_resource type="Script" path="res://scripts/deck_and_hand.gd" id="1_x1mxb"]
+[ext_resource type="PackedScene" uid="uid://c0aigp2eemapb" path="res://scenes/cards/AttackCard.tscn" id="2_6t8qo"]
 [ext_resource type="PackedScene" uid="uid://drbayobfjnntg" path="res://scenes/Hand.tscn" id="2_txvok"]
+[ext_resource type="PackedScene" uid="uid://dy5tnt3xvq4sx" path="res://scenes/cards/DefenseCard.tscn" id="3_cl53y"]
 
 [node name="DeckAndHand" type="Node2D"]
 script = ExtResource("1_x1mxb")
+attack_card_scene = ExtResource("2_6t8qo")
+defense_card_scene = ExtResource("3_cl53y")
 
 [node name="Button" type="Button" parent="."]
 unique_name_in_owner = true
@@ -18,13 +22,6 @@ offset_top = 40.0
 offset_right = 134.0
 offset_bottom = 71.0
 text = "add defend card"
-
-[node name="Button3" type="Button" parent="."]
-unique_name_in_owner = true
-offset_top = 80.0
-offset_right = 134.0
-offset_bottom = 111.0
-text = "remove random card"
 
 [node name="Hand" parent="." instance=ExtResource("2_txvok")]
 unique_name_in_owner = true

@@ -12,7 +12,7 @@ enum Type { RED, BLUE }
 @export_range(0, 20) var cost: int = 1
 @export var image: Texture2D
 @export var type: Type = Type.RED
-
+	
 var _original_scale: Vector2
 var _original_position: Vector2
 
@@ -51,12 +51,12 @@ func set_values(
 	_original_position = position
 
 
-func highlight():
+func highlight() -> void:
 	scale = _original_scale * 1.25
-	position.y -= 150
+	position.y -= 125
 
 
-func unhighlight():
+func unhighlight() -> void:
 	scale = _original_scale * 1.0
 	position = _original_position
 
@@ -76,7 +76,7 @@ func _get_type(type: Type) -> Color:
 	return Color.WHITE
 
 
-func _update_graphics():
+func _update_graphics() -> void:
 	if cost_label != null and cost_label.text != str(cost):
 		cost_label.text = str(cost)
 		

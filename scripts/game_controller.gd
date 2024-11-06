@@ -8,7 +8,24 @@ enum GameState {
 	GAME_WON,
 }
 
+var is_running := true
 var current_state := GameState.PLAYER_TURN
+
+
+func toggle_pause_and_resume() -> void:
+	is_running = !is_running
+	if is_running:
+		pause()
+	else:
+		resume()
+
+
+func pause() -> void:
+	is_running = false
+
+
+func resume() -> void:
+	is_running = true
 
 
 func transition(next_state: GameState) -> void:
@@ -22,4 +39,3 @@ func transition(next_state: GameState) -> void:
 			pass
 		GameState.GAME_WON:
 			pass
-		

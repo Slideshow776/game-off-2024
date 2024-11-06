@@ -6,9 +6,9 @@ signal mouse_exited(card: Card)
 
 @export var action: Node2D
 
-@onready var card: Card = $Card
+@onready var card: Card = %Card
 @onready var attack_action: Node2D = %AttackAction
-@onready var defense_action: Node2D = $DefenseAction
+@onready var defense_action: Node2D = %DefenseAction
 
 
 func _ready() -> void:
@@ -16,23 +16,27 @@ func _ready() -> void:
 	card.mouse_exited.connect(_on_card_mouse_exited)
 
 
-func highlight():
+func highlight() -> void:
 	card.highlight()
 
 
-func unhighlight():
+func unhighlight() -> void:
 	card.unhighlight()
 
 
-func _on_card_mouse_entered(card: Card):
+func get_cost() -> int:
+	return card.cost
+
+
+func _on_card_mouse_entered(card: Card) -> void:
 	mouse_entered.emit(self)
 
 
-func _on_card_mouse_exited(card: Card):
+func _on_card_mouse_exited(card: Card) -> void:
 	mouse_exited.emit(self)
 
 
-func activate(game_state: Dictionary):
+func activate(game_state: Dictionary) -> void:
 	if attack_action != null:
 		attack_action.activate(game_state)
 	if defense_action != null:

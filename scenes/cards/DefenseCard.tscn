@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dy5tnt3xvq4sx"]
 
 [ext_resource type="Script" path="res://scripts/cards/usable_card.gd" id="1_b0tl2"]
-[ext_resource type="PackedScene" uid="uid://c4sdhdmmxwye6" path="res://scenes/Card.tscn" id="2_wnvfe"]
+[ext_resource type="PackedScene" uid="uid://c4sdhdmmxwye6" path="res://scenes/cards/Card.tscn" id="2_wnvfe"]
 [ext_resource type="Texture2D" uid="uid://borofa6wbn8jx" path="res://assets/images/card/image2.png" id="3_eh7g6"]
 [ext_resource type="Script" path="res://scripts/cards/defense_action.gd" id="4_6gh8c"]
 
@@ -10,11 +10,13 @@ script = ExtResource("1_b0tl2")
 action = NodePath("DefenseAction")
 
 [node name="Card" parent="." instance=ExtResource("2_wnvfe")]
+unique_name_in_owner = true
 title = "Defend"
 description = "Defend 1"
-cost = 11
+cost = 2
 image = ExtResource("3_eh7g6")
 type = 1
 
 [node name="DefenseAction" type="Node2D" parent="."]
+unique_name_in_owner = true
 script = ExtResource("4_6gh8c")
