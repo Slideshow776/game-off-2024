@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://c4sdhdmmxwye6"]
+
+[ext_resource type="Script" path="res://scripts/card.gd" id="1_xd1g8"]
+[ext_resource type="Texture2D" uid="uid://dv1stdckgs7l5" path="res://assets/images/card/card_border.png" id="2_w504a"]
+[ext_resource type="Texture2D" uid="uid://b7a04cmjjvgua" path="res://assets/images/card/card.png" id="3_p38ga"]
+[ext_resource type="Texture2D" uid="uid://gm5phtwk456g" path="res://assets/images/card/card_cost.png" id="5_x4q83"]
+[ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/main_theme.tres" id="6_l501u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a1hhb"]
+size = Vector2(487.024, 685.441)
+
+[node name="Card" type="Node2D"]
+scale = Vector2(0.498949, 0.498949)
+script = ExtResource("1_xd1g8")
+
+[node name="Area2D" type="Area2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1.00214, -6.01264)
+shape = SubResource("RectangleShape2D_a1hhb")
+
+[node name="CardBorderSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.803922, 0.360784, 0.360784, 1)
+texture = ExtResource("2_w504a")
+
+[node name="CardSprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_p38ga")
+
+[node name="CardImage" type="Node2D" parent="."]
+
+[node name="ImageSprite" type="Sprite2D" parent="CardImage"]
+unique_name_in_owner = true
+position = Vector2(-5.00001, -101.5)
+scale = Vector2(0.972136, 0.958115)
+
+[node name="CostDisplay" type="Node2D" parent="."]
+position = Vector2(-227, -282)
+metadata/_edit_group_ = true
+
+[node name="CostSprite" type="Sprite2D" parent="CostDisplay"]
+scale = Vector2(0.60926, 0.707936)
+texture = ExtResource("5_x4q83")
+
+[node name="CostLabel" type="Label" parent="CostDisplay"]
+unique_name_in_owner = true
+offset_left = -39.0
+offset_top = -39.0
+offset_right = 40.0
+offset_bottom = 41.0
+theme = ExtResource("6_l501u")
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TitleLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -200.0
+offset_top = -283.0
+offset_right = 178.0
+offset_bottom = -202.0
+theme = ExtResource("6_l501u")
+text = "TODO: Card Title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="descriptionLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -160.0
+offset_top = 6.0
+offset_right = 158.0
+offset_bottom = 254.0
+theme = ExtResource("6_l501u")
+text = "TODO: Card Description"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Node2D" type="Node2D" parent="."]

@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5oliard7acm0"]
+
+[ext_resource type="Script" path="res://scripts/deck_and_hand.gd" id="1_x1mxb"]
+[ext_resource type="PackedScene" uid="uid://drbayobfjnntg" path="res://scenes/Hand.tscn" id="2_txvok"]
+
+[node name="DeckAndHand" type="Node2D"]
+script = ExtResource("1_x1mxb")
+
+[node name="Button" type="Button" parent="."]
+unique_name_in_owner = true
+offset_right = 128.0
+offset_bottom = 31.0
+text = "add attack card"
+
+[node name="Button2" type="Button" parent="."]
+unique_name_in_owner = true
+offset_top = 40.0
+offset_right = 134.0
+offset_bottom = 71.0
+text = "add defend card"
+
+[node name="Hand" parent="." instance=ExtResource("2_txvok")]
+unique_name_in_owner = true
+position = Vector2(576, 1629)
+card_angle = -91.115
+angle_limit = 30.0
+max_card_spread_angle = 10.0

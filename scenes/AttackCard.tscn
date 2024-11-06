@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0aigp2eemapb"]
+
+[ext_resource type="PackedScene" uid="uid://c4sdhdmmxwye6" path="res://scenes/Card.tscn" id="1_c0caq"]
+[ext_resource type="Script" path="res://scripts/cards/usable_card.gd" id="1_csul2"]
+[ext_resource type="Texture2D" uid="uid://deo3losldb63s" path="res://assets/images/card/image.png" id="2_nmliv"]
+[ext_resource type="Script" path="res://scripts/cards/attack_action.gd" id="4_jy4b7"]
+
+[node name="AttackCard" type="Node2D" node_paths=PackedStringArray("action")]
+script = ExtResource("1_csul2")
+action = NodePath("AttackAction")
+
+[node name="Card" parent="." instance=ExtResource("1_c0caq")]
+title = "Attack"
+description = "Deal 1 damage"
+image = ExtResource("2_nmliv")
+
+[node name="AttackAction" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_jy4b7")

@@ -1,0 +1,118 @@
+[gd_scene load_steps=9 format=3 uid="uid://ci0unrji7vi3w"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_8pbs6"]
+[ext_resource type="Script" path="res://scripts/character.gd" id="1_feuee"]
+[ext_resource type="Texture2D" uid="uid://cntwheij8fvq3" path="res://assets/images/thief.png" id="1_tb46g"]
+[ext_resource type="Script" path="res://scripts/game_controller.gd" id="2_lcj48"]
+[ext_resource type="Texture2D" uid="uid://ltjls1rswnvw" path="res://assets/images/muffin_man.png" id="2_n72km"]
+[ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/main_theme.tres" id="2_y60n5"]
+[ext_resource type="PackedScene" uid="uid://c5oliard7acm0" path="res://scenes/DeckAndHand.tscn" id="3_6ku62"]
+[ext_resource type="Texture2D" uid="uid://borofa6wbn8jx" path="res://assets/images/card/image2.png" id="5_fi3wd"]
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("player_character")]
+script = ExtResource("1_8pbs6")
+player_character = NodePath("GameScreen/PlayerCharacter")
+
+[node name="GameController" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_lcj48")
+
+[node name="ManaAmount" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 5.0
+offset_top = 87.0
+offset_right = 76.0
+offset_bottom = 110.0
+text = "Mana: 10"
+
+[node name="GameScreen" type="Node2D" parent="."]
+
+[node name="PlayerCharacter" type="Node2D" parent="GameScreen"]
+unique_name_in_owner = true
+script = ExtResource("1_feuee")
+
+[node name="Sprite2D" type="Sprite2D" parent="GameScreen/PlayerCharacter"]
+position = Vector2(425, 188)
+texture = ExtResource("1_tb46g")
+
+[node name="HealthBar" type="ProgressBar" parent="GameScreen/PlayerCharacter"]
+offset_left = 365.0
+offset_top = 94.0
+offset_right = 494.0
+offset_bottom = 121.0
+theme = ExtResource("2_y60n5")
+max_value = 10.0
+value = 10.0
+show_percentage = false
+
+[node name="Defense" type="Sprite2D" parent="GameScreen/PlayerCharacter"]
+visible = false
+position = Vector2(380, 80)
+scale = Vector2(0.155844, 0.155844)
+texture = ExtResource("5_fi3wd")
+
+[node name="Label" type="Label" parent="GameScreen/PlayerCharacter/Defense"]
+offset_left = 89.8334
+offset_top = -70.5834
+offset_right = 153.833
+offset_bottom = 77.4166
+theme = ExtResource("2_y60n5")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemyCharacter" type="Node2D" parent="GameScreen"]
+script = ExtResource("1_feuee")
+
+[node name="Sprite2D" type="Sprite2D" parent="GameScreen/EnemyCharacter"]
+position = Vector2(739, 155)
+scale = Vector2(0.517778, 0.517778)
+texture = ExtResource("2_n72km")
+
+[node name="HealthBar" type="ProgressBar" parent="GameScreen/EnemyCharacter"]
+offset_left = 673.0
+offset_top = 40.0
+offset_right = 802.0
+offset_bottom = 67.0
+theme = ExtResource("2_y60n5")
+max_value = 10.0
+value = 10.0
+show_percentage = false
+
+[node name="Defense" type="Sprite2D" parent="GameScreen/EnemyCharacter"]
+visible = false
+position = Vector2(687, 27)
+scale = Vector2(0.155844, 0.155844)
+texture = ExtResource("5_fi3wd")
+
+[node name="Label" type="Label" parent="GameScreen/EnemyCharacter/Defense"]
+offset_left = 89.8334
+offset_top = -70.5834
+offset_right = 153.833
+offset_bottom = 77.4166
+theme = ExtResource("2_y60n5")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DeckAndHand" parent="." instance=ExtResource("3_6ku62")]
+unique_name_in_owner = true
+
+[node name="InflictOneButton" type="Button" parent="."]
+offset_left = 5.0
+offset_top = 113.0
+offset_right = 209.0
+offset_bottom = 144.0
+text = "inflict 1 damage to player
+"
+
+[node name="InflictThreeButton" type="Button" parent="."]
+offset_left = 5.0
+offset_top = 153.0
+offset_right = 209.0
+offset_bottom = 184.0
+text = "inflict 3 damage to player
+"
+
+[connection signal="pressed" from="InflictOneButton" to="." method="_on_inflict_one_button_pressed"]
+[connection signal="pressed" from="InflictThreeButton" to="." method="_on_inflict_three_button_pressed"]
