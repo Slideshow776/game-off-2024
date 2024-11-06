@@ -1,4 +1,4 @@
-# My [Game Off 2024](https://itch.io/jam/game-off-2024)
+# My [Game Off 2024](https://itch.io/jam/game-off-2024)  :octocat:
 > Game Off is an annual game jam challenging individuals and teams to build a game during the month of November.
 >
 > This year's Game Off theme is **SECRETS**.
