@@ -4,11 +4,20 @@ extends Node2D
 signal mouse_entered(card: Card)
 signal mouse_exited(card: Card)
 
-@export var action: Node2D
+var actions: Array[RefCounted]
 
 @onready var card: Card = %Card
 @onready var attack_action: Node2D = %AttackAction
 @onready var defense_action: Node2D = %DefenseAction
+@onready var card_image_texture: Texture2D
+
+func load_card_data(card_data: CardData) -> void:
+	card.set_values(card_data.title, card_data.description, card_data.cost)
+	card.image_sprite.texture = card_data.texture		
+	for script in card_data.actions:
+		var action_script = RefCounted.new()
+		action_script.set_script(script)
+		actions.push_back(action_script)
 
 
 func _ready() -> void:
@@ -37,7 +46,5 @@ func _on_card_mouse_exited(card: Card) -> void:
 
 
 func activate(game_state: Dictionary) -> void:
-	if attack_action != null:
-		attack_action.activate(game_state)
-	if defense_action != null:
-		defense_action.activate(game_state)
+	for action in actions:
+		action.activate(game_state)

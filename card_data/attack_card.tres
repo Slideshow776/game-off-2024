@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://dgwxaf1naxwdx"]
+
+[ext_resource type="Script" path="res://scripts/cards/defense_action.gd" id="1_1p23p"]
+[ext_resource type="Script" path="res://scripts/data objects/card_data.gd" id="1_qhee8"]
+[ext_resource type="Texture2D" uid="uid://deo3losldb63s" path="res://assets/images/card/image.png" id="2_pdo18"]
+
+[resource]
+script = ExtResource("1_qhee8")
+title = "Attack"
+description = "Deal 1 damage"
+cost = null
+texture = ExtResource("2_pdo18")
+actions = Array[GDScript]([ExtResource("1_1p23p")])

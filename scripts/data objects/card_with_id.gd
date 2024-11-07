@@ -2,9 +2,9 @@ class_name CardWithID
 extends Resource
 
 var id: int
-var card: UsableCard
+var card: CardData
 
 
-func _init(_id: int, _card) -> void:
-	id = _id
-	card = _card
+func _init(id: int, card: CardData) -> void:
+	self.id = id
+	self.card = card

@@ -9,7 +9,7 @@ var cached_card_containers: Array[CardContainer] = []
 
 func clear_display():
 	for child in h_flow_container.get_children():
-		child.remove_child(child.card)
+		#child.remove_child(child.usable_card)
 		h_flow_container.remove_child(child)
 
 
@@ -22,5 +22,5 @@ func display_card_list(cardsWithID: Array[CardWithID]) -> void:
 	for i in cardsWithID.size():
 		var cardWithID: CardWithID = cardsWithID[i] as CardWithID
 		var card_container: CardContainer = cached_card_containers[i]
-		card_container.card = cardWithID.card
 		h_flow_container.add_child(card_container)
+		card_container.card = cardWithID.card

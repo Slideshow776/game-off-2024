@@ -9,12 +9,12 @@ signal card_activated(card: UsableCard)
 @export var angle_limit := 20.0
 @export var max_card_spread_angle = 5.0
 
-var cards: Array = []
-var touched: Array = []
+var cards: Array[UsableCard] = []
+var touched: Array[UsableCard] = []
 var current_selected_card_index := -1
 
-@onready var test_card: Node2D = $TestCard
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var usable_card_scene: PackedScene = preload("res://scenes/cards/UsableCard.tscn")
 
 
 func _process(delta: float) -> void:
@@ -32,9 +32,6 @@ func _process(delta: float) -> void:
 			current_selected_card_index = highest_touched_index
 	
 	(collision_shape_2d.shape as CircleShape2D).set_radius(hand_radius)
-	
-	test_card.set_position(get_card_position(card_angle))
-	test_card.set_rotation(deg_to_rad(card_angle + 90))
 
 
 func _input(event: InputEvent) -> void:
@@ -44,7 +41,7 @@ func _input(event: InputEvent) -> void:
 		current_selected_card_index = -1
 
 
-func empty():
+func empty() -> void:
 	current_selected_card_index = -1
 	for card in cards:
 		card.queue_free()
@@ -58,7 +55,7 @@ func get_card_position(angle_in_degree: float) -> Vector2:
 	return Vector2(x, y)
 
 
-func remove(index: int) -> UsableCard:
+func remove_card(index: int) -> UsableCard:
 	var card = cards[index]
 	cards.remove_at(index)
 	remove_child(card)
@@ -67,24 +64,26 @@ func remove(index: int) -> UsableCard:
 	return card
 
 
-func remove_by_entity(card: Node2D):
+func remove_by_entity(card: UsableCard) -> void:
 	var remove_index = cards.find(card)
-	remove(remove_index)
+	remove_card(remove_index)
 
 
-func add(card: Node2D) -> void:
-	cards.push_back(card)
-	add_child(card)
-	card.mouse_entered.connect(_handle_card_touched)
-	card.mouse_exited.connect(_handle_card_untouched)
+func add_card(card_data: CardData) -> void:
+	var usable_card = usable_card_scene.instantiate()
+	cards.push_back(usable_card)
+	add_child(usable_card)
+	usable_card.load(card_data)
+	usable_card.mouse_entered.connect(_handle_card_touched)
+	usable_card.mouse_exited.connect(_handle_card_untouched)
 	_reposition_cards()
 
 
-func _handle_card_touched(card: Node2D):
+func _handle_card_touched(card: UsableCard) -> void:
 	touched.push_back(card)
 
 
-func _handle_card_untouched(card: Node2D):
+func _handle_card_untouched(card: UsableCard) -> void:
 	touched.remove_at(touched.find(card))
 	#var card_index := cards.find(card)
 	#if card_index == highlight_index:
@@ -92,7 +91,7 @@ func _handle_card_untouched(card: Node2D):
 		#highlight_index = -1
 
 
-func _reposition_cards():
+func _reposition_cards() -> void:
 	var card_spread = min(angle_limit / cards.size(), max_card_spread_angle)
 	var current_angle = -(card_spread * (cards.size() - 1)) / 2 - 90 
 	for card in cards:
@@ -100,6 +99,6 @@ func _reposition_cards():
 		current_angle += card_spread
 
 
-func _update_card_transform(card: Node2D, angle_in_deg: float) -> void:
+func _update_card_transform(card: UsableCard, angle_in_deg: float) -> void:
 	card.set_position(get_card_position(angle_in_deg))
 	card.set_rotation(deg_to_rad(angle_in_deg + 90))

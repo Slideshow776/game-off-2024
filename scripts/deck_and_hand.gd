@@ -4,8 +4,16 @@ extends Node2D
 signal card_activated(card: UsableCard)
 
 @export var deck: Deck
-@export var attack_card_scene: PackedScene = preload("res://scenes/cards/AttackCard.tscn")
-@export var defense_card_scene: PackedScene = preload("res://scenes/cards/DefenseCard.tscn")
+@export var debug_mode := true:
+	set(value):
+		if !is_node_ready():
+			await ready
+		%Button.visible = debug_mode
+		%Button2.visible = debug_mode
+		%Button3.visible = debug_mode
+
+@export var attack_card_data: CardData = preload("res://card_data/attack_card.tres")
+@export var defense_card_data: CardData = preload("res://card_data/defend_card.tres")
 
 @onready var button: Button = %Button
 @onready var button_2: Button = %Button2
@@ -21,6 +29,10 @@ func _ready() -> void:
 	hand.card_activated.connect(_on_hand_card_activated)
 
 
+func add_card(card_with_id: CardWithID) -> void:
+	hand.add_card(card_with_id.card)
+
+
 func remove_card(card: Node2D) -> void:
 	hand.remove_by_entity(card)
 
@@ -30,13 +42,11 @@ func reset() -> void:
 
 
 func _on_attack_button_pressed() -> void:
-	var card = attack_card_scene.instantiate()
-	deck.add(card)
+	deck.add_card(attack_card_data.duplicate())
 
 
 func _on_defend_button_pressed() -> void:
-	var card = defense_card_scene.instantiate()
-	deck.add(card)
+	deck.add_card(defense_card_data.duplicate())
 
 
 func _on_button3_pressed() -> void:
@@ -44,7 +54,7 @@ func _on_button3_pressed() -> void:
 		return
 		
 	var random_card: CardWithID = deck.get_cards().pick_random()
-	deck.remove(random_card.id)
+	deck.remove_card(random_card.id)
 
 
 func _on_hand_card_activated(card: UsableCard) -> void:

@@ -1,16 +1,28 @@
 extends Node2D
 
 @export var player_character: Character
+@export var debug_mode := true: 
+	set(value):
+		if !is_node_ready():
+			await ready
+		debug_mode = value
+		%InflictOneButton.visible = debug_mode
+		%InflictThreeButton.visible = debug_mode
+		%DeckAndHand.visible = debug_mode
 
 var enemy_character_state := 0
 
 @onready var deck_and_hand: DeckAndHand = %DeckAndHand
 @onready var mana_amount: Label = %ManaAmount
 @onready var game_controller: GameController = %GameController
+@onready var inflict_one_button: Button = %InflictOneButton
+@onready var inflict_three_button: Button = %InflictThreeButton
 @onready var end_turn_button: Button = %EndTurnButton
 @onready var deck_texture_button: TextureButton = %DeckTextureButton
 @onready var enemy_character: Character = %EnemyCharacter
 @onready var deck_view_window: DeckViewWindow = %DeckViewWindow
+@onready var start_game_button: Button = %StartGameButton
+@onready var playable_deck_ui: PlayableDeckUI = %PlayableDeckUi
 
 @onready var deck: Deck = Deck.new()
 
@@ -18,9 +30,13 @@ var enemy_character_state := 0
 func _ready() -> void:
 	deck_and_hand.deck = deck
 	
+	inflict_one_button.pressed.connect(_on_inflict_one_button_pressed)
+	inflict_three_button.pressed.connect(_on_inflict_three_button_pressed)
 	deck_and_hand.card_activated.connect(_on_deck_and_hand_card_activated)
 	end_turn_button.pressed.connect(_on_end_turn_pressed)
 	deck_texture_button.pressed.connect(_on_deck_texture_button_pressed)
+	start_game_button.pressed.connect(_on_start_game_button_pressed)
+	playable_deck_ui.pressed.connect(_on_playable_deck_ui_pressed)
 
 
 func _process(delta: float) -> void:
@@ -107,9 +123,21 @@ func _restart_game() -> void:
 	deck_and_hand.reset()
 
 
-func _on_deck_texture_button_pressed():
+func _on_deck_texture_button_pressed() -> void:
 	game_controller.toggle_pause_and_resume()
 	deck_view_window.visible = !deck_view_window.visible
-	
 	# this is a temporary test
 	deck_view_window.display_card_list(deck.get_cards())
+
+
+func _on_start_game_button_pressed() -> void:
+	deck.get_playable_deck()
+	playable_deck_ui.deck = deck.get_playable_deck()
+	playable_deck_ui.visible = true
+
+
+func _on_playable_deck_ui_pressed() -> void:
+	var card_with_id = playable_deck_ui.draw()
+	
+	if card_with_id:
+		deck_and_hand.add_card(card_with_id)

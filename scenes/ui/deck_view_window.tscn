@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/ui/deck_view_window.gd" id="1_b7jop"]
 
 [node name="DeckViewWindow" type="ScrollContainer"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -22,4 +23,5 @@ script = ExtResource("1_b7jop")
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+alignment = 1
 last_wrap_alignment = 2
