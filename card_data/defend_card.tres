@@ -8,6 +8,7 @@
 script = ExtResource("2_1tn10")
 title = "Defend"
 description = "Defend 1"
-cost = 2
-texture = ExtResource("3_b1uls")
+cost = 1
+image = ExtResource("3_b1uls")
+type = 1
 actions = Array[GDScript]([ExtResource("1_6sdux")])

@@ -39,13 +39,13 @@ func set_values(
 		temp_title:String = title,
 		temp_desription: String = description,
 		temp_cost: int = cost,
-		temp_type: Type = type
+		temp_type: Type = type,
 	) -> void:
 		
 	cost = temp_cost	
 	title = temp_title	
 	description = temp_desription
-	_set_type(temp_type)
+	set_type(temp_type)
 	
 	_original_scale = scale
 	_original_position = position
@@ -61,7 +61,7 @@ func unhighlight() -> void:
 	position = _original_position
 
 
-func _set_type(temp_type: Type) -> void:
+func set_type(temp_type: Type) -> void:
 	type = temp_type
 	if card_border_sprite != null:
 		card_border_sprite.modulate = _get_type(type)
@@ -76,6 +76,11 @@ func _get_type(type: Type) -> Color:
 	return Color.WHITE
 
 
+func set_image(texture: Texture2D):
+	image = texture
+	image_sprite.set_texture(image)
+
+
 func _update_graphics() -> void:
 	if cost_label != null and cost_label.text != str(cost):
 		cost_label.text = str(cost)
@@ -86,10 +91,10 @@ func _update_graphics() -> void:
 	if description_label != null and description_label.text != description:
 		description_label.text = description
 		
-	_set_type(type)
+	set_type(type)
 	
 	if image != null:
-		image_sprite.texture = image
+		image_sprite.set_texture(image)
 
 
 func _on_area_2d_mouse_entered() -> void:

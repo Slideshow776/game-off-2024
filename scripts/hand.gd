@@ -22,8 +22,9 @@ func _process(delta: float) -> void:
 		current_selected_card_index = -1
 		card.unhighlight()
 			
-	if not touched.is_empty():		
+	if not touched.is_empty():
 		var highest_touched_index := -1
+		
 		for touched_card in touched:
 			highest_touched_index = max(highest_touched_index, cards.find(touched_card))
 		
@@ -31,7 +32,8 @@ func _process(delta: float) -> void:
 			cards[highest_touched_index].highlight()
 			current_selected_card_index = highest_touched_index
 	
-	(collision_shape_2d.shape as CircleShape2D).set_radius(hand_radius)
+	if (collision_shape_2d.shape as CircleShape2D).radius != hand_radius:
+		(collision_shape_2d.shape as CircleShape2D).set_radius(hand_radius)
 
 
 func _input(event: InputEvent) -> void:
@@ -73,7 +75,7 @@ func add_card(card_data: CardData) -> void:
 	var usable_card = usable_card_scene.instantiate()
 	cards.push_back(usable_card)
 	add_child(usable_card)
-	usable_card.load(card_data)
+	usable_card.load_card_data(card_data)	
 	usable_card.mouse_entered.connect(_handle_card_touched)
 	usable_card.mouse_exited.connect(_handle_card_untouched)
 	_reposition_cards()

@@ -5,6 +5,6 @@ var id: int
 var card: CardData
 
 
-func _init(id: int, card: CardData) -> void:
-	self.id = id
-	self.card = card
+func _init(temp_id: int, temp_card: CardData) -> void:
+	id = temp_id
+	card = temp_card

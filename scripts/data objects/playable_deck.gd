@@ -8,7 +8,7 @@ func draw_card() -> CardWithID:
 	return cards.pop_back()
 
 
-# shuffle the order of cards in the dec
+# shuffle the order of cards in the deck
 func shuffle() -> void:
 	cards.shuffle()
 

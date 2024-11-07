@@ -11,9 +11,11 @@ var actions: Array[RefCounted]
 @onready var defense_action: Node2D = %DefenseAction
 @onready var card_image_texture: Texture2D
 
+
 func load_card_data(card_data: CardData) -> void:
 	card.set_values(card_data.title, card_data.description, card_data.cost)
-	card.image_sprite.texture = card_data.texture		
+	card.set_image(card_data.image)
+	card.set_type(card_data.type)
 	for script in card_data.actions:
 		var action_script = RefCounted.new()
 		action_script.set_script(script)

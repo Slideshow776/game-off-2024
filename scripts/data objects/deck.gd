@@ -22,9 +22,9 @@ func update_card(card_id: int, card: CardData) -> void:
 func get_cards() -> Array[CardWithID]:
 	var cards: Array[CardWithID] = []
 	if !card_collection.is_empty():
-		for card in card_collection.values():			
-			var duplicate_ccard_with_id: CardWithID = CardWithID.new(card.id, card.card.duplicate())
-			cards.push_back(duplicate_ccard_with_id)
+		for card in card_collection.values():
+			var duplicate_card_with_id: CardWithID = CardWithID.new(card.id, card.card.duplicate())
+			cards.push_back(duplicate_card_with_id)
 	return cards
 
 
