@@ -1,10 +1,9 @@
 class_name DeckViewWindow
 extends ScrollContainer
 
-@onready var card_container_scene: PackedScene = preload("res://scenes/ui/card_container.tscn")
-@onready var h_flow_container: HFlowContainer = %HFlowContainer
-
+@export var card_container_scene: PackedScene
 var cached_card_containers: Array[CardContainer] = []
+@onready var h_flow_container: HFlowContainer = %HFlowContainer
 
 
 func clear_display():

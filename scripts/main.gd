@@ -117,10 +117,12 @@ func _on_inflict_three_button_pressed() -> void:
 
 
 func _restart_game() -> void:
+	playable_deck_ui.visible = true
 	game_controller.current_state = GameController.GameState.PLAYER_TURN
 	player_character.reset()
 	enemy_character.reset()
 	deck_and_hand.reset()
+	playable_deck_ui.deck = deck.get_playable_deck()
 
 
 func _on_deck_texture_button_pressed() -> void:
@@ -131,9 +133,7 @@ func _on_deck_texture_button_pressed() -> void:
 
 
 func _on_start_game_button_pressed() -> void:
-	deck.get_playable_deck()
-	playable_deck_ui.deck = deck.get_playable_deck()
-	playable_deck_ui.visible = true
+	_restart_game()
 
 
 func _on_playable_deck_ui_pressed() -> void:

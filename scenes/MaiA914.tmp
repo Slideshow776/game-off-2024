@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="2_lcj48"]
 [ext_resource type="Texture2D" uid="uid://ltjls1rswnvw" path="res://assets/images/muffin_man.png" id="2_n72km"]
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/main_theme.tres" id="2_y60n5"]
-[ext_resource type="PackedScene" uid="uid://bqim5c7s6n81g" path="res://scenes/ui/DeckViewWindow.tscn" id="3_4v5wd"]
+[ext_resource type="PackedScene" uid="uid://bqim5c7s6n81g" path="res://scenes/ui/deck_view_window.tscn" id="3_4v5wd"]
 [ext_resource type="PackedScene" uid="uid://c5oliard7acm0" path="res://scenes/DeckAndHand.tscn" id="3_6ku62"]
 [ext_resource type="Texture2D" uid="uid://borofa6wbn8jx" path="res://assets/images/card/image2.png" id="5_fi3wd"]
 [ext_resource type="Texture2D" uid="uid://c7jsv1yld1oq8" path="res://assets/images/deck_normal.png" id="9_fg3xd"]
