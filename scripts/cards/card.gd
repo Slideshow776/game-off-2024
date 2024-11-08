@@ -61,7 +61,6 @@ func set_values(
 func highlight() -> void:
 	if not is_highlighted:
 		is_highlighted = true
-		move_to_front()
 		var tween = create_tween()
 		tween.set_parallel()
 		tween.tween_property(self, "scale", _original_scale * 1.25, 0.2)
