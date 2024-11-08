@@ -12,7 +12,7 @@ size = Vector2(487.024, 685.441)
 [node name="Card" type="Node2D"]
 scale = Vector2(0.375, 0.375)
 script = ExtResource("1_umjp1")
-metadata/_edit_group_ = true
+type = "TODO: card type"
 
 [node name="Area2D" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -66,10 +66,22 @@ text = "TODO: Card Title"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="TypeLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -155.0
+offset_top = -8.0
+offset_right = 154.0
+offset_bottom = 29.0
+theme = ExtResource("5_0pxmf")
+theme_override_font_sizes/font_size = 40
+text = "TODO: card type"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="descriptionLabel" type="Label" parent="."]
 unique_name_in_owner = true
 offset_left = -160.0
-offset_top = 6.0
+offset_top = 26.0
 offset_right = 158.0
 offset_bottom = 254.0
 theme = ExtResource("5_0pxmf")

@@ -13,4 +13,4 @@ title = "Usable card"
 description = "This is a test. There are many..."
 cost = 20
 image = ExtResource("3_0pbg8")
-type = 1
+type = "test card"

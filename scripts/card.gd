@@ -5,13 +5,14 @@ extends Node2D
 signal mouse_entered(card: Card)
 signal mouse_exited(card: Card)
 
-enum Type { RED, BLUE }
+enum Colour { RED, BLUE }
 
 @export var title: String = "TODO: Card Title"
 @export var description: String = "TODO: Card Description"
 @export_range(0, 20) var cost: int = 1
 @export var image: Texture2D
-@export var type: Type = Type.RED
+@export var colour: Colour = Colour.RED
+@export var type: String = "TODO: type"
 	
 var _original_scale: Vector2
 var _original_position: Vector2
@@ -21,11 +22,12 @@ var _original_position: Vector2
 @onready var cost_label: Label = %CostLabel
 @onready var title_label: Label = %TitleLabel
 @onready var description_label: Label = %descriptionLabel
+@onready var type_label: Label = %TypeLabel
 @onready var area_2d: Area2D = %Area2D
 
 
 func _ready() -> void:
-	set_values(title, description, cost, type)
+	set_values(title, description, cost, colour, type)
 	
 	area_2d.mouse_entered.connect(_on_area_2d_mouse_entered)
 	area_2d.mouse_exited.connect(_on_area_2d_mouse_exited)
@@ -39,13 +41,17 @@ func set_values(
 		temp_title:String = title,
 		temp_desription: String = description,
 		temp_cost: int = cost,
-		temp_type: Type = type,
+		temp_colour: Colour = colour,
+		temp_type: String = type,
+		temp_image: Texture2D = image
 	) -> void:
 		
-	cost = temp_cost	
-	title = temp_title	
+	title = temp_title
 	description = temp_desription
-	set_type(temp_type)
+	cost = temp_cost
+	_set_colour(temp_colour)
+	type = temp_type
+	_set_image(temp_image)
 	
 	_original_scale = scale
 	_original_position = position
@@ -61,22 +67,22 @@ func unhighlight() -> void:
 	position = _original_position
 
 
-func set_type(temp_type: Type) -> void:
-	type = temp_type
+func _set_colour(temp_colour: Colour) -> void:
+	colour = temp_colour
 	if card_border_sprite != null:
-		card_border_sprite.modulate = _get_type(type)
+		card_border_sprite.modulate = _get_colour(colour)
 
 
-func _get_type(type: Type) -> Color:
-	match type:
-		Type.RED:
+func _get_colour(colour: Colour) -> Color:
+	match colour:
+		Colour.RED:
 			return Color.INDIAN_RED
-		Type.BLUE:
+		Colour.BLUE:
 			return Color.STEEL_BLUE
 	return Color.WHITE
 
 
-func set_image(texture: Texture2D):
+func _set_image(texture: Texture2D):
 	image = texture
 	image_sprite.set_texture(image)
 
@@ -91,7 +97,10 @@ func _update_graphics() -> void:
 	if description_label != null and description_label.text != description:
 		description_label.text = description
 		
-	set_type(type)
+	if type_label != null and type_label.text != type:
+		type_label.text = type
+		
+	_set_colour(colour)
 	
 	if image != null:
 		image_sprite.set_texture(image)

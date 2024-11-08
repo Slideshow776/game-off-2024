@@ -6,9 +6,10 @@
 
 [resource]
 script = ExtResource("2_1tn10")
-title = "Defend"
+title = "Shield Self"
 description = "Defend 1"
 cost = 1
 image = ExtResource("3_b1uls")
-type = 1
+colour = 1
+type = "defend"
 actions = Array[GDScript]([ExtResource("1_6sdux")])

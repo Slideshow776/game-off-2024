@@ -5,5 +5,6 @@ extends Resource
 @export var description: String
 @export var cost: int
 @export var image: CompressedTexture2D
-@export var type: Card.Type
+@export var colour: Card.Colour
+@export var type: String
 @export var actions: Array[GDScript] = []

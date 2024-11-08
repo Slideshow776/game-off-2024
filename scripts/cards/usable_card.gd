@@ -13,9 +13,15 @@ var actions: Array[RefCounted]
 
 
 func load_card_data(card_data: CardData) -> void:
-	card.set_values(card_data.title, card_data.description, card_data.cost)
-	card.set_image(card_data.image)
-	card.set_type(card_data.type)
+	card.set_values(
+		card_data.title,
+		card_data.description,
+		card_data.cost,
+		card_data.colour,
+		card_data.type,
+		card_data.image,
+	)
+	
 	for script in card_data.actions:
 		var action_script = RefCounted.new()
 		action_script.set_script(script)
