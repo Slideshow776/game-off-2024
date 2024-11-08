@@ -13,7 +13,8 @@ enum Colour { RED, BLUE }
 @export var image: Texture2D
 @export var colour: Colour = Colour.RED
 @export var type: String = "TODO: type"
-	
+
+var is_highlighted := false
 var _original_scale: Vector2
 var _original_position: Vector2
 
@@ -58,13 +59,22 @@ func set_values(
 
 
 func highlight() -> void:
-	scale = _original_scale * 1.25
-	position.y -= 125
+	if not is_highlighted:
+		is_highlighted = true
+		move_to_front()
+		var tween = create_tween()
+		tween.set_parallel()
+		tween.tween_property(self, "scale", _original_scale * 1.25, 0.2)
+		tween.tween_property(self, "position:y", _original_position.y - 125, 0.2)
 
 
 func unhighlight() -> void:
-	scale = _original_scale * 1.0
-	position = _original_position
+	if is_highlighted:
+		is_highlighted = false
+		var tween = create_tween()
+		tween.set_parallel()
+		tween.tween_property(self, "scale", _original_scale * 1.0, 0.5)
+		tween.tween_property(self, "position:y", _original_position.y, 0.5)
 
 
 func _set_colour(temp_colour: Colour) -> void:
