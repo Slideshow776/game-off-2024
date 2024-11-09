@@ -18,7 +18,8 @@ var enemy_character_state := 0
 @onready var deck_texture_button: TextureButton = %DeckTextureButton
 @onready var enemy_character: Character = %EnemyCharacter
 @onready var deck_view_window: DeckViewWindow = %DeckViewWindow
-@onready var playable_deck_ui: PlayableDeckUI = %PlayableDeckUi
+@onready var draw_pile: PlayableDeckUI = %DrawPile
+@onready var discard_pile: PlayableDeckUI = %DiscardPile
 @onready var deck: Deck = Deck.new()
 
 
@@ -26,7 +27,7 @@ func _ready() -> void:
 	hand.card_activated.connect(_on_hand_card_activated)
 	end_turn_button.pressed.connect(_on_end_turn_pressed)
 	deck_texture_button.pressed.connect(_on_deck_texture_button_pressed)
-	playable_deck_ui.pressed.connect(_on_playable_deck_ui_pressed)
+	draw_pile.pressed.connect(_on_draw_pile_pressed)
 	
 	for i in 10:
 		deck.add_card(attack_card_data.duplicate())
@@ -102,12 +103,15 @@ func _on_hand_card_activated(card: PlayableCard) -> void:
 
 
 func _restart_game() -> void:
-	playable_deck_ui.visible = true
+	draw_pile.visible = true
 	game_controller.current_state = GameController.GameState.PLAYER_TURN
 	player_character.reset()
 	enemy_character.reset()
 	hand.empty()
-	playable_deck_ui.deck = deck.get_playable_deck()
+	
+	draw_pile.deck = deck.get_playable_deck()
+	draw_pile.set_label_deck_size()
+	discard_pile.set_label_deck_size()
 
 
 func _on_deck_texture_button_pressed() -> void:
@@ -117,8 +121,8 @@ func _on_deck_texture_button_pressed() -> void:
 	deck_view_window.display_card_list(deck.get_cards())
 
 
-func _on_playable_deck_ui_pressed() -> void:
-	var card_with_id = playable_deck_ui.draw()
-	
+func _on_draw_pile_pressed() -> void:
+	var card_with_id = draw_pile.draw()	
 	if card_with_id:
+		draw_pile.set_label_deck_size()
 		hand.add_card(card_with_id.card)

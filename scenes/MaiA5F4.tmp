@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ci0unrji7vi3w"]
+[gd_scene load_steps=17 format=3 uid="uid://ci0unrji7vi3w"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_8pbs6"]
 [ext_resource type="Script" path="res://scripts/character.gd" id="1_feuee"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bqim5c7s6n81g" path="res://scenes/ui/DeckViewWindow.tscn" id="3_4v5wd"]
 [ext_resource type="Resource" uid="uid://bs3yu15jrsqc4" path="res://card_data/defend_card.tres" id="3_x8w5h"]
 [ext_resource type="Texture2D" uid="uid://borofa6wbn8jx" path="res://assets/images/card/image2.png" id="5_fi3wd"]
+[ext_resource type="Texture2D" uid="uid://c7jsv1yld1oq8" path="res://assets/images/deck_normal.png" id="9_fg3xd"]
 [ext_resource type="PackedScene" uid="uid://drbayobfjnntg" path="res://scenes/Hand.tscn" id="10_4fja5"]
 [ext_resource type="PackedScene" uid="uid://bkfg2v0yelnsp" path="res://scenes/ui/PlayableDeckUI.tscn" id="10_w05ha"]
 [ext_resource type="Texture2D" uid="uid://bybc3ktbng41a" path="res://assets/images/card/card_back_normal.png" id="16_6e2ll"]
@@ -189,6 +190,14 @@ offset_right = 1088.0
 offset_bottom = 501.0
 text = "End Turn"
 
+[node name="DrawPile" parent="." instance=ExtResource("10_w05ha")]
+unique_name_in_owner = true
+offset_left = 45.0
+offset_top = 518.0
+offset_right = 190.0
+offset_bottom = 614.0
+pivot_offset = Vector2(0, 0)
+
 [node name="DeckTextureButton" type="TextureButton" parent="."]
 unique_name_in_owner = true
 offset_left = 1028.0
@@ -201,18 +210,11 @@ texture_hover = ExtResource("18_vfux0")
 ignore_texture_size = true
 stretch_mode = 4
 
-[node name="DrawPile" parent="." instance=ExtResource("10_w05ha")]
-unique_name_in_owner = true
-offset_left = 41.0
-offset_top = 569.0
-offset_right = 132.0
-offset_bottom = 634.0
-pivot_offset = Vector2(0, 1)
-
-[node name="DiscardPile" parent="." instance=ExtResource("10_w05ha")]
-unique_name_in_owner = true
-offset_left = 1029.0
-offset_top = 561.0
-offset_right = 1120.0
-offset_bottom = 626.0
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = 1026.0
+offset_top = 549.0
+offset_right = 1287.0
+offset_bottom = 721.0
+scale = Vector2(0.458473, 0.458473)
+texture_normal = ExtResource("9_fg3xd")
 flip_h = true

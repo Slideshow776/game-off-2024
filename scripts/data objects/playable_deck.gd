@@ -4,7 +4,10 @@ extends Resource
 var cards: Array[CardWithID] = []
 
 
-# draw a top card from the deck
+func size() -> int:
+	return cards.size()
+
+
 func deal_card() -> CardWithID:
 	return cards.pop_back()
 

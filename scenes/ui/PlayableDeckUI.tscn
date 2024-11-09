@@ -1,15 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkfg2v0yelnsp"]
+[gd_scene load_steps=6 format=3 uid="uid://bkfg2v0yelnsp"]
 
-[ext_resource type="Texture2D" uid="uid://djcilw7cr8gnx" path="res://assets/images/card/card_back.png" id="1_xrq08"]
+[ext_resource type="Texture2D" uid="uid://c7jsv1yld1oq8" path="res://assets/images/deck_normal.png" id="1_4a6pv"]
 [ext_resource type="Script" path="res://scripts/ui/playable_deck_ui.gd" id="2_760fr"]
-[ext_resource type="Texture2D" uid="uid://cm71df8g7yolu" path="res://assets/images/card/card_back_pressed.png" id="2_p7dds"]
-[ext_resource type="Texture2D" uid="uid://cvtoci2mpevmq" path="res://assets/images/card/card_back_hover.png" id="3_5omsh"]
+[ext_resource type="Texture2D" uid="uid://biyyidgbygajo" path="res://assets/images/deck_pressed.png" id="2_lme7m"]
+[ext_resource type="Texture2D" uid="uid://tp2rl6f6gv38" path="res://assets/images/deck_hover.png" id="3_wp71q"]
+[ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/main_theme.tres" id="5_fbgrc"]
 
 [node name="PlayableDeckUi" type="TextureButton"]
-offset_right = 183.0
-offset_bottom = 254.0
-pivot_offset = Vector2(91, 127)
-texture_normal = ExtResource("1_xrq08")
-texture_pressed = ExtResource("2_p7dds")
-texture_hover = ExtResource("3_5omsh")
+offset_right = 91.0
+offset_bottom = 65.0
+pivot_offset = Vector2(-1, 0)
+texture_normal = ExtResource("1_4a6pv")
+texture_pressed = ExtResource("2_lme7m")
+texture_hover = ExtResource("3_wp71q")
+ignore_texture_size = true
+stretch_mode = 4
 script = ExtResource("2_760fr")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 53.0
+offset_top = 39.0
+offset_right = 85.0
+offset_bottom = 76.0
+theme = ExtResource("5_fbgrc")
+theme_override_font_sizes/font_size = 32
+text = "-1"
