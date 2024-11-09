@@ -1,7 +1,7 @@
 class_name DeckAndHand
 extends Node2D
 
-signal card_activated(card: UsableCard)
+signal card_activated(card: PlayableCard)
 
 @export var deck: Deck
 @export var debug_mode := true:
@@ -12,8 +12,8 @@ signal card_activated(card: UsableCard)
 		%Button2.visible = debug_mode
 		%Button3.visible = debug_mode
 
-@export var attack_card_data: CardData = preload("res://card_data/attack_card.tres")
-@export var defense_card_data: CardData = preload("res://card_data/defend_card.tres")
+@export var attack_card_data: CardData
+@export var defense_card_data: CardData
 
 @onready var button: Button = %Button
 @onready var button_2: Button = %Button2
@@ -57,5 +57,5 @@ func _on_button3_pressed() -> void:
 	deck.remove_card(random_card.id)
 
 
-func _on_hand_card_activated(card: UsableCard) -> void:
+func _on_hand_card_activated(card: PlayableCard) -> void:
 	card_activated.emit(card)

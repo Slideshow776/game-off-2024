@@ -5,4 +5,4 @@ var deck: PlayableDeck
 
 
 func draw() -> CardWithID:
-	return deck.draw_card()
+	return deck.deal_card()

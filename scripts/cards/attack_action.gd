@@ -2,5 +2,6 @@ extends RefCounted
 
 
 func activate(game_state: Dictionary):
-	game_state.get("caster").spend_mana(1)
-	game_state.get("targets")[0].take_damage(1)
+	game_state.get("caster").spend_mana(1)	
+	for target in game_state.get("targets"):
+		target.take_damage(1)

@@ -6,8 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://gm5phtwk456g" path="res://assets/images/card/card_cost.png" id="4_yfsjg"]
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/main_theme.tres" id="5_0pxmf"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a1hhb"]
-size = Vector2(487.024, 685.441)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4wvrc"]
+radius = 9.30719
+height = 30.3268
 
 [node name="Card" type="Node2D"]
 scale = Vector2(0.375, 0.375)
@@ -16,10 +17,13 @@ type = "TODO: card type"
 
 [node name="Area2D" type="Area2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(-2.66667, 18.6667)
+scale = Vector2(5, 5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(1.00214, -6.01264)
-shape = SubResource("RectangleShape2D_a1hhb")
+position = Vector2(0.533333, -4.8)
+scale = Vector2(5.1, 5.1)
+shape = SubResource("CapsuleShape2D_4wvrc")
 
 [node name="CardBorderSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true

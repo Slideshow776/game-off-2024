@@ -3,12 +3,12 @@ extends Resource
 
 var cards: Array[CardWithID] = []
 
+
 # draw a top card from the deck
-func draw_card() -> CardWithID:
+func deal_card() -> CardWithID:
 	return cards.pop_back()
 
 
-# shuffle the order of cards in the deck
 func shuffle() -> void:
 	cards.shuffle()
 

@@ -1,4 +1,4 @@
-class_name UsableCard
+class_name PlayableCard
 extends Node2D
 
 signal mouse_entered(card: Card)
@@ -9,7 +9,6 @@ var actions: Array[RefCounted]
 @onready var card: Card = %Card
 @onready var attack_action: Node2D = %AttackAction
 @onready var defense_action: Node2D = %DefenseAction
-@onready var card_image_texture: Texture2D
 
 
 func load_card_data(card_data: CardData) -> void:

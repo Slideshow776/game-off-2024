@@ -90,12 +90,12 @@ func _on_end_turn_pressed() -> void:
 		enemy_character.start_turn()
 
 
-func _on_deck_and_hand_card_activated(card: UsableCard) -> void:
+func _on_deck_and_hand_card_activated(card: PlayableCard) -> void:
 	var card_cost := card.get_cost()
 	if card_cost <= player_character.mana:
 		card.activate({
 			"caster": player_character,
-			"targets": [$GameScreen/EnemyCharacter],
+			"targets": [enemy_character],
 		})
 		deck_and_hand.remove_card(card)
 		card.queue_free()

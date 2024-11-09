@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmsh50ndo3ouw"]
+[gd_scene load_steps=3 format=3 uid="uid://bmsh50ndo3ouw"]
 
 [ext_resource type="Script" path="res://scripts/ui/card_container.gd" id="1_be3hq"]
+[ext_resource type="PackedScene" uid="uid://cbkph8q1bp178" path="res://scenes/cards/PlayableCard.tscn" id="2_lsi84"]
 
 [node name="CardContainer" type="Container"]
 custom_minimum_size = Vector2(194, 245)
 script = ExtResource("1_be3hq")
+playable_card_scene = ExtResource("2_lsi84")

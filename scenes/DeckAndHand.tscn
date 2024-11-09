@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5oliard7acm0"]
+[gd_scene load_steps=5 format=3 uid="uid://c5oliard7acm0"]
 
 [ext_resource type="Script" path="res://scripts/deck_and_hand.gd" id="1_x1mxb"]
+[ext_resource type="Resource" uid="uid://dgwxaf1naxwdx" path="res://card_data/attack_card.tres" id="2_f1dcm"]
 [ext_resource type="PackedScene" uid="uid://drbayobfjnntg" path="res://scenes/Hand.tscn" id="2_txvok"]
+[ext_resource type="Resource" uid="uid://bs3yu15jrsqc4" path="res://card_data/defend_card.tres" id="3_7ge5m"]
 
 [node name="DeckAndHand" type="Node2D"]
 script = ExtResource("1_x1mxb")
+attack_card_data = ExtResource("2_f1dcm")
+defense_card_data = ExtResource("3_7ge5m")
 
 [node name="Button" type="Button" parent="."]
 unique_name_in_owner = true

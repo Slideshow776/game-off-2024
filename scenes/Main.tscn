@@ -17,6 +17,7 @@
 [node name="Main" type="Node2D" node_paths=PackedStringArray("player_character")]
 script = ExtResource("1_8pbs6")
 player_character = NodePath("GameScreen/PlayerCharacter")
+debug_mode = null
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -87,17 +88,17 @@ script = ExtResource("2_lcj48")
 
 [node name="ManaAmount" type="Label" parent="."]
 unique_name_in_owner = true
-offset_left = 415.0
-offset_top = 31.0
-offset_right = 486.0
-offset_bottom = 54.0
+offset_left = 251.0
+offset_top = 396.0
+offset_right = 322.0
+offset_bottom = 419.0
 text = "Mana: 10"
 
 [node name="GameScreen" type="Node2D" parent="."]
 
 [node name="PlayerCharacter" type="Node2D" parent="GameScreen"]
 unique_name_in_owner = true
-position = Vector2(367, 176)
+position = Vector2(410, 279)
 script = ExtResource("1_feuee")
 max_health = 10
 metadata/_edit_group_ = true
@@ -134,7 +135,7 @@ vertical_alignment = 1
 
 [node name="EnemyCharacter" type="Node2D" parent="GameScreen"]
 unique_name_in_owner = true
-position = Vector2(792, 154)
+position = Vector2(773, 254)
 script = ExtResource("1_feuee")
 max_health = 10
 metadata/_edit_group_ = true
@@ -193,10 +194,10 @@ text = "inflict 3 damage to player
 
 [node name="EndTurnButton" type="Button" parent="."]
 unique_name_in_owner = true
-offset_left = 493.0
-offset_top = 11.0
-offset_right = 649.0
-offset_bottom = 73.0
+offset_left = 932.0
+offset_top = 439.0
+offset_right = 1088.0
+offset_bottom = 501.0
 text = "End Turn"
 
 [node name="PlayableDeckUi" parent="." instance=ExtResource("10_w05ha")]
@@ -226,6 +227,15 @@ offset_top = -1.0
 offset_right = 1151.0
 offset_bottom = 30.0
 text = "Start New Game"
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = 1026.0
+offset_top = 549.0
+offset_right = 1287.0
+offset_bottom = 721.0
+scale = Vector2(0.458473, 0.458473)
+texture_normal = ExtResource("9_fg3xd")
+flip_h = true
 
 [connection signal="pressed" from="InflictOneButton" to="." method="_on_inflict_one_button_pressed"]
 [connection signal="pressed" from="InflictThreeButton" to="." method="_on_inflict_three_button_pressed"]

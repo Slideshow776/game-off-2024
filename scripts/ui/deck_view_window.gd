@@ -8,7 +8,7 @@ var cached_card_containers: Array[CardContainer] = []
 
 func clear_display():
 	for child in h_flow_container.get_children():
-		child.remove_child(child.usable_card)
+		child.remove_child(child.playable_card)
 		h_flow_container.remove_child(child)
 
 

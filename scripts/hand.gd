@@ -2,19 +2,19 @@
 class_name Hand
 extends Node2D
 
-signal card_activated(card: UsableCard)
+signal card_activated(card: PlayableCard)
 
 @export var hand_radius := 100.0 # TODO: @export_range ?
 @export var card_angle := -90.0 # TODO: @export_range?
 @export var angle_limit := 20.0
 @export var max_card_spread_angle = 5.0
+@export var playable_card_scene: PackedScene
 
-var cards: Array[UsableCard] = []
-var touched: Array[UsableCard] = []
+var cards: Array[PlayableCard] = []
+var touched: Array[PlayableCard] = []
 var current_selected_card_index := -1
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-@onready var usable_card_scene: PackedScene = preload("res://scenes/cards/UsableCard.tscn")
 
 
 func _process(delta: float) -> void:
@@ -51,13 +51,7 @@ func empty() -> void:
 	touched.clear()
 
 
-func get_card_position(angle_in_degree: float) -> Vector2:
-	var x: float = hand_radius * cos(deg_to_rad(angle_in_degree))
-	var y: float = hand_radius * sin(deg_to_rad(angle_in_degree))
-	return Vector2(x, y)
-
-
-func remove_card(index: int) -> UsableCard:
+func remove_card(index: int) -> PlayableCard:
 	var card = cards[index]
 	cards.remove_at(index)
 	remove_child(card)
@@ -66,31 +60,27 @@ func remove_card(index: int) -> UsableCard:
 	return card
 
 
-func remove_by_entity(card: UsableCard) -> void:
+func remove_by_entity(card: PlayableCard) -> void:
 	var remove_index = cards.find(card)
 	remove_card(remove_index)
 
 
 func add_card(card_data: CardData) -> void:
-	var usable_card = usable_card_scene.instantiate()
-	cards.push_back(usable_card)
-	add_child(usable_card)
-	usable_card.load_card_data(card_data)	
-	usable_card.mouse_entered.connect(_handle_card_touched)
-	usable_card.mouse_exited.connect(_handle_card_untouched)
+	var playable_card = playable_card_scene.instantiate()
+	cards.push_back(playable_card)
+	add_child(playable_card)
+	playable_card.load_card_data(card_data)	
+	playable_card.mouse_entered.connect(_handle_card_touched)
+	playable_card.mouse_exited.connect(_handle_card_untouched)
 	_reposition_cards()
 
 
-func _handle_card_touched(card: UsableCard) -> void:
+func _handle_card_touched(card: PlayableCard) -> void:
 	touched.push_back(card)
 
 
-func _handle_card_untouched(card: UsableCard) -> void:
+func _handle_card_untouched(card: PlayableCard) -> void:
 	touched.remove_at(touched.find(card))
-	#var card_index := cards.find(card)
-	#if card_index == highlight_index:
-		#cards[highlight_index].unhighlight()
-		#highlight_index = -1
 
 
 func _reposition_cards() -> void:
@@ -101,6 +91,12 @@ func _reposition_cards() -> void:
 		current_angle += card_spread
 
 
-func _update_card_transform(card: UsableCard, angle_in_deg: float) -> void:
-	card.set_position(get_card_position(angle_in_deg))
+func _update_card_transform(card: PlayableCard, angle_in_deg: float) -> void:
+	card.set_position(_get_card_position(angle_in_deg))
 	card.set_rotation(deg_to_rad(angle_in_deg + 90))
+
+
+func _get_card_position(angle_in_degree: float) -> Vector2:
+	var x: float = hand_radius * cos(deg_to_rad(angle_in_degree))
+	var y: float = hand_radius * sin(deg_to_rad(angle_in_degree))
+	return Vector2(x, y)
