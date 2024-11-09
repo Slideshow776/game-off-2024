@@ -29,10 +29,12 @@ func _ready() -> void:
 	deck_texture_button.pressed.connect(_on_deck_texture_button_pressed)
 	draw_pile.pressed.connect(_on_draw_pile_pressed)
 	
-	for i in 10:
+	# generate a starting deck
+	for i in 5:
 		deck.add_card(attack_card_data.duplicate())
-		deck.add_card(defend_card_data.duplicate())		
-	
+	for i in 5:
+		deck.add_card(defend_card_data.duplicate())
+		
 	_restart_game()
 
 
@@ -103,7 +105,6 @@ func _on_hand_card_activated(card: PlayableCard) -> void:
 
 
 func _restart_game() -> void:
-	draw_pile.visible = true
 	game_controller.current_state = GameController.GameState.PLAYER_TURN
 	player_character.reset()
 	enemy_character.reset()
@@ -111,18 +112,22 @@ func _restart_game() -> void:
 	
 	draw_pile.deck = deck.get_playable_deck()
 	draw_pile.set_label_deck_size()
+	draw_pile.deck.shuffle()
 	discard_pile.set_label_deck_size()
+	
+	var tween := create_tween()
+	for i in player_character.number_of_cards_to_be_dealt:
+		tween.tween_callback(_on_draw_pile_pressed).set_delay(0.2)
 
 
 func _on_deck_texture_button_pressed() -> void:
 	game_controller.toggle_pause_and_resume()
 	deck_view_window.visible = !deck_view_window.visible
-	# this is a temporary test
 	deck_view_window.display_card_list(deck.get_cards())
 
 
 func _on_draw_pile_pressed() -> void:
-	var card_with_id = draw_pile.draw()	
+	var card_with_id = draw_pile.draw()
 	if card_with_id:
 		draw_pile.set_label_deck_size()
 		hand.add_card(card_with_id.card)

@@ -10,6 +10,7 @@ extends Node2D
 var health := 5
 var mana := 5
 var defense := 0
+var number_of_cards_to_be_dealt := 5
 
 
 func _ready() -> void:
