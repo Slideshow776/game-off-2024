@@ -8,7 +8,6 @@ signal card_activated(card: PlayableCard)
 @export var card_angle := -90.0 # TODO: @export_range?
 @export var angle_limit := 20.0
 @export var max_card_spread_angle = 5.0
-@export var playable_card_scene: PackedScene
 
 var cards: Array[PlayableCard] = []
 var touched: Array[PlayableCard] = []
@@ -43,12 +42,16 @@ func _input(event: InputEvent) -> void:
 		current_selected_card_index = -1
 
 
-func empty() -> void:
+func empty() -> Array[PlayableCard]:
 	current_selected_card_index = -1
+	var temp: Array[PlayableCard] = []
 	for card in cards:
-		card.queue_free()
+		temp.push_back(card)
+		#card.queue_free()
+		remove_child(card)
 	cards.clear()
 	touched.clear()
+	return temp
 
 
 func remove_card(index: int) -> PlayableCard:
@@ -62,14 +65,14 @@ func remove_card(index: int) -> PlayableCard:
 
 func remove_by_entity(card: PlayableCard) -> PlayableCard:
 	var remove_index = cards.find(card)
+	remove_child(card)
 	return remove_card(remove_index)
 
 
-func add_card(card_data: CardData) -> void:
-	var playable_card = playable_card_scene.instantiate()
+func add_card(playable_card: PlayableCard) -> void:
 	cards.push_back(playable_card)
 	add_child(playable_card)
-	playable_card.load_card_data(card_data)	
+	playable_card.visible = true
 	playable_card.mouse_entered.connect(_handle_card_touched)
 	playable_card.mouse_exited.connect(_handle_card_untouched)
 	_reposition_cards()

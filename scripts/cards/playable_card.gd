@@ -5,6 +5,7 @@ signal mouse_entered(card: Card)
 signal mouse_exited(card: Card)
 
 var actions: Array[Action]
+var id := -1
 
 @onready var card: Card = %Card
 @onready var attack_action: Node2D = %AttackAction

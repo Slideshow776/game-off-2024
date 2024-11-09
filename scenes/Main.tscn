@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ci0unrji7vi3w"]
+[gd_scene load_steps=17 format=3 uid="uid://ci0unrji7vi3w"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_8pbs6"]
 [ext_resource type="Script" path="res://scripts/character.gd" id="1_feuee"]
@@ -9,6 +9,7 @@
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/main_theme.tres" id="2_y60n5"]
 [ext_resource type="PackedScene" uid="uid://bqim5c7s6n81g" path="res://scenes/ui/DeckViewWindow.tscn" id="3_4v5wd"]
 [ext_resource type="Resource" uid="uid://bs3yu15jrsqc4" path="res://card_data/defend_card.tres" id="3_x8w5h"]
+[ext_resource type="PackedScene" uid="uid://cbkph8q1bp178" path="res://scenes/cards/PlayableCard.tscn" id="4_xxjt2"]
 [ext_resource type="Texture2D" uid="uid://borofa6wbn8jx" path="res://assets/images/card/image2.png" id="5_fi3wd"]
 [ext_resource type="PackedScene" uid="uid://drbayobfjnntg" path="res://scenes/Hand.tscn" id="10_4fja5"]
 [ext_resource type="PackedScene" uid="uid://bkfg2v0yelnsp" path="res://scenes/ui/PlayableDeckUI.tscn" id="10_w05ha"]
@@ -21,6 +22,7 @@ script = ExtResource("1_8pbs6")
 player_character = NodePath("GameScreen/PlayerCharacter")
 attack_card_data = ExtResource("2_xbw3r")
 defend_card_data = ExtResource("3_x8w5h")
+playable_card_scene = ExtResource("4_xxjt2")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

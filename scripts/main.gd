@@ -3,6 +3,7 @@ extends Node2D
 @export var player_character: Character
 @export var attack_card_data: CardData
 @export var defend_card_data: CardData
+@export var playable_card_scene: PackedScene
 @export var debug_mode := true: 
 	set(value):
 		if !is_node_ready():
@@ -27,7 +28,6 @@ func _ready() -> void:
 	hand.card_activated.connect(_on_hand_card_activated)
 	end_turn_button.pressed.connect(_on_end_turn_pressed)
 	deck_texture_button.pressed.connect(_on_deck_texture_button_pressed)
-	draw_pile.pressed.connect(_on_draw_pile_pressed)
 	
 	# generate a starting deck
 	for i in 5:
@@ -65,6 +65,7 @@ func _process(delta: float) -> void:
 		game_controller.transition(GameController.GameState.PLAYER_TURN)
 		end_turn_button.disabled = false
 		player_character.start_turn()
+		deal_to_hand()
 	
 	if game_controller.current_state == GameController.GameState.GAME_WON:
 		%GameWonColorRect.visible = true
@@ -87,6 +88,10 @@ func _on_end_turn_pressed() -> void:
 		end_turn_button.disabled = true
 		game_controller.transition(GameController.GameState.ENEMY_TURN)
 		enemy_character.start_turn()
+		
+		var cards: Array[PlayableCard] = hand.empty()
+		for card in cards:
+			discard_pile.add_card(deck.get_card(card.id))
 
 
 func _on_hand_card_activated(card: PlayableCard) -> void:
@@ -97,8 +102,9 @@ func _on_hand_card_activated(card: PlayableCard) -> void:
 			"targets": [enemy_character],
 			"cost": card_cost
 		})
+		
 		hand.remove_by_entity(card)
-		card.queue_free()
+		discard_pile.add_card(deck.get_card(card.id))
 	else:
 		# TODO: indicate to the player that they're out of mana
 		pass
@@ -113,11 +119,17 @@ func _restart_game() -> void:
 	draw_pile.deck = deck.get_playable_deck()
 	draw_pile.set_label_deck_size()
 	draw_pile.deck.shuffle()
-	discard_pile.set_label_deck_size()
 	
+	discard_pile.reset()
+	
+	deal_to_hand()
+
+
+func deal_to_hand():
 	var tween := create_tween()
 	for i in player_character.number_of_cards_to_be_dealt:
-		tween.tween_callback(_on_draw_pile_pressed).set_delay(0.2)
+		_check_transfer_from_discard_to_draw_pile()
+		tween.tween_callback(_draw_card_to_hand).set_delay(0.2)
 
 
 func _on_deck_texture_button_pressed() -> void:
@@ -126,8 +138,23 @@ func _on_deck_texture_button_pressed() -> void:
 	deck_view_window.display_card_list(deck.get_cards())
 
 
-func _on_draw_pile_pressed() -> void:
+func _check_transfer_from_discard_to_draw_pile() -> void:
+	if draw_pile.get_number_of_cards() == 0:
+		var number_of_cards = discard_pile.get_number_of_cards()
+		for i in number_of_cards:
+			draw_pile.add_card(discard_pile.draw())
+	discard_pile.set_label_deck_size()
+
+
+func _draw_card_to_hand() -> void:	
 	var card_with_id = draw_pile.draw()
 	if card_with_id:
 		draw_pile.set_label_deck_size()
-		hand.add_card(card_with_id.card)
+		var playable_card = playable_card_scene.instantiate()
+		add_child(playable_card)
+		playable_card.visible = false
+		playable_card.load_card_data(card_with_id.card)
+		playable_card.id = card_with_id.id
+		playable_card.global_position = hand.global_position
+		remove_child(playable_card)
+		hand.add_card(playable_card)
