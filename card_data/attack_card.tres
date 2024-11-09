@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://dgwxaf1naxwdx"]
 
-[ext_resource type="Script" path="res://scripts/cards/attack_action.gd" id="1_astir"]
+[ext_resource type="Script" path="res://scripts/cards/actions/attack_action.gd" id="1_pduny"]
 [ext_resource type="Script" path="res://scripts/data objects/card_data.gd" id="1_qhee8"]
 [ext_resource type="Texture2D" uid="uid://deo3losldb63s" path="res://assets/images/card/image.png" id="2_pdo18"]
 
@@ -11,5 +11,5 @@ description = "Deal 1 damage"
 cost = 1
 image = ExtResource("2_pdo18")
 colour = 0
-type = "attac"
-actions = Array[GDScript]([ExtResource("1_astir")])
+type = "attack"
+actions = Array[GDScript]([ExtResource("1_pduny")])

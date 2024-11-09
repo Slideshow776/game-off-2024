@@ -181,6 +181,24 @@ card_angle = -91.115
 angle_limit = 30.0
 max_card_spread_angle = 10.0
 
+[node name="InflictOneButton" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 1.0
+offset_top = 121.0
+offset_right = 205.0
+offset_bottom = 152.0
+text = "inflict 1 damage to player
+"
+
+[node name="InflictThreeButton" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 1.0
+offset_top = 161.0
+offset_right = 205.0
+offset_bottom = 192.0
+text = "inflict 3 damage to player
+"
+
 [node name="EndTurnButton" type="Button" parent="."]
 unique_name_in_owner = true
 offset_left = 932.0
@@ -209,6 +227,14 @@ texture_hover = ExtResource("11_rsxpr")
 ignore_texture_size = true
 stretch_mode = 4
 
+[node name="StartGameButton" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 1016.0
+offset_top = -1.0
+offset_right = 1151.0
+offset_bottom = 30.0
+text = "Start New Game"
+
 [node name="TextureButton" type="TextureButton" parent="."]
 offset_left = 1026.0
 offset_top = 549.0
@@ -217,3 +243,6 @@ offset_bottom = 721.0
 scale = Vector2(0.458473, 0.458473)
 texture_normal = ExtResource("9_fg3xd")
 flip_h = true
+
+[connection signal="pressed" from="InflictOneButton" to="." method="_on_inflict_one_button_pressed"]
+[connection signal="pressed" from="InflictThreeButton" to="." method="_on_inflict_three_button_pressed"]

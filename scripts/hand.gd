@@ -60,9 +60,9 @@ func remove_card(index: int) -> PlayableCard:
 	return card
 
 
-func remove_by_entity(card: PlayableCard) -> void:
+func remove_by_entity(card: PlayableCard) -> PlayableCard:
 	var remove_index = cards.find(card)
-	remove_card(remove_index)
+	return remove_card(remove_index)
 
 
 func add_card(card_data: CardData) -> void:

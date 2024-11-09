@@ -1,42 +1,38 @@
 extends Node2D
 
 @export var player_character: Character
+@export var attack_card_data: CardData
+@export var defend_card_data: CardData
 @export var debug_mode := true: 
 	set(value):
 		if !is_node_ready():
 			await ready
 		debug_mode = value
-		%InflictOneButton.visible = debug_mode
-		%InflictThreeButton.visible = debug_mode
-		%DeckAndHand.visible = debug_mode
 
 var enemy_character_state := 0
 
-@onready var deck_and_hand: DeckAndHand = %DeckAndHand
+@onready var hand: Hand = %Hand
 @onready var mana_amount: Label = %ManaAmount
 @onready var game_controller: GameController = %GameController
-@onready var inflict_one_button: Button = %InflictOneButton
-@onready var inflict_three_button: Button = %InflictThreeButton
 @onready var end_turn_button: Button = %EndTurnButton
 @onready var deck_texture_button: TextureButton = %DeckTextureButton
 @onready var enemy_character: Character = %EnemyCharacter
 @onready var deck_view_window: DeckViewWindow = %DeckViewWindow
-@onready var start_game_button: Button = %StartGameButton
 @onready var playable_deck_ui: PlayableDeckUI = %PlayableDeckUi
-
 @onready var deck: Deck = Deck.new()
 
 
 func _ready() -> void:
-	deck_and_hand.deck = deck
-	
-	inflict_one_button.pressed.connect(_on_inflict_one_button_pressed)
-	inflict_three_button.pressed.connect(_on_inflict_three_button_pressed)
-	deck_and_hand.card_activated.connect(_on_deck_and_hand_card_activated)
+	hand.card_activated.connect(_on_hand_card_activated)
 	end_turn_button.pressed.connect(_on_end_turn_pressed)
 	deck_texture_button.pressed.connect(_on_deck_texture_button_pressed)
-	start_game_button.pressed.connect(_on_start_game_button_pressed)
 	playable_deck_ui.pressed.connect(_on_playable_deck_ui_pressed)
+	
+	for i in 10:
+		deck.add_card(attack_card_data.duplicate())
+		deck.add_card(defend_card_data.duplicate())		
+	
+	_restart_game()
 
 
 func _process(delta: float) -> void:
@@ -90,30 +86,19 @@ func _on_end_turn_pressed() -> void:
 		enemy_character.start_turn()
 
 
-func _on_deck_and_hand_card_activated(card: PlayableCard) -> void:
+func _on_hand_card_activated(card: PlayableCard) -> void:
 	var card_cost := card.get_cost()
 	if card_cost <= player_character.mana:
 		card.activate({
-			"caster": player_character,
+			"actor": player_character,
 			"targets": [enemy_character],
+			"cost": card_cost
 		})
-		deck_and_hand.remove_card(card)
+		hand.remove_by_entity(card)
 		card.queue_free()
 	else:
 		# TODO: indicate to the player that they're out of mana
 		pass
-
-
-func _inflict_damage_to_player(amount: int):
-	player_character.take_damage(amount)
-
-
-func _on_inflict_one_button_pressed() -> void:
-	_inflict_damage_to_player(1)
-
-
-func _on_inflict_three_button_pressed() -> void:
-	_inflict_damage_to_player(3)
 
 
 func _restart_game() -> void:
@@ -121,7 +106,7 @@ func _restart_game() -> void:
 	game_controller.current_state = GameController.GameState.PLAYER_TURN
 	player_character.reset()
 	enemy_character.reset()
-	deck_and_hand.reset()
+	hand.empty()
 	playable_deck_ui.deck = deck.get_playable_deck()
 
 
@@ -132,12 +117,8 @@ func _on_deck_texture_button_pressed() -> void:
 	deck_view_window.display_card_list(deck.get_cards())
 
 
-func _on_start_game_button_pressed() -> void:
-	_restart_game()
-
-
 func _on_playable_deck_ui_pressed() -> void:
 	var card_with_id = playable_deck_ui.draw()
 	
 	if card_with_id:
-		deck_and_hand.add_card(card_with_id)
+		hand.add_card(card_with_id.card)

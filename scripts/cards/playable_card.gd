@@ -4,11 +4,16 @@ extends Node2D
 signal mouse_entered(card: Card)
 signal mouse_exited(card: Card)
 
-var actions: Array[RefCounted]
+var actions: Array[Action]
 
 @onready var card: Card = %Card
 @onready var attack_action: Node2D = %AttackAction
 @onready var defense_action: Node2D = %DefenseAction
+
+
+func _ready() -> void:
+	card.mouse_entered.connect(_on_card_mouse_entered)
+	card.mouse_exited.connect(_on_card_mouse_exited)
 
 
 func load_card_data(card_data: CardData) -> void:
@@ -27,11 +32,6 @@ func load_card_data(card_data: CardData) -> void:
 		actions.push_back(action_script)
 
 
-func _ready() -> void:
-	card.mouse_entered.connect(_on_card_mouse_entered)
-	card.mouse_exited.connect(_on_card_mouse_exited)
-
-
 func highlight() -> void:
 	card.highlight()
 
@@ -44,14 +44,14 @@ func get_cost() -> int:
 	return card.cost
 
 
+func activate(game_state: Dictionary) -> void:
+	for action in actions:
+		action.activate(game_state)
+
+
 func _on_card_mouse_entered(card: Card) -> void:
 	mouse_entered.emit(self)
 
 
 func _on_card_mouse_exited(card: Card) -> void:
 	mouse_exited.emit(self)
-
-
-func activate(game_state: Dictionary) -> void:
-	for action in actions:
-		action.activate(game_state)
