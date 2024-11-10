@@ -22,10 +22,5 @@ func set_label_deck_size() -> void:
 		label.set_text(str(0))
 
 
-func reset() -> void:
-	deck = PlayableDeck.new()
-	set_label_deck_size()
-
-
 func get_number_of_cards() -> int:
 	return deck.cards.size()

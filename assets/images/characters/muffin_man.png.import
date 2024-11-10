@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://biyyidgbygajo"
-path="res://.godot/imported/deck_pressed.png-3df1e0b8a3b2a13d01f3a92796c0f382.ctex"
+uid="uid://ltjls1rswnvw"
+path="res://.godot/imported/muffin_man.png-789acb2d8112a67e7afd332b231020e1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/deck_pressed.png"
-dest_files=["res://.godot/imported/deck_pressed.png-3df1e0b8a3b2a13d01f3a92796c0f382.ctex"]
+source_file="res://assets/images/characters/muffin_man.png"
+dest_files=["res://.godot/imported/muffin_man.png-789acb2d8112a67e7afd332b231020e1.ctex"]
 
 [params]
 

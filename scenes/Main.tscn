@@ -1,21 +1,22 @@
-[gd_scene load_steps=17 format=3 uid="uid://ci0unrji7vi3w"]
+[gd_scene load_steps=18 format=3 uid="uid://ci0unrji7vi3w"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_8pbs6"]
 [ext_resource type="Script" path="res://scripts/character.gd" id="1_feuee"]
-[ext_resource type="Texture2D" uid="uid://cntwheij8fvq3" path="res://assets/images/thief.png" id="1_tb46g"]
+[ext_resource type="Texture2D" uid="uid://cntwheij8fvq3" path="res://assets/images/characters/thief.png" id="1_tb46g"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="2_lcj48"]
-[ext_resource type="Texture2D" uid="uid://ltjls1rswnvw" path="res://assets/images/muffin_man.png" id="2_n72km"]
+[ext_resource type="Texture2D" uid="uid://ltjls1rswnvw" path="res://assets/images/characters/muffin_man.png" id="2_n72km"]
 [ext_resource type="Resource" uid="uid://dgwxaf1naxwdx" path="res://card_data/attack_card.tres" id="2_xbw3r"]
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/main_theme.tres" id="2_y60n5"]
-[ext_resource type="PackedScene" uid="uid://bqim5c7s6n81g" path="res://scenes/ui/DeckViewWindow.tscn" id="3_4v5wd"]
 [ext_resource type="Resource" uid="uid://bs3yu15jrsqc4" path="res://card_data/defend_card.tres" id="3_x8w5h"]
 [ext_resource type="PackedScene" uid="uid://cbkph8q1bp178" path="res://scenes/cards/PlayableCard.tscn" id="4_xxjt2"]
 [ext_resource type="Texture2D" uid="uid://borofa6wbn8jx" path="res://assets/images/card/image2.png" id="5_fi3wd"]
+[ext_resource type="PackedScene" uid="uid://cr1bhgtdf5bal" path="res://scenes/ui/DeckViewControl.tscn" id="6_tjxqj"]
 [ext_resource type="PackedScene" uid="uid://drbayobfjnntg" path="res://scenes/Hand.tscn" id="10_4fja5"]
 [ext_resource type="PackedScene" uid="uid://bkfg2v0yelnsp" path="res://scenes/ui/PlayableDeckUI.tscn" id="10_w05ha"]
-[ext_resource type="Texture2D" uid="uid://bybc3ktbng41a" path="res://assets/images/card/card_back_normal.png" id="16_6e2ll"]
-[ext_resource type="Texture2D" uid="uid://cm71df8g7yolu" path="res://assets/images/card/card_back_pressed.png" id="17_oweln"]
-[ext_resource type="Texture2D" uid="uid://cvtoci2mpevmq" path="res://assets/images/card/card_back_hover.png" id="18_vfux0"]
+[ext_resource type="Texture2D" uid="uid://bybc3ktbng41a" path="res://assets/images/deck/card_back_normal.png" id="16_6e2ll"]
+[ext_resource type="Texture2D" uid="uid://cvtlvqu414jwv" path="res://assets/images/deck/card_back_disabled.png" id="16_8hj4e"]
+[ext_resource type="Texture2D" uid="uid://cm71df8g7yolu" path="res://assets/images/deck/card_back_pressed.png" id="17_oweln"]
+[ext_resource type="Texture2D" uid="uid://cvtoci2mpevmq" path="res://assets/images/deck/card_back_hover.png" id="18_vfux0"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("player_character")]
 script = ExtResource("1_8pbs6")
@@ -84,8 +85,9 @@ text = "Game Won!
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DeckViewWindow" parent="CanvasLayer" instance=ExtResource("3_4v5wd")]
+[node name="DeckViewControl" parent="CanvasLayer" instance=ExtResource("6_tjxqj")]
 unique_name_in_owner = true
+visible = false
 
 [node name="GameController" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -191,7 +193,7 @@ offset_right = 1088.0
 offset_bottom = 501.0
 text = "End Turn"
 
-[node name="DeckTextureButton" type="TextureButton" parent="."]
+[node name="ViewDeckButton" type="TextureButton" parent="."]
 unique_name_in_owner = true
 offset_left = 1028.0
 offset_top = 6.0
@@ -200,6 +202,7 @@ offset_bottom = 79.0
 texture_normal = ExtResource("16_6e2ll")
 texture_pressed = ExtResource("17_oweln")
 texture_hover = ExtResource("18_vfux0")
+texture_disabled = ExtResource("16_8hj4e")
 ignore_texture_size = true
 stretch_mode = 4
 

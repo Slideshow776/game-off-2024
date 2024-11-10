@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ltjls1rswnvw"
-path="res://.godot/imported/muffin_man.png-f31f79482dd326b270c53caed605acfa.ctex"
+uid="uid://cvtoci2mpevmq"
+path="res://.godot/imported/card_back_hover.png-c82e8b92072cb8cf7920558bf275ab14.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/muffin_man.png"
-dest_files=["res://.godot/imported/muffin_man.png-f31f79482dd326b270c53caed605acfa.ctex"]
+source_file="res://assets/images/deck/card_back_hover.png"
+dest_files=["res://.godot/imported/card_back_hover.png-c82e8b92072cb8cf7920558bf275ab14.ctex"]
 
 [params]
 

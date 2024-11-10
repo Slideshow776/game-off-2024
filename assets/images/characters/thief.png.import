@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvtoci2mpevmq"
-path="res://.godot/imported/card_back_hover.png-5e9906f512330f5cfce0a22ce8583a42.ctex"
+uid="uid://cntwheij8fvq3"
+path="res://.godot/imported/thief.png-d913fb1c825742aae3584b3459ba2f70.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/card/card_back_hover.png"
-dest_files=["res://.godot/imported/card_back_hover.png-5e9906f512330f5cfce0a22ce8583a42.ctex"]
+source_file="res://assets/images/characters/thief.png"
+dest_files=["res://.godot/imported/thief.png-d913fb1c825742aae3584b3459ba2f70.ctex"]
 
 [params]
 

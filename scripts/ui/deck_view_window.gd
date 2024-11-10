@@ -1,8 +1,10 @@
 class_name DeckViewWindow
-extends ScrollContainer
+extends Control
 
 @export var card_container_scene: PackedScene
+
 var cached_card_containers: Array[CardContainer] = []
+
 @onready var h_flow_container: HFlowContainer = %HFlowContainer
 
 

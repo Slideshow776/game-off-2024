@@ -16,9 +16,10 @@ var enemy_character_state := 0
 @onready var mana_amount: Label = %ManaAmount
 @onready var game_controller: GameController = %GameController
 @onready var end_turn_button: Button = %EndTurnButton
-@onready var deck_texture_button: TextureButton = %DeckTextureButton
+@onready var view_deck_button: TextureButton = %ViewDeckButton
 @onready var enemy_character: Character = %EnemyCharacter
 @onready var deck_view_window: DeckViewWindow = %DeckViewWindow
+@onready var deck_view_control: Control = %DeckViewControl
 @onready var draw_pile: PlayableDeckUI = %DrawPile
 @onready var discard_pile: PlayableDeckUI = %DiscardPile
 @onready var deck: Deck = Deck.new()
@@ -27,14 +28,11 @@ var enemy_character_state := 0
 func _ready() -> void:
 	hand.card_activated.connect(_on_hand_card_activated)
 	end_turn_button.pressed.connect(_on_end_turn_pressed)
-	deck_texture_button.pressed.connect(_on_deck_texture_button_pressed)
+	view_deck_button.pressed.connect(_on_view_deck_button_pressed)
+	draw_pile.pressed.connect(_on_draw_pile_pressed)
+	discard_pile.pressed.connect(_on_discard_pile_pressed)
 	
-	# generate a starting deck
-	for i in 5:
-		deck.add_card(attack_card_data.duplicate())
-	for i in 5:
-		deck.add_card(defend_card_data.duplicate())
-		
+	_generate_starting_deck()
 	_restart_game()
 
 
@@ -91,7 +89,9 @@ func _on_end_turn_pressed() -> void:
 		
 		var cards: Array[PlayableCard] = hand.empty()
 		for card in cards:
+			card.visible = false
 			discard_pile.add_card(deck.get_card(card.id))
+			discard_pile.disabled = false
 
 
 func _on_hand_card_activated(card: PlayableCard) -> void:
@@ -105,6 +105,7 @@ func _on_hand_card_activated(card: PlayableCard) -> void:
 		
 		hand.remove_by_entity(card)
 		discard_pile.add_card(deck.get_card(card.id))
+		discard_pile.disabled = false
 	else:
 		# TODO: indicate to the player that they're out of mana
 		pass
@@ -115,12 +116,17 @@ func _restart_game() -> void:
 	player_character.reset()
 	enemy_character.reset()
 	hand.empty()
+		
+	view_deck_button.disabled = deck.get_playable_deck().size() == 0
 	
 	draw_pile.deck = deck.get_playable_deck()
+	draw_pile.disabled = false
 	draw_pile.set_label_deck_size()
 	draw_pile.deck.shuffle()
 	
-	discard_pile.reset()
+	discard_pile.deck = PlayableDeck.new()
+	discard_pile.set_label_deck_size()
+	discard_pile.disabled = true
 	
 	deal_to_hand()
 
@@ -132,10 +138,27 @@ func deal_to_hand():
 		tween.tween_callback(_draw_card_to_hand).set_delay(0.2)
 
 
-func _on_deck_texture_button_pressed() -> void:
+func _on_view_deck_button_pressed() -> void:
+	toggle_deck_view(deck.get_cards())
+
+
+func _on_draw_pile_pressed() -> void:
+	toggle_deck_view(draw_pile.deck.cards)
+
+
+func _on_discard_pile_pressed() -> void:
+	toggle_deck_view(discard_pile.deck.cards)
+
+
+func toggle_deck_view(deck: Array[CardWithID]) -> void:
 	game_controller.toggle_pause_and_resume()
-	deck_view_window.visible = !deck_view_window.visible
-	deck_view_window.display_card_list(deck.get_cards())
+	deck_view_control.visible = !deck_view_control.visible
+	deck_view_control.deck_view_window.display_card_list(deck)
+
+
+func _generate_starting_deck() -> void:
+	for i in 1: deck.add_card(attack_card_data.duplicate())
+	for i in 5: deck.add_card(defend_card_data.duplicate())
 
 
 func _check_transfer_from_discard_to_draw_pile() -> void:
@@ -143,6 +166,8 @@ func _check_transfer_from_discard_to_draw_pile() -> void:
 		var number_of_cards = discard_pile.get_number_of_cards()
 		for i in number_of_cards:
 			draw_pile.add_card(discard_pile.draw())
+		draw_pile.disabled = false
+		discard_pile.disabled = true
 	discard_pile.set_label_deck_size()
 
 
@@ -158,3 +183,6 @@ func _draw_card_to_hand() -> void:
 		playable_card.global_position = hand.global_position
 		remove_child(playable_card)
 		hand.add_card(playable_card)
+		
+		if draw_pile.get_number_of_cards() == 0:
+			draw_pile.disabled = true

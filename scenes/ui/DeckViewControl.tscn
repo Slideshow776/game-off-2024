@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://cr1bhgtdf5bal"]
+
+[ext_resource type="Script" path="res://scripts/ui/deck_view_control.gd" id="1_5memk"]
+[ext_resource type="PackedScene" uid="uid://bqim5c7s6n81g" path="res://scenes/ui/DeckViewWindow.tscn" id="1_njfl3"]
+[ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/main_theme.tres" id="2_6c6mw"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5memk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.8)
+
+[node name="DeckViewWindow" parent="." instance=ExtResource("1_njfl3")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -519.0
+offset_right = 518.0
+
+[node name="BackButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 528.0
+offset_right = 195.0
+offset_bottom = 603.0
+theme = ExtResource("2_6c6mw")
+text = "Back"
