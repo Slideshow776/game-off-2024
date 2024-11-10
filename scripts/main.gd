@@ -61,9 +61,9 @@ func _process(delta: float) -> void:
 				
 		enemy_character_state = posmod(enemy_character_state + 1, 3)
 		game_controller.transition(GameController.GameState.PLAYER_TURN)
-		end_turn_button.disabled = false
+		end_turn_button.disabled = true
 		player_character.start_turn()
-		deal_to_hand()
+		_deal_to_hand()
 	
 	if game_controller.current_state == GameController.GameState.GAME_WON:
 		%GameWonColorRect.visible = true
@@ -128,14 +128,15 @@ func _restart_game() -> void:
 	discard_pile.set_label_deck_size()
 	discard_pile.disabled = true
 	
-	deal_to_hand()
+	_deal_to_hand()
 
 
-func deal_to_hand():
+func _deal_to_hand():
 	var tween := create_tween()
 	for i in player_character.number_of_cards_to_be_dealt:
 		_check_transfer_from_discard_to_draw_pile()
 		tween.tween_callback(_draw_card_to_hand).set_delay(0.2)
+	tween.tween_callback(func() -> void: end_turn_button.disabled = false)
 
 
 func _on_view_deck_button_pressed() -> void:
@@ -162,8 +163,9 @@ func _generate_starting_deck() -> void:
 
 
 func _check_transfer_from_discard_to_draw_pile() -> void:
-	if draw_pile.get_number_of_cards() == 0:
+	if draw_pile.get_number_of_cards() < player_character.number_of_cards_to_be_dealt:
 		var number_of_cards = discard_pile.get_number_of_cards()
+		discard_pile.deck.shuffle()
 		for i in number_of_cards:
 			draw_pile.add_card(discard_pile.draw())
 		draw_pile.disabled = false
