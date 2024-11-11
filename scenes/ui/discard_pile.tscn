@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cp2kehc1qtxjr" path="res://assets/images/ui/discard_pile_hover.png" id="3_mfnj1"]
 [ext_resource type="Script" path="res://scripts/ui/playable_deck_ui.gd" id="4_blu3c"]
 [ext_resource type="Texture2D" uid="uid://di8exfyrvob1a" path="res://assets/images/ui/number_circle.png" id="5_ukkqw"]
-[ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/main_theme.tres" id="6_4y62u"]
+[ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="6_4y62u"]
 
 [node name="DiscardPile" type="TextureButton"]
 offset_left = 1009.0

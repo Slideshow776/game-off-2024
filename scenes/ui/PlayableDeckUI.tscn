@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://biyyidgbygajo" path="res://assets/images/deck/deck_pressed.png" id="2_lme7m"]
 [ext_resource type="Texture2D" uid="uid://tp2rl6f6gv38" path="res://assets/images/deck/deck_hover.png" id="3_wp71q"]
 [ext_resource type="Texture2D" uid="uid://bepsy5bwbogoo" path="res://assets/images/deck/deck_disabled.png" id="4_6mhbr"]
-[ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/main_theme.tres" id="5_fbgrc"]
+[ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="5_fbgrc"]
 
 [node name="PlayableDeckUi" type="TextureButton"]
 offset_right = 91.0

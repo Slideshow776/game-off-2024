@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b65u5dn2xodcf" path="res://assets/images/ui/draw_pile_hover.png" id="3_uas3f"]
 [ext_resource type="Script" path="res://scripts/ui/playable_deck_ui.gd" id="5_phgqx"]
 [ext_resource type="Texture2D" uid="uid://di8exfyrvob1a" path="res://assets/images/ui/number_circle.png" id="6_oc14r"]
-[ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/main_theme.tres" id="7_mleuy"]
+[ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="7_mleuy"]
 
 [node name="DrawPile" type="TextureButton"]
 offset_left = 40.0

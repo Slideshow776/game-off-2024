@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/ui/deck_view_control.gd" id="1_5memk"]
 [ext_resource type="PackedScene" uid="uid://bqim5c7s6n81g" path="res://scenes/ui/DeckViewWindow.tscn" id="1_njfl3"]
-[ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/main_theme.tres" id="2_6c6mw"]
+[ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="2_6c6mw"]
 
 [node name="Control" type="Control"]
 layout_mode = 3

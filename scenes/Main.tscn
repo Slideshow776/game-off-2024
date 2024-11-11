@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/character.gd" id="1_feuee"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="2_lcj48"]
 [ext_resource type="Resource" uid="uid://dgwxaf1naxwdx" path="res://card_data/attack_card.tres" id="2_xbw3r"]
-[ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/main_theme.tres" id="2_y60n5"]
+[ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="2_y60n5"]
 [ext_resource type="Resource" uid="uid://bs3yu15jrsqc4" path="res://card_data/defend_card.tres" id="3_x8w5h"]
 [ext_resource type="PackedScene" uid="uid://cbkph8q1bp178" path="res://scenes/cards/PlayableCard.tscn" id="4_xxjt2"]
 [ext_resource type="Texture2D" uid="uid://borofa6wbn8jx" path="res://assets/images/card/image2.png" id="5_fi3wd"]
@@ -204,11 +204,22 @@ max_card_spread_angle = 10.0
 
 [node name="EndTurnButton" type="Button" parent="."]
 unique_name_in_owner = true
-offset_left = 884.0
-offset_top = 458.0
-offset_right = 1040.0
-offset_bottom = 520.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 888.0
+offset_top = 428.0
+offset_right = 1042.0
+offset_bottom = 522.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.0174533
+scale = Vector2(1, 0.75)
+pivot_offset = Vector2(94, 63)
+theme = ExtResource("2_y60n5")
 text = "End Turn"
+icon_alignment = 1
+vertical_icon_alignment = 2
 
 [node name="ViewDeckButton" parent="." instance=ExtResource("14_okd2s")]
 unique_name_in_owner = true
