@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ci0unrji7vi3w"]
+[gd_scene load_steps=18 format=3 uid="uid://ci0unrji7vi3w"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_8pbs6"]
 [ext_resource type="Script" path="res://scripts/character.gd" id="1_feuee"]
@@ -14,13 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://csjv2jq11b2o3" path="res://assets/images/characters/player.png" id="10_rrl4x"]
 [ext_resource type="Texture2D" uid="uid://bag0jsvx10rad" path="res://assets/images/characters/ice_cream.png" id="12_ad7y4"]
 [ext_resource type="PackedScene" uid="uid://d1ni5upcefubs" path="res://scenes/ui/view_deck_button.tscn" id="14_okd2s"]
+[ext_resource type="PackedScene" uid="uid://b8cf5ve82x7hv" path="res://scenes/ui/discard_pile.tscn" id="17_qqyw7"]
 [ext_resource type="Texture2D" uid="uid://d1h8u0gquq3x2" path="res://assets/images/backgrounds/background_test.png" id="18_7r4xs"]
 [ext_resource type="PackedScene" uid="uid://dddavuqmsq4ei" path="res://scenes/ui/draw_pile.tscn" id="18_x2c22"]
-[ext_resource type="Script" path="res://scripts/ui/playable_deck_ui.gd" id="20_e2gpl"]
-[ext_resource type="Texture2D" uid="uid://btvtj0qvwixyc" path="res://assets/images/ui/discard_pile_pressed.png" id="20_ih5sb"]
-[ext_resource type="Texture2D" uid="uid://bdojceij58f10" path="res://assets/images/ui/discard_pile_normal.png" id="21_dfv8o"]
-[ext_resource type="Texture2D" uid="uid://cp2kehc1qtxjr" path="res://assets/images/ui/discard_pile_hover.png" id="21_fs4e6"]
-[ext_resource type="Texture2D" uid="uid://di8exfyrvob1a" path="res://assets/images/ui/number_circle.png" id="21_tckvx"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("player_character")]
 script = ExtResource("1_8pbs6")
@@ -30,6 +26,7 @@ defend_card_data = ExtResource("3_x8w5h")
 playable_card_scene = ExtResource("4_xxjt2")
 
 [node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.82606, 0.82606, 0.82606, 1)
 position = Vector2(576, 324)
 texture = ExtResource("18_7r4xs")
 
@@ -229,31 +226,5 @@ unique_name_in_owner = true
 offset_left = 16.0
 offset_right = 106.0
 
-[node name="DiscardPile" type="TextureButton" parent="."]
+[node name="DiscardPile" parent="." instance=ExtResource("17_qqyw7")]
 unique_name_in_owner = true
-offset_left = 1041.0
-offset_top = 536.0
-offset_right = 1131.0
-offset_bottom = 630.0
-texture_normal = ExtResource("21_dfv8o")
-texture_pressed = ExtResource("20_ih5sb")
-texture_hover = ExtResource("21_fs4e6")
-stretch_mode = 4
-script = ExtResource("20_e2gpl")
-
-[node name="Sprite2D" type="Sprite2D" parent="DiscardPile"]
-position = Vector2(9.00006, 80)
-scale = Vector2(0.751331, 0.751331)
-texture = ExtResource("21_tckvx")
-
-[node name="Label" type="Label" parent="DiscardPile/Sprite2D"]
-unique_name_in_owner = true
-offset_left = -26.6193
-offset_top = -37.2672
-offset_right = 24.3807
-offset_bottom = 36.7328
-theme = ExtResource("2_y60n5")
-theme_override_font_sizes/font_size = 48
-text = "-1"
-horizontal_alignment = 1
-vertical_alignment = 1

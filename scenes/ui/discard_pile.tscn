@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://inr1yvrar4xc"]
+[gd_scene load_steps=7 format=3 uid="uid://b8cf5ve82x7hv"]
 
 [ext_resource type="Texture2D" uid="uid://bdojceij58f10" path="res://assets/images/ui/discard_pile_normal.png" id="1_vqj3k"]
 [ext_resource type="Texture2D" uid="uid://btvtj0qvwixyc" path="res://assets/images/ui/discard_pile_pressed.png" id="2_67tpn"]
@@ -8,9 +8,9 @@
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="6_4y62u"]
 
 [node name="DiscardPile" type="TextureButton"]
-offset_left = 1009.0
+offset_left = 1041.0
 offset_top = 536.0
-offset_right = 1099.0
+offset_right = 1131.0
 offset_bottom = 630.0
 texture_normal = ExtResource("1_vqj3k")
 texture_pressed = ExtResource("2_67tpn")

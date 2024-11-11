@@ -15,6 +15,7 @@ enum Colour { RED, BLUE }
 @export var type: String = "TODO: type"
 
 var is_highlighted := false
+var tween_unhighlight: Tween
 var _original_scale: Vector2
 var _original_position: Vector2
 
@@ -70,10 +71,10 @@ func highlight() -> void:
 func unhighlight() -> void:
 	if is_highlighted:
 		is_highlighted = false
-		var tween = create_tween()
-		tween.set_parallel()
-		tween.tween_property(self, "scale", _original_scale * 1.0, 0.5)
-		tween.tween_property(self, "position:y", _original_position.y, 0.5)
+		tween_unhighlight = create_tween()
+		tween_unhighlight.set_parallel()
+		tween_unhighlight.tween_property(self, "scale", _original_scale * 1.0, 0.5)
+		tween_unhighlight.tween_property(self, "position:y", _original_position.y, 0.5)
 
 
 func _set_colour(temp_colour: Colour) -> void:

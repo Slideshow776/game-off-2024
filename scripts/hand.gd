@@ -58,14 +58,13 @@ func remove_card(index: int) -> PlayableCard:
 	var card = cards[index]
 	cards.remove_at(index)
 	remove_child(card)
-	touched.remove_at(touched.find(card))
-	_reposition_cards()
+	touched.remove_at(touched.find(card))	
+	create_tween().tween_callback(_reposition_cards).set_delay(0.2)
 	return card
 
 
 func remove_by_entity(card: PlayableCard) -> PlayableCard:
-	var remove_index = cards.find(card)
-	remove_child(card)
+	var remove_index = cards.find(card)	
 	return remove_card(remove_index)
 
 
@@ -95,8 +94,10 @@ func _reposition_cards() -> void:
 
 
 func _update_card_transform(card: PlayableCard, angle_in_deg: float) -> void:
-	card.set_position(_get_card_position(angle_in_deg))
-	card.set_rotation(deg_to_rad(angle_in_deg + 90))
+	var tween := create_tween()
+	tween.set_parallel()
+	tween.tween_property(card, "position", _get_card_position(angle_in_deg), 0.2)
+	tween.tween_property(card, "rotation", deg_to_rad(angle_in_deg + 90), 0.6)
 
 
 func _get_card_position(angle_in_degree: float) -> Vector2:
