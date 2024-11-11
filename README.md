@@ -5,6 +5,8 @@ TODO: cover art of game
 >
 > This year's Game Off theme is **SECRETS**.
 
+* [kanban board](https://trello.com/b/Kbo7RItS/game-off-2024)
+
 Followed [this Godot deckbuilding tutorial](https://www.youtube.com/watch?v=HF8A0OuyHho&t=4088s) by [DeveloperEzra](https://www.youtube.com/@ezthedev).
 
 Project is made using [Godot](https://godotengine.org) 4.
