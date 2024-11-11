@@ -79,6 +79,8 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("restart"):
 		_restart_game()
+	elif event.is_action_pressed("mouse_click_back") && deck_view_control.visible:
+		deck_view_control.visible = false
 
 
 func _on_end_turn_pressed() -> void:
