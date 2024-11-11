@@ -22,3 +22,7 @@ func peek_top() -> CardWithID:
 
 func put_card_on_top(card: CardWithID) -> void:
 	cards.push_back(card)
+
+
+func put_card_on_bottom(card: CardWithID) -> void:
+	cards.push_front(card)

@@ -90,7 +90,7 @@ func _on_end_turn_pressed() -> void:
 		var cards: Array[PlayableCard] = hand.empty()
 		for card in cards:
 			card.visible = false
-			discard_pile.add_card(deck.get_card(card.id))
+			discard_pile.add_card_on_top(deck.get_card(card.id))
 			discard_pile.disabled = false
 
 
@@ -104,7 +104,7 @@ func _on_hand_card_activated(card: PlayableCard) -> void:
 		})
 		
 		hand.remove_by_entity(card)
-		discard_pile.add_card(deck.get_card(card.id))
+		discard_pile.add_card_on_top(deck.get_card(card.id))
 		discard_pile.disabled = false
 	else:
 		# TODO: indicate to the player that they're out of mana
@@ -167,7 +167,7 @@ func _check_transfer_from_discard_to_draw_pile() -> void:
 		var number_of_cards = discard_pile.get_number_of_cards()
 		discard_pile.deck.shuffle()
 		for i in number_of_cards:
-			draw_pile.add_card(discard_pile.draw())
+			draw_pile.add_card_on_bottom(discard_pile.draw())
 		draw_pile.disabled = false
 		discard_pile.disabled = true
 	discard_pile.set_label_deck_size()

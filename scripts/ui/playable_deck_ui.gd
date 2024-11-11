@@ -10,8 +10,13 @@ func draw() -> CardWithID:
 	return deck.deal_card()
 
 
-func add_card(card_with_id: CardWithID):
+func add_card_on_top(card_with_id: CardWithID):
 	deck.put_card_on_top(card_with_id)
+	set_label_deck_size()
+
+
+func add_card_on_bottom(card_with_id: CardWithID):
+	deck.put_card_on_bottom(card_with_id)
 	set_label_deck_size()
 
 
