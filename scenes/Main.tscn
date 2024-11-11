@@ -1,10 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://ci0unrji7vi3w"]
+[gd_scene load_steps=19 format=3 uid="uid://ci0unrji7vi3w"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_8pbs6"]
 [ext_resource type="Script" path="res://scripts/character.gd" id="1_feuee"]
-[ext_resource type="Texture2D" uid="uid://cntwheij8fvq3" path="res://assets/images/characters/thief.png" id="1_tb46g"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="2_lcj48"]
-[ext_resource type="Texture2D" uid="uid://ltjls1rswnvw" path="res://assets/images/characters/muffin_man.png" id="2_n72km"]
 [ext_resource type="Resource" uid="uid://dgwxaf1naxwdx" path="res://card_data/attack_card.tres" id="2_xbw3r"]
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/main_theme.tres" id="2_y60n5"]
 [ext_resource type="Resource" uid="uid://bs3yu15jrsqc4" path="res://card_data/defend_card.tres" id="3_x8w5h"]
@@ -12,10 +10,13 @@
 [ext_resource type="Texture2D" uid="uid://borofa6wbn8jx" path="res://assets/images/card/image2.png" id="5_fi3wd"]
 [ext_resource type="PackedScene" uid="uid://cr1bhgtdf5bal" path="res://scenes/ui/DeckViewControl.tscn" id="6_tjxqj"]
 [ext_resource type="PackedScene" uid="uid://drbayobfjnntg" path="res://scenes/Hand.tscn" id="10_4fja5"]
+[ext_resource type="Texture2D" uid="uid://csjv2jq11b2o3" path="res://assets/images/characters/player.png" id="10_rrl4x"]
 [ext_resource type="PackedScene" uid="uid://bkfg2v0yelnsp" path="res://scenes/ui/PlayableDeckUI.tscn" id="10_w05ha"]
+[ext_resource type="Texture2D" uid="uid://bag0jsvx10rad" path="res://assets/images/characters/ice_cream.png" id="12_ad7y4"]
 [ext_resource type="Texture2D" uid="uid://bybc3ktbng41a" path="res://assets/images/deck/card_back_normal.png" id="16_6e2ll"]
 [ext_resource type="Texture2D" uid="uid://cvtlvqu414jwv" path="res://assets/images/deck/card_back_disabled.png" id="16_8hj4e"]
 [ext_resource type="Texture2D" uid="uid://cm71df8g7yolu" path="res://assets/images/deck/card_back_pressed.png" id="17_oweln"]
+[ext_resource type="Texture2D" uid="uid://d1h8u0gquq3x2" path="res://assets/images/backgrounds/background_test.png" id="18_7r4xs"]
 [ext_resource type="Texture2D" uid="uid://cvtoci2mpevmq" path="res://assets/images/deck/card_back_hover.png" id="18_vfux0"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("player_character")]
@@ -24,6 +25,10 @@ player_character = NodePath("GameScreen/PlayerCharacter")
 attack_card_data = ExtResource("2_xbw3r")
 defend_card_data = ExtResource("3_x8w5h")
 playable_card_scene = ExtResource("4_xxjt2")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+texture = ExtResource("18_7r4xs")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -99,26 +104,28 @@ offset_left = 251.0
 offset_top = 396.0
 offset_right = 322.0
 offset_bottom = 419.0
+theme = ExtResource("2_y60n5")
+theme_override_font_sizes/font_size = 32
 text = "Mana: 10"
 
 [node name="GameScreen" type="Node2D" parent="."]
 
 [node name="PlayerCharacter" type="Node2D" parent="GameScreen"]
 unique_name_in_owner = true
-position = Vector2(410, 279)
+position = Vector2(479, 282)
 script = ExtResource("1_feuee")
 max_health = 10
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="GameScreen/PlayerCharacter"]
 position = Vector2(-2, 27)
-texture = ExtResource("1_tb46g")
+texture = ExtResource("10_rrl4x")
 
 [node name="HealthBar" type="ProgressBar" parent="GameScreen/PlayerCharacter"]
-offset_left = -62.0
-offset_top = -72.0
-offset_right = 67.0
-offset_bottom = -45.0
+offset_left = -96.0
+offset_top = 104.0
+offset_right = 94.0
+offset_bottom = 118.0
 theme = ExtResource("2_y60n5")
 max_value = 10.0
 value = 10.0
@@ -142,21 +149,21 @@ vertical_alignment = 1
 
 [node name="EnemyCharacter" type="Node2D" parent="GameScreen"]
 unique_name_in_owner = true
-position = Vector2(773, 254)
+position = Vector2(743, 299)
 script = ExtResource("1_feuee")
 max_health = 10
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="GameScreen/EnemyCharacter"]
-position = Vector2(3, 32)
-scale = Vector2(0.517778, 0.517778)
-texture = ExtResource("2_n72km")
+position = Vector2(41.3956, -32.0867)
+scale = Vector2(1.08242, 1.08242)
+texture = ExtResource("12_ad7y4")
 
 [node name="HealthBar" type="ProgressBar" parent="GameScreen/EnemyCharacter"]
-offset_left = -62.0
-offset_top = -87.0
-offset_right = 67.0
-offset_bottom = -60.0
+offset_left = -50.0
+offset_top = 89.0
+offset_right = 141.0
+offset_bottom = 103.0
 theme = ExtResource("2_y60n5")
 max_value = 10.0
 value = 10.0
@@ -217,7 +224,7 @@ pivot_offset = Vector2(0, 1)
 [node name="DiscardPile" parent="." instance=ExtResource("10_w05ha")]
 unique_name_in_owner = true
 offset_left = 1029.0
-offset_top = 561.0
+offset_top = 573.0
 offset_right = 1120.0
-offset_bottom = 626.0
+offset_bottom = 638.0
 flip_h = true
