@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://inr1yvrar4xc"]
+
+[ext_resource type="Texture2D" uid="uid://bdojceij58f10" path="res://assets/images/ui/discard_pile_normal.png" id="1_vqj3k"]
+[ext_resource type="Texture2D" uid="uid://btvtj0qvwixyc" path="res://assets/images/ui/discard_pile_pressed.png" id="2_67tpn"]
+[ext_resource type="Texture2D" uid="uid://cp2kehc1qtxjr" path="res://assets/images/ui/discard_pile_hover.png" id="3_mfnj1"]
+[ext_resource type="Script" path="res://scripts/ui/playable_deck_ui.gd" id="4_blu3c"]
+[ext_resource type="Texture2D" uid="uid://di8exfyrvob1a" path="res://assets/images/ui/number_circle.png" id="5_ukkqw"]
+[ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/main_theme.tres" id="6_4y62u"]
+
+[node name="DiscardPile" type="TextureButton"]
+offset_left = 1009.0
+offset_top = 536.0
+offset_right = 1099.0
+offset_bottom = 630.0
+texture_normal = ExtResource("1_vqj3k")
+texture_pressed = ExtResource("2_67tpn")
+texture_hover = ExtResource("3_mfnj1")
+stretch_mode = 4
+script = ExtResource("4_blu3c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(9.00006, 80)
+scale = Vector2(0.751331, 0.751331)
+texture = ExtResource("5_ukkqw")
+
+[node name="Label" type="Label" parent="Sprite2D"]
+unique_name_in_owner = true
+offset_left = -26.6193
+offset_top = -37.2672
+offset_right = 24.3807
+offset_bottom = 36.7328
+theme = ExtResource("6_4y62u")
+theme_override_font_sizes/font_size = 48
+text = "-1"
+horizontal_alignment = 1
+vertical_alignment = 1

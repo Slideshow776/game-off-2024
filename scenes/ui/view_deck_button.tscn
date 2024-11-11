@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1ni5upcefubs"]
+
+[ext_resource type="Texture2D" uid="uid://btbjh6oo15ikm" path="res://assets/images/ui/deck_normal.png" id="1_okq4y"]
+[ext_resource type="Texture2D" uid="uid://uvpbpv63aqm2" path="res://assets/images/ui/deck_pressed.png" id="2_sm0vh"]
+[ext_resource type="Texture2D" uid="uid://bu3dh7yxpxclg" path="res://assets/images/ui/deck_hover.png" id="3_k2rlt"]
+[ext_resource type="Script" path="res://scripts/ui/playable_deck_ui.gd" id="4_eqhg6"]
+[ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/main_theme.tres" id="4_s3pe0"]
+
+[node name="ViewDeckButton" type="TextureButton"]
+offset_left = 1028.0
+offset_right = 1100.0
+offset_bottom = 79.0
+texture_normal = ExtResource("1_okq4y")
+texture_pressed = ExtResource("2_sm0vh")
+texture_hover = ExtResource("3_k2rlt")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("4_eqhg6")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -25.0
+offset_top = -2.0
+offset_right = 26.0
+offset_bottom = 72.0
+theme = ExtResource("4_s3pe0")
+theme_override_font_sizes/font_size = 48
+text = "-1"

@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 	if !game_controller.is_running:
 		return
 	
-	mana_amount.text = "Mana: " + str(player_character.mana)
+	mana_amount.text = str(player_character.mana)
 	
 	if player_character.health <= 0:
 		game_controller.transition(GameController.GameState.GAME_OVER)
@@ -117,7 +117,9 @@ func _restart_game() -> void:
 	enemy_character.reset()
 	hand.empty()
 		
-	view_deck_button.disabled = deck.get_playable_deck().size() == 0
+	view_deck_button.disabled = deck.get_playable_deck().size() == 0	
+	view_deck_button.deck = deck.get_playable_deck()
+	view_deck_button.set_label_deck_size()
 	
 	draw_pile.deck = deck.get_playable_deck()
 	draw_pile.disabled = false
