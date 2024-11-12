@@ -13,7 +13,7 @@ extends Node2D
 var enemy_character_state := 0
 
 @onready var hand: Hand = %Hand
-@onready var mana_amount: Label = %ManaAmount
+@onready var mana_orb: Sprite2D = %ManaOrb
 @onready var game_controller: GameController = %GameController
 @onready var end_turn_button: Button = %EndTurnButton
 @onready var view_deck_button: TextureButton = %ViewDeckButton
@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 	if !game_controller.is_running:
 		return
 	
-	mana_amount.text = str(player_character.mana)
+	mana_orb.label.text = str(player_character.mana)
 	
 	if player_character.health <= 0:
 		game_controller.transition(GameController.GameState.GAME_OVER)
@@ -144,26 +144,27 @@ func _deal_to_hand():
 
 
 func _on_view_deck_button_pressed() -> void:
-	toggle_deck_view(deck.get_cards())
+	_toggle_deck_view(deck.get_cards(), DeckViewControl.Description.DECK)
 
 
 func _on_draw_pile_pressed() -> void:
-	toggle_deck_view(draw_pile.deck.cards)
+	_toggle_deck_view(draw_pile.deck.cards, DeckViewControl.Description.DRAW_PILE)
 
 
 func _on_discard_pile_pressed() -> void:
-	toggle_deck_view(discard_pile.deck.cards)
+	_toggle_deck_view(discard_pile.deck.cards, DeckViewControl.Description.DISCARD_PILE)
 
 
-func toggle_deck_view(deck: Array[CardWithID]) -> void:
+func _toggle_deck_view(deck: Array[CardWithID], type: DeckViewControl.Description) -> void:
 	game_controller.toggle_pause_and_resume()
 	deck_view_control.visible = !deck_view_control.visible
 	deck_view_control.deck_view_window.display_card_list(deck)
+	deck_view_control.set_description(type)
 
 
 func _generate_starting_deck() -> void:
-	for i in 1: deck.add_card(attack_card_data.duplicate())
-	for i in 5: deck.add_card(defend_card_data.duplicate())
+	for i in 19: deck.add_card(attack_card_data.duplicate())
+	for i in 19: deck.add_card(defend_card_data.duplicate())
 
 
 func _check_transfer_from_discard_to_draw_pile() -> void:

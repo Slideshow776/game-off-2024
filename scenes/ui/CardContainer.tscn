@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://cbkph8q1bp178" path="res://scenes/cards/PlayableCard.tscn" id="2_lsi84"]
 
 [node name="CardContainer" type="Container"]
-custom_minimum_size = Vector2(194, 245)
+custom_minimum_size = Vector2(185, 240)
+offset_right = 194.0
+offset_bottom = 245.0
 script = ExtResource("1_be3hq")
 playable_card_scene = ExtResource("2_lsi84")

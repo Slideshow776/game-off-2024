@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cbkph8q1bp178" path="res://scenes/cards/PlayableCard.tscn" id="4_xxjt2"]
 [ext_resource type="Texture2D" uid="uid://borofa6wbn8jx" path="res://assets/images/card/image2.png" id="5_fi3wd"]
 [ext_resource type="PackedScene" uid="uid://cr1bhgtdf5bal" path="res://scenes/ui/DeckViewControl.tscn" id="6_tjxqj"]
-[ext_resource type="Texture2D" uid="uid://c1y6sqgrl0bc" path="res://assets/images/ui/mana_orb.png" id="9_sx24e"]
+[ext_resource type="PackedScene" uid="uid://dp25u7ocj871r" path="res://scenes/ui/mana_orb.tscn" id="9_l7107"]
 [ext_resource type="PackedScene" uid="uid://drbayobfjnntg" path="res://scenes/Hand.tscn" id="10_4fja5"]
 [ext_resource type="Texture2D" uid="uid://csjv2jq11b2o3" path="res://assets/images/characters/player.png" id="10_rrl4x"]
 [ext_resource type="Texture2D" uid="uid://bag0jsvx10rad" path="res://assets/images/characters/ice_cream.png" id="12_ad7y4"]
@@ -98,22 +98,8 @@ visible = false
 unique_name_in_owner = true
 script = ExtResource("2_lcj48")
 
-[node name="ManaOrb" type="Sprite2D" parent="."]
-position = Vector2(146, 492)
-texture = ExtResource("9_sx24e")
-metadata/_edit_group_ = true
-
-[node name="ManaAmount" type="Label" parent="ManaOrb"]
+[node name="ManaOrb" parent="." instance=ExtResource("9_l7107")]
 unique_name_in_owner = true
-offset_left = -17.0
-offset_top = -17.0
-offset_right = 20.0
-offset_bottom = 20.0
-theme = ExtResource("2_y60n5")
-theme_override_font_sizes/font_size = 32
-text = "10"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="GameScreen" type="Node2D" parent="."]
 
