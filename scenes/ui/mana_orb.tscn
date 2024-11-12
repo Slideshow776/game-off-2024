@@ -8,7 +8,6 @@
 position = Vector2(146, 492)
 texture = ExtResource("1_7yo2o")
 script = ExtResource("2_1yqwk")
-metadata/_edit_group_ = true
 
 [node name="Label" type="Label" parent="."]
 unique_name_in_owner = true

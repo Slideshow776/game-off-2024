@@ -13,7 +13,7 @@ extends Node2D
 var enemy_character_state := 0
 
 @onready var hand: Hand = %Hand
-@onready var mana_orb: Sprite2D = %ManaOrb
+@onready var mana_orb: ManaOrb = %ManaOrb
 @onready var game_controller: GameController = %GameController
 @onready var end_turn_button: Button = %EndTurnButton
 @onready var view_deck_button: TextureButton = %ViewDeckButton
@@ -60,7 +60,8 @@ func _process(delta: float) -> void:
 				player_character.take_damage(1)
 				
 		enemy_character_state = posmod(enemy_character_state + 1, 3)
-		game_controller.transition(GameController.GameState.PLAYER_TURN)
+		game_controller.transition(GameController.GameState.PLAYER_TURN)		
+		mana_orb.fill_up_animation()
 		end_turn_button.disabled = true
 		player_character.start_turn()
 		_deal_to_hand()
@@ -102,8 +103,12 @@ func _on_hand_card_activated(card: PlayableCard) -> void:
 		card.activate({
 			"actor": player_character,
 			"targets": [enemy_character],
-			"cost": card_cost
+			"cost": card_cost,
 		})
+		if player_character.mana > 0:
+			mana_orb.spend_animation()
+		else:
+			mana_orb.empty_animation()
 		
 		hand.remove_by_entity(card)
 		discard_pile.add_card_on_top(deck.get_card(card.id))
@@ -115,6 +120,7 @@ func _on_hand_card_activated(card: PlayableCard) -> void:
 
 func _restart_game() -> void:
 	game_controller.current_state = GameController.GameState.PLAYER_TURN
+	mana_orb.fill_up_animation()
 	player_character.reset()
 	enemy_character.reset()
 	hand.empty()
