@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://dyit180vdx2qe"]
+
+[ext_resource type="Script" path="res://scripts/character.gd" id="1_a57p6"]
+[ext_resource type="Texture2D" uid="uid://bag0jsvx10rad" path="res://assets/images/characters/ice_cream.png" id="2_67yw1"]
+[ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="3_he3pn"]
+[ext_resource type="Texture2D" uid="uid://borofa6wbn8jx" path="res://assets/images/card/image2.png" id="4_b7wny"]
+
+[node name="Character" type="Node2D"]
+script = ExtResource("1_a57p6")
+texture2D = ExtResource("2_67yw1")
+max_health = 10
+
+[node name="Pivot" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Pivot"]
+unique_name_in_owner = true
+position = Vector2(0, -114)
+texture = ExtResource("2_67yw1")
+offset = Vector2(0, 0.95)
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -95.0
+offset_right = 95.0
+offset_bottom = 14.0
+theme = ExtResource("3_he3pn")
+max_value = 10.0
+value = 10.0
+show_percentage = false
+
+[node name="DefenseIcon" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(-95, 7)
+scale = Vector2(0.311688, 0.311688)
+texture = ExtResource("4_b7wny")
+
+[node name="Label" type="Label" parent="DefenseIcon"]
+unique_name_in_owner = true
+offset_left = -32.0834
+offset_top = -64.1667
+offset_right = 31.9162
+offset_bottom = 83.8333
+theme = ExtResource("3_he3pn")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -6,5 +6,5 @@ func activate(game_state: Dictionary):
 	cost = game_state.get("cost")
 	
 	actor.spend_mana(cost)
-	for target in game_state.get("targets"):
+	for target in (game_state.get("targets") as Array[Character]):
 		target.take_damage(1)

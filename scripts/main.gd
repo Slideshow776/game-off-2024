@@ -97,7 +97,7 @@ func _on_end_turn_pressed() -> void:
 			discard_pile.disabled = false
 
 
-func _on_hand_card_activated(card: PlayableCard) -> void:
+func _on_hand_card_activated(card: PlayableCard) -> void:	
 	var card_cost := card.get_cost()
 	if card_cost <= player_character.mana:
 		card.activate({
@@ -169,8 +169,8 @@ func _toggle_deck_view(deck: Array[CardWithID], type: DeckViewControl.Descriptio
 
 
 func _generate_starting_deck() -> void:
-	for i in 19: deck.add_card(attack_card_data.duplicate())
-	for i in 19: deck.add_card(defend_card_data.duplicate())
+	for i in 6: deck.add_card(attack_card_data.duplicate())
+	for i in 5: deck.add_card(defend_card_data.duplicate())
 
 
 func _check_transfer_from_discard_to_draw_pile() -> void:

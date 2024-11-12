@@ -1,18 +1,16 @@
-[gd_scene load_steps=18 format=3 uid="uid://ci0unrji7vi3w"]
+[gd_scene load_steps=16 format=3 uid="uid://ci0unrji7vi3w"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_8pbs6"]
-[ext_resource type="Script" path="res://scripts/character.gd" id="1_feuee"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="2_lcj48"]
 [ext_resource type="Resource" uid="uid://dgwxaf1naxwdx" path="res://card_data/attack_card.tres" id="2_xbw3r"]
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="2_y60n5"]
 [ext_resource type="Resource" uid="uid://bs3yu15jrsqc4" path="res://card_data/defend_card.tres" id="3_x8w5h"]
 [ext_resource type="PackedScene" uid="uid://cbkph8q1bp178" path="res://scenes/cards/PlayableCard.tscn" id="4_xxjt2"]
-[ext_resource type="Texture2D" uid="uid://borofa6wbn8jx" path="res://assets/images/card/image2.png" id="5_fi3wd"]
 [ext_resource type="PackedScene" uid="uid://cr1bhgtdf5bal" path="res://scenes/ui/DeckViewControl.tscn" id="6_tjxqj"]
 [ext_resource type="PackedScene" uid="uid://dp25u7ocj871r" path="res://scenes/ui/mana_orb.tscn" id="9_l7107"]
 [ext_resource type="PackedScene" uid="uid://drbayobfjnntg" path="res://scenes/Hand.tscn" id="10_4fja5"]
+[ext_resource type="PackedScene" uid="uid://dyit180vdx2qe" path="res://scenes/Character.tscn" id="10_11voj"]
 [ext_resource type="Texture2D" uid="uid://csjv2jq11b2o3" path="res://assets/images/characters/player.png" id="10_rrl4x"]
-[ext_resource type="Texture2D" uid="uid://bag0jsvx10rad" path="res://assets/images/characters/ice_cream.png" id="12_ad7y4"]
 [ext_resource type="PackedScene" uid="uid://d1ni5upcefubs" path="res://scenes/ui/view_deck_button.tscn" id="14_okd2s"]
 [ext_resource type="PackedScene" uid="uid://b8cf5ve82x7hv" path="res://scenes/ui/discard_pile.tscn" id="17_qqyw7"]
 [ext_resource type="Texture2D" uid="uid://d1h8u0gquq3x2" path="res://assets/images/backgrounds/background_test.png" id="18_7r4xs"]
@@ -20,7 +18,7 @@
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("player_character")]
 script = ExtResource("1_8pbs6")
-player_character = NodePath("GameScreen/PlayerCharacter")
+player_character = NodePath("Characters/PlayerCharacter")
 attack_card_data = ExtResource("2_xbw3r")
 defend_card_data = ExtResource("3_x8w5h")
 playable_card_scene = ExtResource("4_xxjt2")
@@ -101,82 +99,16 @@ script = ExtResource("2_lcj48")
 [node name="ManaOrb" parent="." instance=ExtResource("9_l7107")]
 unique_name_in_owner = true
 
-[node name="GameScreen" type="Node2D" parent="."]
+[node name="Characters" type="Node2D" parent="."]
 
-[node name="PlayerCharacter" type="Node2D" parent="GameScreen"]
+[node name="PlayerCharacter" parent="Characters" instance=ExtResource("10_11voj")]
 unique_name_in_owner = true
-position = Vector2(479, 282)
-script = ExtResource("1_feuee")
-max_health = 10
-metadata/_edit_group_ = true
+position = Vector2(501, 394)
+texture2D = ExtResource("10_rrl4x")
 
-[node name="Sprite2D" type="Sprite2D" parent="GameScreen/PlayerCharacter"]
-position = Vector2(-2, 27)
-texture = ExtResource("10_rrl4x")
-
-[node name="HealthBar" type="ProgressBar" parent="GameScreen/PlayerCharacter"]
-offset_left = -96.0
-offset_top = 104.0
-offset_right = 94.0
-offset_bottom = 118.0
-theme = ExtResource("2_y60n5")
-max_value = 10.0
-value = 10.0
-show_percentage = false
-
-[node name="Defense" type="Sprite2D" parent="GameScreen/PlayerCharacter"]
-visible = false
-position = Vector2(-47, -85)
-scale = Vector2(0.155844, 0.155844)
-texture = ExtResource("5_fi3wd")
-
-[node name="Label" type="Label" parent="GameScreen/PlayerCharacter/Defense"]
-offset_left = 89.8334
-offset_top = -70.5834
-offset_right = 153.833
-offset_bottom = 77.4166
-theme = ExtResource("2_y60n5")
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="EnemyCharacter" type="Node2D" parent="GameScreen"]
+[node name="EnemyCharacter" parent="Characters" instance=ExtResource("10_11voj")]
 unique_name_in_owner = true
-position = Vector2(743, 299)
-script = ExtResource("1_feuee")
-max_health = 10
-metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="GameScreen/EnemyCharacter"]
-position = Vector2(41.3956, -32.0867)
-scale = Vector2(1.08242, 1.08242)
-texture = ExtResource("12_ad7y4")
-
-[node name="HealthBar" type="ProgressBar" parent="GameScreen/EnemyCharacter"]
-offset_left = -50.0
-offset_top = 89.0
-offset_right = 141.0
-offset_bottom = 103.0
-theme = ExtResource("2_y60n5")
-max_value = 10.0
-value = 10.0
-show_percentage = false
-
-[node name="Defense" type="Sprite2D" parent="GameScreen/EnemyCharacter"]
-visible = false
-position = Vector2(-48, -100)
-scale = Vector2(0.155844, 0.155844)
-texture = ExtResource("5_fi3wd")
-
-[node name="Label" type="Label" parent="GameScreen/EnemyCharacter/Defense"]
-offset_left = 89.8334
-offset_top = -70.5834
-offset_right = 153.833
-offset_bottom = 77.4166
-theme = ExtResource("2_y60n5")
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
+position = Vector2(780, 387)
 
 [node name="Hand" parent="." instance=ExtResource("10_4fja5")]
 unique_name_in_owner = true
