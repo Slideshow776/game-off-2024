@@ -165,7 +165,7 @@ func _toggle_deck_view(deck: Array[CardWithID], type: DeckViewControl.Descriptio
 	game_controller.toggle_pause_and_resume()
 	deck_view_control.visible = !deck_view_control.visible
 	deck_view_control.deck_view_window.display_card_list(deck)
-	deck_view_control.set_description(type)
+	deck_view_control.set_type(type)
 
 
 func _generate_starting_deck() -> void:

@@ -44,7 +44,20 @@ offset_bottom = 552.0
 theme = ExtResource("2_6c6mw")
 text = "Back"
 
-[node name="Label" type="Label" parent="."]
+[node name="TitleLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 44.0
+offset_top = 426.0
+offset_right = 244.0
+offset_bottom = 465.0
+theme = ExtResource("2_6c6mw")
+theme_override_colors/font_color = Color(0.912289, 0.912289, 0.912289, 1)
+theme_override_font_sizes/font_size = 32
+text = "Morbi mattis"
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = -12.0
