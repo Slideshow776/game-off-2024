@@ -1,8 +1,12 @@
 extends Node2D
 
 @export var player_character: Character
+
 @export var attack_card_data: CardData
 @export var defend_card_data: CardData
+@export var draw_a_card_card_data: CardData
+@export var defend_and_draw_card_data: CardData
+
 @export var playable_card_scene: PackedScene
 @export var debug_mode := true: 
 	set(value):
@@ -96,10 +100,12 @@ func _start_enemy_turn() -> void:
 func _on_end_turn_pressed() -> void:
 	if game_controller.current_state == GameController.GameState.PLAYER_TURN:
 		end_turn_button.disabled = true
+		_empty_hand_to_discard_pile()
 		_start_enemy_turn()
-		
-		var cards: Array[PlayableCard] = hand.empty()
-		for card in cards:
+
+
+func _empty_hand_to_discard_pile() -> void:
+	for card in hand.empty():
 			card.visible = false
 			discard_pile.add_card_on_top(deck.get_card(card.id))
 			discard_pile.disabled = false
@@ -114,6 +120,12 @@ func _on_hand_card_activated(card: PlayableCard) -> void:
 			"cost": card_cost,
 		})
 		_is_win_or_loose()
+		
+		for action in card.actions:
+			if action is DrawACard:
+				_draw_a_card_to_hand(null, action.number_of_cards_to_draw)
+		
+		player_character.spend_mana(card_cost)
 		mana_orb.label.text = str(player_character.mana)
 		if player_character.mana > 0:
 			mana_orb.spend_animation()
@@ -158,9 +170,16 @@ func _restart_game() -> void:
 func _deal_to_hand():
 	var tween := create_tween()
 	for i in player_character.number_of_cards_to_be_dealt:
-		_check_transfer_from_discard_to_draw_pile()
-		tween.tween_callback(_draw_card_to_hand).set_delay(0.2)
+		_draw_a_card_to_hand(tween, player_character.number_of_cards_to_be_dealt)
 	tween.tween_callback(func() -> void: end_turn_button.disabled = false)
+
+
+func _draw_a_card_to_hand(tween: Tween, cards_to_be_dealt: int) -> void:
+	if tween == null:
+		tween = create_tween()
+		
+	_check_transfer_from_discard_to_draw_pile(cards_to_be_dealt)
+	tween.tween_callback(_draw_card_to_hand).set_delay(0.2)
 
 
 func _on_view_deck_button_pressed() -> void:
@@ -183,13 +202,16 @@ func _toggle_deck_view(deck: Array[CardWithID], type: DeckViewControl.Descriptio
 
 
 func _generate_starting_deck() -> void:
-	for i in 6: deck.add_card(attack_card_data.duplicate())
-	for i in 5: deck.add_card(defend_card_data.duplicate())
+	for i in 2: deck.add_card(attack_card_data.duplicate())
+	for i in 2: deck.add_card(defend_card_data.duplicate())
+	for i in 2: deck.add_card(draw_a_card_card_data.duplicate())
+	for i in 2: deck.add_card(defend_and_draw_card_data.duplicate())
 
 
-func _check_transfer_from_discard_to_draw_pile() -> void:
-	if draw_pile.get_number_of_cards() < player_character.number_of_cards_to_be_dealt:
+func _check_transfer_from_discard_to_draw_pile(cards_to_be_dealt: int) -> void:
+	if draw_pile.get_number_of_cards() < cards_to_be_dealt:
 		var number_of_cards = discard_pile.get_number_of_cards()
+		print("_check_transfer_from_discard_to_draw_pile")
 		discard_pile.deck.shuffle()
 		for i in number_of_cards:
 			draw_pile.add_card_on_bottom(discard_pile.draw())

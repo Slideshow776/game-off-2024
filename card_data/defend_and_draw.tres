@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=5 format=3 uid="uid://diohlghnp538v"]
+
+[ext_resource type="Script" path="res://scripts/cards/actions/draw_a_card.gd" id="1_5w7n1"]
+[ext_resource type="Texture2D" uid="uid://b5g77vdarjohh" path="res://assets/images/card/better defense.png" id="2_c1cwo"]
+[ext_resource type="Script" path="res://scripts/cards/actions/defense_action.gd" id="2_fxjxs"]
+[ext_resource type="Script" path="res://scripts/data objects/card_data.gd" id="3_u4kqf"]
+
+[resource]
+script = ExtResource("3_u4kqf")
+title = "Better defense"
+description = "Defend 1. Draw a card"
+cost = 2
+image = ExtResource("2_c1cwo")
+colour = 1
+type = "skill"
+actions = Array[GDScript]([ExtResource("1_5w7n1"), ExtResource("2_fxjxs")])
