@@ -77,12 +77,15 @@ func _start_enemy_turn() -> void:
 	match enemy_character_state: # ai logic
 		0:
 			enemy_character.add_defense(0)
+			enemy_character.deal_damage_animation()
 			player_character.take_damage(3)
 		1:
 			enemy_character.add_defense(1)
+			enemy_character.deal_damage_animation()
 			player_character.take_damage(2)
 		2:
 			enemy_character.add_defense(2)
+			enemy_character.deal_damage_animation()
 			player_character.take_damage(1)
 			
 	enemy_character_state = posmod(enemy_character_state + 1, 3)

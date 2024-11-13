@@ -65,6 +65,19 @@ func spend_mana(amount: int) -> void:
 	mana -= amount
 
 
+func deal_damage_animation() -> void:
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_SPRING)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_parallel(true)
+	tween.tween_property(sprite_2d, "rotation", 0.1, 0.2)
+	tween.tween_property(sprite_2d, "scale", Vector2(1.2, 0.8), 0.2)
+	
+	tween.set_parallel(false)
+	tween.tween_property(sprite_2d, "rotation", 0.0, 0.2)
+	tween.tween_property(sprite_2d, "scale", Vector2(1.0, 1.0), 0.2)
+
+
 func take_damage(amount: int) -> void:
 	var damage = max(amount - defense, 0)
 	health -= damage
