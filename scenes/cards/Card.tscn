@@ -1,15 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://c4sdhdmmxwye6"]
+[gd_scene load_steps=7 format=3 uid="uid://c4sdhdmmxwye6"]
 
 [ext_resource type="Script" path="res://scripts/cards/card.gd" id="1_umjp1"]
 [ext_resource type="Texture2D" uid="uid://dv1stdckgs7l5" path="res://assets/images/card/card_border.png" id="2_fh1hc"]
 [ext_resource type="Texture2D" uid="uid://b7a04cmjjvgua" path="res://assets/images/card/card.png" id="3_7kxam"]
-[ext_resource type="Texture2D" uid="uid://dtajdmxoi1nfl" path="res://assets/images/card/cocaine.png" id="4_ojbxt"]
 [ext_resource type="Texture2D" uid="uid://gm5phtwk456g" path="res://assets/images/card/card_cost.png" id="4_yfsjg"]
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="5_0pxmf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4wvrc"]
 radius = 9.30719
-height = 30.3268
+height = 27.3987
 
 [node name="Card" type="Node2D"]
 scale = Vector2(0.375, 0.375)
@@ -40,7 +39,6 @@ texture = ExtResource("3_7kxam")
 unique_name_in_owner = true
 position = Vector2(-5.33335, -100)
 scale = Vector2(1.13189, 1.02682)
-texture = ExtResource("4_ojbxt")
 
 [node name="CostDisplay" type="Node2D" parent="."]
 position = Vector2(-227, -282)

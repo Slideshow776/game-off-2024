@@ -20,6 +20,7 @@ func _process(delta: float) -> void:
 	for card in cards:
 		current_selected_card_index = -1
 		card.unhighlight()
+		card.z_index = 0
 			
 	if not touched.is_empty():
 		var highest_touched_index := -1
@@ -29,6 +30,7 @@ func _process(delta: float) -> void:
 		
 		if highest_touched_index >= 0 and highest_touched_index < cards.size():
 			cards[highest_touched_index].highlight()
+			cards[highest_touched_index].z_index = cards.size()
 			current_selected_card_index = highest_touched_index
 	
 	if (collision_shape_2d.shape as CircleShape2D).radius != hand_radius:
