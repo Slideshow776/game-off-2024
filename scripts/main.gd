@@ -23,6 +23,8 @@ var enemy_character_state := 0
 @onready var draw_pile: PlayableDeckUI = %DrawPile
 @onready var discard_pile: PlayableDeckUI = %DiscardPile
 @onready var deck: Deck = Deck.new()
+@onready var game_over_color_rect: ColorRect = %GameOverColorRect
+@onready var game_won_color_rect: ColorRect = %GameWonColorRect
 
 
 func _ready() -> void:
@@ -39,42 +41,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if !game_controller.is_running:
 		return
-	
-	mana_orb.label.text = str(player_character.mana)
-	
-	if player_character.health <= 0:
-		game_controller.transition(GameController.GameState.GAME_OVER)
-	elif(enemy_character.health <= 0):
-		game_controller.transition(GameController.GameState.GAME_WON)
-	
-	if game_controller.current_state == GameController.GameState.ENEMY_TURN:
-		match enemy_character_state: # ai logic
-			0:
-				enemy_character.add_defense(0)
-				player_character.take_damage(3)
-			1:
-				enemy_character.add_defense(1)
-				player_character.take_damage(2)
-			2:
-				enemy_character.add_defense(2)
-				player_character.take_damage(1)
-				
-		enemy_character_state = posmod(enemy_character_state + 1, 3)
-		game_controller.transition(GameController.GameState.PLAYER_TURN)		
-		mana_orb.fill_up_animation()
-		end_turn_button.disabled = true
-		player_character.start_turn()
-		_deal_to_hand()
-	
-	if game_controller.current_state == GameController.GameState.GAME_WON:
-		%GameWonColorRect.visible = true
-	else:
-		%GameWonColorRect.visible = false
-	
-	if game_controller.current_state == GameController.GameState.GAME_OVER:
-		%GameOverColorRect.visible = true
-	else:
-		%GameOverColorRect.visible = false
 
 
 func _input(event: InputEvent) -> void:
@@ -84,11 +50,50 @@ func _input(event: InputEvent) -> void:
 		deck_view_control.visible = false
 
 
+func _is_win_or_loose() -> bool:
+	if player_character.health <= 0:
+		game_controller.transition(GameController.GameState.GAME_OVER)
+	elif(enemy_character.health <= 0):
+		game_controller.transition(GameController.GameState.GAME_WON)
+	
+	game_won_color_rect.visible = game_controller.current_state == GameController.GameState.GAME_WON
+	game_over_color_rect.visible = game_controller.current_state == GameController.GameState.GAME_OVER		
+	return game_over_color_rect.visible or game_won_color_rect.visible
+
+
+func _start_player_turn() -> void:
+	game_controller.transition(GameController.GameState.PLAYER_TURN)		
+	end_turn_button.disabled = true
+	player_character.start_turn()
+	mana_orb.fill_up_animation()
+	mana_orb.label.text = str(player_character.mana)
+	_deal_to_hand()
+
+
+func _start_enemy_turn() -> void:
+	game_controller.transition(GameController.GameState.ENEMY_TURN)
+	enemy_character.start_turn()
+	
+	match enemy_character_state: # ai logic
+		0:
+			enemy_character.add_defense(0)
+			player_character.take_damage(3)
+		1:
+			enemy_character.add_defense(1)
+			player_character.take_damage(2)
+		2:
+			enemy_character.add_defense(2)
+			player_character.take_damage(1)
+			
+	enemy_character_state = posmod(enemy_character_state + 1, 3)
+	if not _is_win_or_loose():
+		_start_player_turn()
+
+
 func _on_end_turn_pressed() -> void:
 	if game_controller.current_state == GameController.GameState.PLAYER_TURN:
 		end_turn_button.disabled = true
-		game_controller.transition(GameController.GameState.ENEMY_TURN)
-		enemy_character.start_turn()
+		_start_enemy_turn()
 		
 		var cards: Array[PlayableCard] = hand.empty()
 		for card in cards:
@@ -105,6 +110,8 @@ func _on_hand_card_activated(card: PlayableCard) -> void:
 			"targets": [enemy_character],
 			"cost": card_cost,
 		})
+		_is_win_or_loose()
+		mana_orb.label.text = str(player_character.mana)
 		if player_character.mana > 0:
 			mana_orb.spend_animation()
 		else:
@@ -121,6 +128,7 @@ func _on_hand_card_activated(card: PlayableCard) -> void:
 func _restart_game() -> void:
 	game_controller.current_state = GameController.GameState.PLAYER_TURN
 	mana_orb.fill_up_animation()
+	mana_orb.label.text = str(player_character.mana)
 	player_character.reset()
 	enemy_character.reset()
 	hand.empty()
@@ -137,6 +145,9 @@ func _restart_game() -> void:
 	discard_pile.deck = PlayableDeck.new()
 	discard_pile.set_label_deck_size()
 	discard_pile.disabled = true
+	
+	game_won_color_rect.visible = false
+	game_over_color_rect.visible = false
 	
 	_deal_to_hand()
 

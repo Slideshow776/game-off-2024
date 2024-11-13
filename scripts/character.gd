@@ -76,10 +76,12 @@ func add_defense(amount: int) -> void:
 	update_defense_icon()
 
 
-func reset() -> void:	
+func reset() -> void:
 	health = max_health
 	mana = start_mana
 	defense = base_defense
+	
+	print(health)
 	
 	update_health_bar()
 	update_defense_icon()
