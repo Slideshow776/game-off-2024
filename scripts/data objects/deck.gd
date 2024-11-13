@@ -42,6 +42,17 @@ func get_playable_deck() -> PlayableDeck:
 	return playable_deck
 
 
+func shuffle() -> void:
+	# Extract cards into an array for shuffling
+	var card_list := _card_collection.values()
+	card_list.shuffle()
+	
+	# Reconstruct _card_collection with the shuffled cards
+	_card_collection.clear()
+	for card_with_id in card_list:
+		_card_collection[card_with_id.id] = card_with_id
+
+
 func _generate_card_id(card: CardData) -> int:
 	_id_counter += 1
 	return _id_counter

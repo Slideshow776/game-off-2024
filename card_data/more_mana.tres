@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://cnyc12kujqtih"]
+
+[ext_resource type="Script" path="res://scripts/cards/actions/get_two_more_mana.gd" id="1_pp1hi"]
+[ext_resource type="Texture2D" uid="uid://dtajdmxoi1nfl" path="res://assets/images/card/cocaine.png" id="2_vrx6a"]
+[ext_resource type="Script" path="res://scripts/data objects/card_data.gd" id="3_ljcdi"]
+
+[resource]
+script = ExtResource("3_ljcdi")
+title = "Cocaine"
+description = "Get two more mana."
+cost = 1
+image = ExtResource("2_vrx6a")
+colour = 1
+type = "skill"
+actions = Array[GDScript]([ExtResource("1_pp1hi")])

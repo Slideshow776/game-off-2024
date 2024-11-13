@@ -6,6 +6,7 @@ extends Node2D
 @export var defend_card_data: CardData
 @export var draw_a_card_card_data: CardData
 @export var defend_and_draw_card_data: CardData
+@export var more_mana_card_data: CardData
 
 @export var playable_card_scene: PackedScene
 @export var debug_mode := true: 
@@ -152,6 +153,7 @@ func _restart_game() -> void:
 	view_deck_button.deck = deck.get_playable_deck()
 	view_deck_button.set_label_deck_size()
 	
+	deck.shuffle()
 	draw_pile.deck = deck.get_playable_deck()
 	draw_pile.disabled = false
 	draw_pile.set_label_deck_size()
@@ -161,13 +163,14 @@ func _restart_game() -> void:
 	discard_pile.set_label_deck_size()
 	discard_pile.disabled = true
 	
+	
 	game_won_color_rect.visible = false
 	game_over_color_rect.visible = false
 	
 	_deal_to_hand()
 
 
-func _deal_to_hand():
+func _deal_to_hand() -> void:
 	var tween := create_tween()
 	for i in player_character.number_of_cards_to_be_dealt:
 		_draw_a_card_to_hand(tween, player_character.number_of_cards_to_be_dealt)
@@ -206,6 +209,7 @@ func _generate_starting_deck() -> void:
 	for i in 2: deck.add_card(defend_card_data.duplicate())
 	for i in 2: deck.add_card(draw_a_card_card_data.duplicate())
 	for i in 2: deck.add_card(defend_and_draw_card_data.duplicate())
+	for i in 2: deck.add_card(more_mana_card_data.duplicate())
 
 
 func _check_transfer_from_discard_to_draw_pile(cards_to_be_dealt: int) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ci0unrji7vi3w"]
+[gd_scene load_steps=19 format=3 uid="uid://ci0unrji7vi3w"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_8pbs6"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="2_lcj48"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cbkph8q1bp178" path="res://scenes/cards/PlayableCard.tscn" id="4_xxjt2"]
 [ext_resource type="Resource" uid="uid://dggmi3yjmi2hs" path="res://card_data/draw_cards.tres" id="4_ywboh"]
 [ext_resource type="Resource" uid="uid://diohlghnp538v" path="res://card_data/defend_and_draw.tres" id="5_2of7i"]
+[ext_resource type="Resource" uid="uid://cnyc12kujqtih" path="res://card_data/more_mana.tres" id="6_a4nex"]
 [ext_resource type="PackedScene" uid="uid://cr1bhgtdf5bal" path="res://scenes/ui/DeckViewControl.tscn" id="6_tjxqj"]
 [ext_resource type="PackedScene" uid="uid://dp25u7ocj871r" path="res://scenes/ui/mana_orb.tscn" id="9_l7107"]
 [ext_resource type="PackedScene" uid="uid://drbayobfjnntg" path="res://scenes/Hand.tscn" id="10_4fja5"]
@@ -25,6 +26,7 @@ attack_card_data = ExtResource("2_xbw3r")
 defend_card_data = ExtResource("3_x8w5h")
 draw_a_card_card_data = ExtResource("4_ywboh")
 defend_and_draw_card_data = ExtResource("5_2of7i")
+more_mana_card_data = ExtResource("6_a4nex")
 playable_card_scene = ExtResource("4_xxjt2")
 
 [node name="Background" type="Sprite2D" parent="."]
