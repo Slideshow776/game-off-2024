@@ -102,7 +102,7 @@ func _on_end_turn_pressed() -> void:
 			discard_pile.disabled = false
 
 
-func _on_hand_card_activated(card: PlayableCard) -> void:	
+func _on_hand_card_activated(card: PlayableCard) -> void:
 	var card_cost := card.get_cost()
 	if card_cost <= player_character.mana:
 		card.activate({
