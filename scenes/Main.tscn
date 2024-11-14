@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ci0unrji7vi3w"]
+[gd_scene load_steps=24 format=3 uid="uid://ci0unrji7vi3w"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_8pbs6"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="2_lcj48"]
@@ -13,9 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://dp25u7ocj871r" path="res://scenes/ui/mana_orb.tscn" id="9_l7107"]
 [ext_resource type="PackedScene" uid="uid://drbayobfjnntg" path="res://scenes/Hand.tscn" id="10_4fja5"]
 [ext_resource type="PackedScene" uid="uid://dyit180vdx2qe" path="res://scenes/Character.tscn" id="10_11voj"]
-[ext_resource type="Texture2D" uid="uid://csjv2jq11b2o3" path="res://assets/images/characters/player.png" id="10_rrl4x"]
 [ext_resource type="PackedScene" uid="uid://dbt3cfgdkh528" path="res://scenes/map/Map.tscn" id="11_rhhs2"]
 [ext_resource type="PackedScene" uid="uid://d1ni5upcefubs" path="res://scenes/ui/view_deck_button.tscn" id="14_okd2s"]
+[ext_resource type="Resource" uid="uid://c8g1pfm2qxi0a" path="res://character_data/player.tres" id="15_n4bk4"]
+[ext_resource type="Resource" uid="uid://bfjhjehgmwvkr" path="res://character_data/muffin_max.tres" id="16_iku6y"]
 [ext_resource type="Texture2D" uid="uid://bjyjrshsnl4ao" path="res://assets/images/ui/map_normal.png" id="17_k80c8"]
 [ext_resource type="PackedScene" uid="uid://b8cf5ve82x7hv" path="res://scenes/ui/discard_pile.tscn" id="17_qqyw7"]
 [ext_resource type="Texture2D" uid="uid://d1h8u0gquq3x2" path="res://assets/images/backgrounds/background_test.png" id="18_7r4xs"]
@@ -118,11 +119,12 @@ unique_name_in_owner = true
 [node name="PlayerCharacter" parent="Characters" instance=ExtResource("10_11voj")]
 unique_name_in_owner = true
 position = Vector2(501, 394)
-texture2D = ExtResource("10_rrl4x")
+character_data = ExtResource("15_n4bk4")
 
 [node name="EnemyCharacter" parent="Characters" instance=ExtResource("10_11voj")]
 unique_name_in_owner = true
 position = Vector2(780, 387)
+character_data = ExtResource("16_iku6y")
 
 [node name="Hand" parent="." instance=ExtResource("10_4fja5")]
 unique_name_in_owner = true

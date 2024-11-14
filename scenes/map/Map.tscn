@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbt3cfgdkh528"]
+[gd_scene load_steps=8 format=3 uid="uid://dbt3cfgdkh528"]
 
 [ext_resource type="Script" path="res://scripts/map/map.gd" id="1_r0fvt"]
 [ext_resource type="Texture2D" uid="uid://c6y8ocfgu5uqi" path="res://assets/images/map/map.png" id="2_dld2r"]
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="3_d2d28"]
 [ext_resource type="PackedScene" uid="uid://kov5odyf4pho" path="res://scenes/map/encounter.tscn" id="4_387ij"]
+[ext_resource type="Resource" uid="uid://dmdu673wjnv3i" path="res://character_data/ice_cream_isaac.tres" id="5_iw1j2"]
+[ext_resource type="Resource" uid="uid://bfjhjehgmwvkr" path="res://character_data/muffin_max.tres" id="6_rx2ty"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wjya"]
 bg_color = Color(0, 0, 0, 0.815686)
@@ -71,18 +73,18 @@ text = "No treat left unwrapped—finish your mission!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Encounter" parent="." instance=ExtResource("4_387ij")]
+[node name="IceCreamIsaac" parent="." instance=ExtResource("4_387ij")]
 layout_mode = 0
 offset_left = 329.0
 offset_top = 294.0
 offset_right = 369.0
 offset_bottom = 338.0
-description = "Ice Cream Isaac"
+character_data = ExtResource("5_iw1j2")
 
-[node name="Encounter2" parent="." instance=ExtResource("4_387ij")]
+[node name="MuffinMax" parent="." instance=ExtResource("4_387ij")]
 layout_mode = 0
 offset_left = 605.0
 offset_top = 124.0
 offset_right = 645.0
 offset_bottom = 168.0
-description = "Muffin Max"
+character_data = ExtResource("6_rx2ty")

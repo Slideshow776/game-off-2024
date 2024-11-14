@@ -15,7 +15,6 @@ texture_normal = ExtResource("1_tplfr")
 texture_pressed = ExtResource("2_c2k5n")
 texture_hover = ExtResource("3_l6m04")
 script = ExtResource("4_7dxcn")
-description = "In ac felis"
 
 [node name="Label" type="Label" parent="."]
 unique_name_in_owner = true

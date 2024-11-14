@@ -2,11 +2,12 @@
 class_name Character
 extends Node2D
 
-@export var texture2D: Texture2D
-@export var max_health := 5
-@export var start_mana := 3
-@export var base_defense := 0
-@export var current_mana_cap := 3
+#@export var texture2D: Texture2D
+#@export var max_health := 5
+#@export var start_mana := 3
+#@export var base_defense := 0
+#@export var current_mana_cap := 3
+@export var character_data: CharacterData
 
 var health := 5
 var mana := 5
@@ -28,17 +29,17 @@ func _process(delta: float) -> void:
 	sprite_2d.offset.y = pivot.position.y - (sprite_2d.position.y + sprite_2d.texture.get_height() / 2) * 0.95
 	update_health_bar()
 	update_defense_icon()
-	sprite_2d.texture = texture2D
+	sprite_2d.texture = character_data.texture
 
 
 func set_health_values(new_health: int, new_max_health: int) -> void:
-	max_health = new_max_health
+	character_data.max_health = new_max_health
 	health = new_health
 
 
 func start_turn() -> void:
 	defense = 0
-	mana = current_mana_cap
+	mana = character_data.current_mana_cap
 
 
 func update_health_bar() -> void:
@@ -46,8 +47,8 @@ func update_health_bar() -> void:
 		print("Character.gd => Error: health bar is null")
 		return
 		
-	if health_bar.max_value != max_health:
-		health_bar.max_value = max_health
+	if health_bar.max_value != character_data.max_health:
+		health_bar.max_value = character_data.max_health
 	if health_bar.value != health:
 		health_bar.value = health
 
@@ -100,9 +101,9 @@ func add_defense(amount: int) -> void:
 
 
 func reset() -> void:
-	health = max_health
-	mana = start_mana
-	defense = base_defense
+	health = character_data.max_health
+	mana = character_data.start_mana
+	defense = character_data.base_defense
 	
 	update_health_bar()
 	update_defense_icon()
