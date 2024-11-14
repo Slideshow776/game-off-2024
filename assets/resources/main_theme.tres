@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://c8r8cjb1at4wg"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://c8r8cjb1at4wg"]
 
 [ext_resource type="FontFile" uid="uid://bxykhdw140ily" path="res://assets/ComicNeue-Bold.ttf" id="1_8k3pc"]
 [ext_resource type="StyleBox" uid="uid://q6bdax3oo8f1" path="res://assets/resources/new_style_box_flat.tres" id="2_vp0b6"]
@@ -15,10 +15,23 @@ corner_detail = 4
 expand_margin_left = 8.0
 expand_margin_right = 8.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_emrwl"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tqm40"]
 bg_color = Color(0.473531, 0.627142, 0.919388, 1)
 border_width_bottom = 10
 border_color = Color(0.332695, 0.497031, 0.716262, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 4
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2aqkm"]
+content_margin_top = 8.0
+bg_color = Color(0.571859, 0.53719, 0.94569, 1)
+border_width_bottom = 10
+border_color = Color(0.427788, 0.368656, 0.669687, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
@@ -40,9 +53,10 @@ Button/font_sizes/font_size = 36
 Button/fonts/font = ExtResource("1_8k3pc")
 Button/styles/disabled = SubResource("StyleBoxFlat_vs374")
 Button/styles/focus = ExtResource("2_vp0b6")
-Button/styles/hover = SubResource("StyleBoxFlat_emrwl")
+Button/styles/hover = SubResource("StyleBoxFlat_tqm40")
 Button/styles/hover_pressed = ExtResource("2_vp0b6")
 Button/styles/normal = ExtResource("2_vp0b6")
+Button/styles/pressed = SubResource("StyleBoxFlat_2aqkm")
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/font_sizes/font_size = 64
 Label/fonts/font = ExtResource("1_8k3pc")

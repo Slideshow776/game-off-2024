@@ -30,6 +30,8 @@ var enemy_character_state := 0
 @onready var deck: Deck = Deck.new()
 @onready var game_over_color_rect: ColorRect = %GameOverColorRect
 @onready var game_won_color_rect: ColorRect = %GameWonColorRect
+@onready var view_map_button: TextureButton = %ViewMapButton
+@onready var map: Map = %Map
 
 
 func _ready() -> void:
@@ -38,6 +40,7 @@ func _ready() -> void:
 	view_deck_button.pressed.connect(_on_view_deck_button_pressed)
 	draw_pile.pressed.connect(_on_draw_pile_pressed)
 	discard_pile.pressed.connect(_on_discard_pile_pressed)
+	view_map_button.pressed.connect(_on_view_map_button_pressed)
 	
 	_generate_starting_deck()
 	_restart_game()
@@ -53,6 +56,8 @@ func _input(event: InputEvent) -> void:
 		_restart_game()
 	elif event.is_action_pressed("mouse_click_back") && deck_view_control.visible:
 		deck_view_control.visible = false
+	elif event.is_action_pressed("mouse_click_back") && map.visible:
+		map.visible = false
 
 
 func _is_win_or_loose() -> bool:
@@ -191,6 +196,10 @@ func _on_view_deck_button_pressed() -> void:
 
 func _on_draw_pile_pressed() -> void:
 	_toggle_deck_view(draw_pile.deck.cards, DeckViewControl.Description.DRAW_PILE)
+
+
+func _on_view_map_button_pressed() -> void:
+	map.visible = !map.visible
 
 
 func _on_discard_pile_pressed() -> void:

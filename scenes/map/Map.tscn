@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbt3cfgdkh528"]
+
+[ext_resource type="Script" path="res://scripts/map/map.gd" id="1_r0fvt"]
+[ext_resource type="Texture2D" uid="uid://c6y8ocfgu5uqi" path="res://assets/images/map/map.png" id="2_dld2r"]
+[ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="3_d2d28"]
+[ext_resource type="PackedScene" uid="uid://kov5odyf4pho" path="res://scenes/map/encounter.tscn" id="4_387ij"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wjya"]
+bg_color = Color(0, 0, 0, 0.815686)
+
+[node name="Map" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_r0fvt")
+
+[node name="BlackOverlay" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0.901961)
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -22.0
+offset_right = 1152.0
+offset_bottom = 626.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.0184739
+pivot_offset = Vector2(569, 351)
+texture = ExtResource("2_dld2r")
+
+[node name="BackButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 48.0
+offset_top = 509.0
+offset_right = 151.0
+offset_bottom = 584.0
+theme = ExtResource("3_d2d28")
+text = "Back"
+
+[node name="TitleLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 44.0
+offset_top = 458.0
+offset_right = 244.0
+offset_bottom = 497.0
+theme = ExtResource("3_d2d28")
+theme_override_colors/font_color = Color(0.912289, 0.912289, 0.912289, 1)
+theme_override_font_sizes/font_size = 32
+text = "Treat Tracker"
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -12.0
+offset_top = 597.0
+offset_right = 1244.0
+offset_bottom = 636.0
+theme = ExtResource("3_d2d28")
+theme_override_colors/font_color = Color(0.912289, 0.912289, 0.912289, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_0wjya")
+text = "No treat left unwrapped—finish your mission!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Encounter" parent="." instance=ExtResource("4_387ij")]
+layout_mode = 0
+offset_left = 329.0
+offset_top = 294.0
+offset_right = 369.0
+offset_bottom = 338.0
+description = "Ice Cream Isaac"
+
+[node name="Encounter2" parent="." instance=ExtResource("4_387ij")]
+layout_mode = 0
+offset_left = 605.0
+offset_top = 124.0
+offset_right = 645.0
+offset_bottom = 168.0
+description = "Muffin Max"

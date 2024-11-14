@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ci0unrji7vi3w"]
+[gd_scene load_steps=23 format=3 uid="uid://ci0unrji7vi3w"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_8pbs6"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="2_lcj48"]
@@ -14,10 +14,14 @@
 [ext_resource type="PackedScene" uid="uid://drbayobfjnntg" path="res://scenes/Hand.tscn" id="10_4fja5"]
 [ext_resource type="PackedScene" uid="uid://dyit180vdx2qe" path="res://scenes/Character.tscn" id="10_11voj"]
 [ext_resource type="Texture2D" uid="uid://csjv2jq11b2o3" path="res://assets/images/characters/player.png" id="10_rrl4x"]
+[ext_resource type="PackedScene" uid="uid://dbt3cfgdkh528" path="res://scenes/map/Map.tscn" id="11_rhhs2"]
 [ext_resource type="PackedScene" uid="uid://d1ni5upcefubs" path="res://scenes/ui/view_deck_button.tscn" id="14_okd2s"]
+[ext_resource type="Texture2D" uid="uid://bjyjrshsnl4ao" path="res://assets/images/ui/map_normal.png" id="17_k80c8"]
 [ext_resource type="PackedScene" uid="uid://b8cf5ve82x7hv" path="res://scenes/ui/discard_pile.tscn" id="17_qqyw7"]
 [ext_resource type="Texture2D" uid="uid://d1h8u0gquq3x2" path="res://assets/images/backgrounds/background_test.png" id="18_7r4xs"]
+[ext_resource type="Texture2D" uid="uid://dng3qw7ctwls2" path="res://assets/images/ui/map_pressed.png" id="18_w87mo"]
 [ext_resource type="PackedScene" uid="uid://dddavuqmsq4ei" path="res://scenes/ui/draw_pile.tscn" id="18_x2c22"]
+[ext_resource type="Texture2D" uid="uid://chc5rigmc2qya" path="res://assets/images/ui/map_hover.png" id="19_fppyf"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("player_character")]
 script = ExtResource("1_8pbs6")
@@ -98,6 +102,10 @@ vertical_alignment = 1
 unique_name_in_owner = true
 visible = false
 
+[node name="Map" parent="CanvasLayer" instance=ExtResource("11_rhhs2")]
+unique_name_in_owner = true
+visible = false
+
 [node name="GameController" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_lcj48")
@@ -144,6 +152,16 @@ vertical_icon_alignment = 2
 
 [node name="ViewDeckButton" parent="." instance=ExtResource("14_okd2s")]
 unique_name_in_owner = true
+
+[node name="ViewMapButton" type="TextureButton" parent="."]
+unique_name_in_owner = true
+offset_left = 908.0
+offset_top = 3.0
+offset_right = 986.0
+offset_bottom = 68.0
+texture_normal = ExtResource("17_k80c8")
+texture_pressed = ExtResource("18_w87mo")
+texture_hover = ExtResource("19_fppyf")
 
 [node name="DrawPile" parent="." instance=ExtResource("18_x2c22")]
 unique_name_in_owner = true
