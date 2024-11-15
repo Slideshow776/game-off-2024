@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://1vnisugvhetm"]
+
+[ext_resource type="Texture2D" uid="uid://cmylhxkckjble" path="res://assets/images/map/dotted_line.png" id="1_oic6p"]
+
+[node name="MapDottedLine" type="Line2D"]
+width = 8.0
+default_color = Color(0.28, 0.28, 0.28, 0.462745)
+texture = ExtResource("1_oic6p")
+texture_mode = 2

@@ -1,20 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://kov5odyf4pho"]
+[gd_scene load_steps=7 format=3 uid="uid://kov5odyf4pho"]
 
 [ext_resource type="Texture2D" uid="uid://6jfb8dt00lrj" path="res://assets/images/map/encounter_normal.png" id="1_tplfr"]
 [ext_resource type="Texture2D" uid="uid://c4bsq5qy7m5uv" path="res://assets/images/map/encounter_pressed.png" id="2_c2k5n"]
 [ext_resource type="Texture2D" uid="uid://uw1xa2kxwu52" path="res://assets/images/map/encounter_hover.png" id="3_l6m04"]
 [ext_resource type="Script" path="res://scripts/map/encounter.gd" id="4_7dxcn"]
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="4_g8hcm"]
+[ext_resource type="Resource" uid="uid://c8g1pfm2qxi0a" path="res://character_data/player.tres" id="5_nkh0s"]
 
 [node name="Encounter" type="TextureButton"]
 offset_left = -20.0
 offset_top = -22.0
 offset_right = 20.0
 offset_bottom = 22.0
+pivot_offset = Vector2(20, 22)
 texture_normal = ExtResource("1_tplfr")
 texture_pressed = ExtResource("2_c2k5n")
 texture_hover = ExtResource("3_l6m04")
 script = ExtResource("4_7dxcn")
+character_data = ExtResource("5_nkh0s")
 
 [node name="Label" type="Label" parent="."]
 unique_name_in_owner = true
@@ -25,6 +28,6 @@ offset_right = 74.0
 offset_bottom = 65.0
 theme = ExtResource("4_g8hcm")
 theme_override_font_sizes/font_size = 16
-text = "In ac felis"
+text = "Rascal"
 horizontal_alignment = 1
 vertical_alignment = 1
