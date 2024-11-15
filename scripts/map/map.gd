@@ -8,12 +8,14 @@ signal chosen(Encounter)
 @onready var back_button: Button = %BackButton
 @onready var ice_cream_isaac: Encounter = $IceCreamIsaac
 @onready var muffin_max: Encounter = $MuffinMax
+@onready var donut_daisy: Encounter = $DonutDaisy
 
 
 func _ready() -> void:
 	back_button.pressed.connect(_on_back_button_pressed)
 	ice_cream_isaac.pressed.connect(_on_encounter_pressed)
 	muffin_max.pressed.connect(_on_encounter_pressed)
+	donut_daisy.pressed.connect(_on_encounter_pressed)
 	
 	_create_connections()
 

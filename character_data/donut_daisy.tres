@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=3 format=3 uid="uid://7neydhttfjw1"]
+
+[ext_resource type="Script" path="res://scripts/data objects/character_data.gd" id="1_mo1qy"]
+[ext_resource type="Texture2D" uid="uid://cm8onhg7pa38r" path="res://assets/images/characters/donut_daisy.png" id="2_j4ean"]
+
+[resource]
+script = ExtResource("1_mo1qy")
+name = "Donut Daisy"
+texture = ExtResource("2_j4ean")
+max_health = 10
+start_mana = 3
+base_defense = 0
+current_mana_cap = 3
