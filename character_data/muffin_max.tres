@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="CharacterData" load_steps=3 format=3 uid="uid://bfjhjehgmwvkr"]
 
 [ext_resource type="Script" path="res://scripts/data objects/character_data.gd" id="1_u1mmt"]
-[ext_resource type="Texture2D" uid="uid://bag0jsvx10rad" path="res://assets/images/characters/ice_cream.png" id="2_olsrg"]
+[ext_resource type="Texture2D" uid="uid://bhjnrrovlyjj0" path="res://assets/images/characters/muffin_max.png" id="2_yewbm"]
 
 [resource]
 script = ExtResource("1_u1mmt")
 name = "Muffin Max"
-texture = ExtResource("2_olsrg")
+texture = ExtResource("2_yewbm")
 max_health = 10
 start_mana = 3
 base_defense = 0

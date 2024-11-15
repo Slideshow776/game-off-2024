@@ -30,6 +30,7 @@ var enemy_character_state := 0
 @onready var deck: Deck = Deck.new()
 @onready var game_over_color_rect: ColorRect = %GameOverColorRect
 @onready var game_won_color_rect: ColorRect = %GameWonColorRect
+@onready var fade_in_color_rect: ColorRect = $CanvasLayer/FadeInColorRect
 @onready var view_map_button: TextureButton = %ViewMapButton
 @onready var map: Map = %Map
 
@@ -41,6 +42,7 @@ func _ready() -> void:
 	draw_pile.pressed.connect(_on_draw_pile_pressed)
 	discard_pile.pressed.connect(_on_discard_pile_pressed)
 	view_map_button.pressed.connect(_on_view_map_button_pressed)
+	map.chosen.connect(_on_chosen_received)
 	
 	_generate_starting_deck()
 	_restart_game()
@@ -173,6 +175,7 @@ func _restart_game() -> void:
 	game_over_color_rect.visible = false
 	
 	_deal_to_hand()
+	_fade_out()
 
 
 func _deal_to_hand() -> void:
@@ -248,3 +251,19 @@ func _draw_card_to_hand() -> void:
 		
 		if draw_pile.get_number_of_cards() == 0:
 			draw_pile.disabled = true
+
+
+func _on_chosen_received(encounter: Encounter):
+	enemy_character.character_data = encounter.character_data
+	enemy_character.reset()
+	_restart_game()
+	map.visible = false
+
+
+func _fade_out():
+	fade_in_color_rect.visible = true
+	fade_in_color_rect.modulate.a = 1.0
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_QUAD)
+	tween.set_ease(Tween.EASE_IN)
+	tween.tween_property(fade_in_color_rect, "modulate:a", 0.0, 0.5)
