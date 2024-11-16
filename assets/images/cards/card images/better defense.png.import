@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4wdw5ldqk0u3"
-path="res://.godot/imported/icon.svg-a81e9d7aee99e741aebe2d89f3f0c9ab.ctex"
+uid="uid://b5g77vdarjohh"
+path="res://.godot/imported/better defense.png-d55cb97a5d41d39d10410e2a3d9fe2fb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/card/icon.svg"
-dest_files=["res://.godot/imported/icon.svg-a81e9d7aee99e741aebe2d89f3f0c9ab.ctex"]
+source_file="res://assets/images/cards/card images/better defense.png"
+dest_files=["res://.godot/imported/better defense.png-d55cb97a5d41d39d10410e2a3d9fe2fb.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

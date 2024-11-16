@@ -62,7 +62,7 @@ func _input(event: InputEvent) -> void:
 		map.visible = false
 
 
-func _is_win_or_loose() -> bool:
+func _is_game_over() -> bool:
 	if player_character.health <= 0:
 		game_controller.transition(GameController.GameState.GAME_OVER)
 	elif(enemy_character.health <= 0):
@@ -101,7 +101,7 @@ func _start_enemy_turn() -> void:
 			player_character.take_damage(1)
 			
 	enemy_character_state = posmod(enemy_character_state + 1, 3)
-	if not _is_win_or_loose():
+	if not _is_game_over():
 		_start_player_turn()
 
 
@@ -127,7 +127,7 @@ func _on_hand_card_activated(card: PlayableCard) -> void:
 			"targets": [enemy_character],
 			"cost": card_cost,
 		})
-		_is_win_or_loose()
+		_is_game_over()
 		
 		for action in card.actions:
 			if action is DrawACard:
@@ -202,7 +202,7 @@ func _on_draw_pile_pressed() -> void:
 
 
 func _on_view_map_button_pressed() -> void:
-	map.visible = !map.visible
+	map.enable(true)#_is_game_over())
 
 
 func _on_discard_pile_pressed() -> void:

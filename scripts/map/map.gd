@@ -24,12 +24,26 @@ func _on_back_button_pressed() -> void:
 	visible = false
 
 
+func enable(is_win: bool) -> void:
+	visible = !visible
+	for encounter in get_all_encounters():
+		encounter.disabled = !is_win
+
+
 func _on_encounter_pressed(encounter: Encounter) -> void:
 	chosen.emit(encounter)
 
 
+func get_all_encounters() -> Array[Encounter]:
+	var encounters: Array[Encounter] = []
+	for child in get_children():
+		if child is Encounter:
+			encounters.append(child)
+	return encounters
+
+
 func _create_connections() -> void:	
-	var encounters = _get_all_encounters()	
+	var encounters = get_all_encounters()	
 	var drawn_pairs = {}  # Dictionary to track unique connections, keyed by tuples of node positions	
 	for encounter in encounters:
 		for connection in encounter.connections:
@@ -42,7 +56,7 @@ func _create_connections() -> void:
 			# Check if this pair has already been drawn
 			if not drawn_pairs.has(pair):
 				# Generate random points to simulate a trail
-				var points = generate_trail_points(pos1, pos2, 10)  # 10 intermediate points for the trail
+				var points = _generate_trail_points(pos1, pos2, 10)  # 10 intermediate points for the trail
 				
 				# Create the dotted line
 				var line2D := dotted_line_scene.instantiate()
@@ -54,7 +68,7 @@ func _create_connections() -> void:
 				drawn_pairs[pair] = true
 
 
-func generate_trail_points(start: Vector2, end: Vector2, num_points: int) -> Array:
+func _generate_trail_points(start: Vector2, end: Vector2, num_points: int) -> Array:
 	var points = []
 	var random_offset_range = 15  # How much random offset can be applied to each intermediate point
 	for i in range(num_points):
@@ -69,11 +83,3 @@ func generate_trail_points(start: Vector2, end: Vector2, num_points: int) -> Arr
 	# Add the final position to the points list
 	points.append(end)
 	return points
-
-
-func _get_all_encounters() -> Array[Encounter]:
-	var encounters: Array[Encounter] = []
-	for child in get_children():
-		if child is Encounter:
-			encounters.append(child)
-	return encounters

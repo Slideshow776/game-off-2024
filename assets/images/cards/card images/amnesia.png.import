@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5g77vdarjohh"
-path="res://.godot/imported/better defense.png-e814e6cef3f16a2c8997a310b0bb173f.ctex"
+uid="uid://b1h5x1nlpus47"
+path="res://.godot/imported/amnesia.png-fcfbd6a095ad25d1b2574dbbeab501f5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/card/better defense.png"
-dest_files=["res://.godot/imported/better defense.png-e814e6cef3f16a2c8997a310b0bb173f.ctex"]
+source_file="res://assets/images/cards/card images/amnesia.png"
+dest_files=["res://.godot/imported/amnesia.png-fcfbd6a095ad25d1b2574dbbeab501f5.ctex"]
 
 [params]
 

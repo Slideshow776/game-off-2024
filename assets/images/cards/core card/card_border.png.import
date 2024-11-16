@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1h5x1nlpus47"
-path="res://.godot/imported/amnesia.png-2f4d462fde5dcec65484423ca11fa7c1.ctex"
+uid="uid://dv1stdckgs7l5"
+path="res://.godot/imported/card_border.png-bb9087eb53912fce8b5b23e8360c8849.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/card/amnesia.png"
-dest_files=["res://.godot/imported/amnesia.png-2f4d462fde5dcec65484423ca11fa7c1.ctex"]
+source_file="res://assets/images/cards/core card/card_border.png"
+dest_files=["res://.godot/imported/card_border.png-bb9087eb53912fce8b5b23e8360c8849.ctex"]
 
 [params]
 

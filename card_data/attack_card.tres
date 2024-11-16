@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" path="res://scripts/cards/actions/attack_action.gd" id="1_pduny"]
 [ext_resource type="Script" path="res://scripts/data objects/card_data.gd" id="1_qhee8"]
-[ext_resource type="Texture2D" uid="uid://deo3losldb63s" path="res://assets/images/card/image.png" id="2_pdo18"]
+[ext_resource type="Texture2D" uid="uid://deo3losldb63s" path="res://assets/images/cards/card images/image.png" id="2_ylkoh"]
 
 [resource]
 script = ExtResource("1_qhee8")
-title = "Lantern Bash"
+title = "Gaslight"
 description = "Deal 1 damage"
 cost = 1
-image = ExtResource("2_pdo18")
+image = ExtResource("2_ylkoh")
 colour = 0
 type = "attack"
 actions = Array[GDScript]([ExtResource("1_pduny")])

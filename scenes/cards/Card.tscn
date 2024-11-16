@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://c4sdhdmmxwye6"]
 
 [ext_resource type="Script" path="res://scripts/cards/card.gd" id="1_umjp1"]
-[ext_resource type="Texture2D" uid="uid://dv1stdckgs7l5" path="res://assets/images/card/card_border.png" id="2_fh1hc"]
-[ext_resource type="Texture2D" uid="uid://b7a04cmjjvgua" path="res://assets/images/card/card.png" id="3_7kxam"]
-[ext_resource type="Texture2D" uid="uid://gm5phtwk456g" path="res://assets/images/card/card_cost.png" id="4_yfsjg"]
+[ext_resource type="Texture2D" uid="uid://dv1stdckgs7l5" path="res://assets/images/cards/core card/card_border.png" id="2_fh1hc"]
+[ext_resource type="Texture2D" uid="uid://b7a04cmjjvgua" path="res://assets/images/cards/core card/card.png" id="3_7kxam"]
+[ext_resource type="Texture2D" uid="uid://gm5phtwk456g" path="res://assets/images/cards/core card/card_cost.png" id="4_yfsjg"]
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="5_0pxmf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4wvrc"]
@@ -30,22 +30,30 @@ unique_name_in_owner = true
 modulate = Color(0.803922, 0.360784, 0.360784, 1)
 texture = ExtResource("2_fh1hc")
 
+[node name="ImageSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-12, -102.667)
+scale = Vector2(0.993631, 1.02342)
+
 [node name="CardSprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_7kxam")
 
-[node name="CardImage" type="Node2D" parent="."]
-
-[node name="ImageSprite" type="Sprite2D" parent="CardImage"]
+[node name="TitleLabel" type="Label" parent="."]
 unique_name_in_owner = true
-position = Vector2(-5.33335, -100)
-scale = Vector2(1.13189, 1.02682)
+offset_left = -246.0
+offset_top = -283.0
+offset_right = 242.0
+offset_bottom = -202.0
+theme = ExtResource("5_0pxmf")
+text = "TODO: Card Title"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CostDisplay" type="Node2D" parent="."]
-position = Vector2(-227, -282)
-metadata/_edit_group_ = true
+position = Vector2(-221.667, -284.667)
 
 [node name="CostSprite" type="Sprite2D" parent="CostDisplay"]
-scale = Vector2(0.60926, 0.707936)
+scale = Vector2(0.702729, 0.816543)
 texture = ExtResource("4_yfsjg")
 
 [node name="CostLabel" type="Label" parent="CostDisplay"]
@@ -56,17 +64,6 @@ offset_right = 40.0
 offset_bottom = 41.0
 theme = ExtResource("5_0pxmf")
 text = "1"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TitleLabel" type="Label" parent="."]
-unique_name_in_owner = true
-offset_left = -200.0
-offset_top = -283.0
-offset_right = 178.0
-offset_bottom = -202.0
-theme = ExtResource("5_0pxmf")
-text = "TODO: Card Title"
 horizontal_alignment = 1
 vertical_alignment = 1
 

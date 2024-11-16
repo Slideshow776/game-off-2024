@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://dggmi3yjmi2hs"]
 
 [ext_resource type="Script" path="res://scripts/cards/actions/draw_a_card.gd" id="1_rnv4t"]
-[ext_resource type="Texture2D" uid="uid://b1h5x1nlpus47" path="res://assets/images/card/amnesia.png" id="2_mqs5b"]
+[ext_resource type="Texture2D" uid="uid://b1h5x1nlpus47" path="res://assets/images/cards/card images/amnesia.png" id="2_mqs5b"]
 [ext_resource type="Script" path="res://scripts/data objects/card_data.gd" id="3_kb5ko"]
 
 [resource]
