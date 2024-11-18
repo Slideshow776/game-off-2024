@@ -61,7 +61,7 @@ func spend_mana(amount: int) -> void:
 	mana -= amount
 
 
-func deal_damage_animation() -> void:
+func deal_damage_animation() -> Tween:
 	var tween := create_tween()
 	tween.set_trans(Tween.TRANS_SPRING)
 	tween.set_ease(Tween.EASE_OUT)
@@ -72,6 +72,8 @@ func deal_damage_animation() -> void:
 	tween.set_parallel(false)
 	tween.tween_property(sprite_2d, "rotation", 0.0, 0.2)
 	tween.tween_property(sprite_2d, "scale", Vector2(1.0, 1.0), 0.2)
+	
+	return tween
 
 
 func take_damage(amount: int) -> void:

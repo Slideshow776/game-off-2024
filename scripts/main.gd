@@ -7,6 +7,7 @@ extends Node2D
 @export var draw_a_card_card_data: CardData
 @export var defend_and_draw_card_data: CardData
 @export var more_mana_card_data: CardData
+@export var turn_delay := 2.0
 
 @export var playable_card_scene: PackedScene
 @export var debug_mode := true: 
@@ -33,6 +34,7 @@ var enemy_character_state := 0
 @onready var fade_in_color_rect: ColorRect = $CanvasLayer/FadeInColorRect
 @onready var view_map_button: TextureButton = %ViewMapButton
 @onready var map: Map = %Map
+@onready var turn_announcer: TurnAnnouncer = %TurnAnnouncer
 
 
 func _ready() -> void:
@@ -44,6 +46,7 @@ func _ready() -> void:
 	view_map_button.pressed.connect(_on_view_map_button_pressed)
 	map.chosen.connect(_on_chosen_received)
 	
+	turn_announcer.total_duration = turn_delay
 	_generate_starting_deck()
 	_restart_game()
 
@@ -74,7 +77,8 @@ func _is_game_over() -> bool:
 
 
 func _start_player_turn() -> void:
-	game_controller.transition(GameController.GameState.PLAYER_TURN)		
+	turn_announcer.announce("Player Turn")
+	game_controller.transition(GameController.GameState.PLAYER_TURN)
 	end_turn_button.disabled = true
 	player_character.start_turn()
 	mana_orb.fill_up_animation()
@@ -85,34 +89,36 @@ func _start_player_turn() -> void:
 func _start_enemy_turn() -> void:
 	game_controller.transition(GameController.GameState.ENEMY_TURN)
 	enemy_character.start_turn()
+	var tween: Tween = null
 	
 	match enemy_character_state: # ai logic
 		0:
 			enemy_character.add_defense(0)
 			%attack_action_sfx.play()
-			enemy_character.deal_damage_animation()
+			tween = enemy_character.deal_damage_animation()
 			player_character.take_damage(3)
 		1:
 			enemy_character.add_defense(1)
 			%attack_action_sfx.play()
-			enemy_character.deal_damage_animation()
+			tween = enemy_character.deal_damage_animation()
 			player_character.take_damage(2)
 		2:
 			enemy_character.add_defense(2)
 			%attack_action_sfx.play()
-			enemy_character.deal_damage_animation()
+			tween = enemy_character.deal_damage_animation()
 			player_character.take_damage(1)
 			
 	enemy_character_state = posmod(enemy_character_state + 1, 3)
 	if not _is_game_over():
-		_start_player_turn()
+		tween.tween_interval(turn_announcer.total_duration / 2)
+		tween.finished.connect(_start_player_turn)
 
 
 func _on_end_turn_pressed() -> void:
 	if game_controller.current_state == GameController.GameState.PLAYER_TURN:
 		end_turn_button.disabled = true
 		_empty_hand_to_discard_pile()
-		_start_enemy_turn()
+		turn_announcer.announce("Enemy Turn").finished.connect(_start_enemy_turn)
 
 
 func _empty_hand_to_discard_pile() -> void:
@@ -157,13 +163,12 @@ func _on_hand_card_activated(card: PlayableCard) -> void:
 		pass
 
 
-func _restart_game() -> void:
-	game_controller.current_state = GameController.GameState.PLAYER_TURN
-	mana_orb.fill_up_animation()
-	mana_orb.label.text = str(player_character.mana)
+func _restart_game() -> void:	
 	player_character.reset()
 	enemy_character.reset()
 	hand.empty()
+	mana_orb.empty_animation()
+	mana_orb.label.text = str(0)
 		
 	view_deck_button.disabled = deck.get_playable_deck().size() == 0	
 	view_deck_button.deck = deck.get_playable_deck()
@@ -183,7 +188,8 @@ func _restart_game() -> void:
 	game_won_color_rect.visible = false
 	game_over_color_rect.visible = false
 	
-	_deal_to_hand()
+	var tween := create_tween()
+	turn_announcer.announce("Battle start!").finished.connect(_start_player_turn)
 	_fade_out()
 
 
