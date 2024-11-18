@@ -22,10 +22,16 @@ func _ready() -> void:
 
 func _on_back_button_pressed() -> void:
 	visible = false
+	%map_select.play()
 
 
 func enable(is_win: bool) -> void:
 	visible = !visible
+	
+	if visible:
+		%map_open.play()	
+	else:
+		%map_select.play()
 	for encounter in get_all_encounters():
 		encounter.disabled = !is_win
 

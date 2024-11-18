@@ -91,5 +91,3 @@ text = "TODO: Card Description"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
-
-[node name="Node2D" type="Node2D" parent="."]

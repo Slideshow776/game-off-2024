@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ci0unrji7vi3w"]
+[gd_scene load_steps=32 format=3 uid="uid://ci0unrji7vi3w"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_8pbs6"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="2_lcj48"]
@@ -23,7 +23,19 @@
 [ext_resource type="Texture2D" uid="uid://dng3qw7ctwls2" path="res://assets/images/ui/map_pressed.png" id="18_w87mo"]
 [ext_resource type="PackedScene" uid="uid://dddavuqmsq4ei" path="res://scenes/ui/draw_pile.tscn" id="18_x2c22"]
 [ext_resource type="Texture2D" uid="uid://chc5rigmc2qya" path="res://assets/images/ui/map_hover.png" id="19_fppyf"]
-[ext_resource type="AudioStream" uid="uid://qap7btt5hr1g" path="res://assets/audio/music/CardGame_Soundtrack.wav" id="24_7exj3"]
+[ext_resource type="AudioStream" uid="uid://cf1amttorpsv5" path="res://assets/audio/music/CardGame_Soundtrack.mp3" id="24_2brc4"]
+[ext_resource type="AudioStream" uid="uid://bg2o3fm2y8si8" path="res://assets/audio/sfx/GGA_DeckDeal.wav" id="25_e33yx"]
+[ext_resource type="AudioStream" uid="uid://wuxls2wq8twc" path="res://assets/audio/sfx/GGA_CardFlip_1.wav" id="26_s6vvb"]
+[ext_resource type="AudioStream" uid="uid://ckmvwt1vmi87d" path="res://assets/audio/sfx/GGA_CardFlip_2.wav" id="27_lkp4e"]
+[ext_resource type="AudioStream" uid="uid://dsp4xmuekr2ig" path="res://assets/audio/sfx/GGA_CardFlip_3.wav" id="28_lsw73"]
+[ext_resource type="AudioStream" uid="uid://dr27n3daxgjtp" path="res://assets/audio/sfx/GGA_LanternBash.wav" id="29_ygrqp"]
+[ext_resource type="AudioStream" uid="uid://dca864uolx4rb" path="res://assets/audio/sfx/GGA_ShieldSelf.wav" id="30_0a0r8"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rq1nq"]
+streams_count = 3
+stream_0/stream = ExtResource("26_s6vvb")
+stream_1/stream = ExtResource("27_lkp4e")
+stream_2/stream = ExtResource("28_lsw73")
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("player_character")]
 script = ExtResource("1_8pbs6")
@@ -163,9 +175,6 @@ text = "End Turn"
 icon_alignment = 1
 vertical_icon_alignment = 2
 
-[node name="ViewDeckButton" parent="." instance=ExtResource("14_okd2s")]
-unique_name_in_owner = true
-
 [node name="ViewMapButton" type="TextureButton" parent="."]
 unique_name_in_owner = true
 offset_left = 908.0
@@ -176,15 +185,42 @@ texture_normal = ExtResource("17_k80c8")
 texture_pressed = ExtResource("18_w87mo")
 texture_hover = ExtResource("19_fppyf")
 
-[node name="DrawPile" parent="." instance=ExtResource("18_x2c22")]
+[node name="Piles" type="Node2D" parent="."]
+
+[node name="ViewDeckButton" parent="Piles" instance=ExtResource("14_okd2s")]
+unique_name_in_owner = true
+
+[node name="DrawPile" parent="Piles" instance=ExtResource("18_x2c22")]
 unique_name_in_owner = true
 offset_left = 16.0
 offset_right = 106.0
 
-[node name="DiscardPile" parent="." instance=ExtResource("17_qqyw7")]
+[node name="DiscardPile" parent="Piles" instance=ExtResource("17_qqyw7")]
 unique_name_in_owner = true
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("24_7exj3")
-volume_db = -5.0
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="main_music" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("24_2brc4")
 autoplay = true
+bus = &"Music"
+
+[node name="deal_to_hand_sfx" type="AudioStreamPlayer" parent="Audio"]
+unique_name_in_owner = true
+stream = ExtResource("25_e33yx")
+bus = &"SFX"
+
+[node name="draw_card_sfxs" type="AudioStreamPlayer" parent="Audio"]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_rq1nq")
+bus = &"SFX"
+
+[node name="attack_action_sfx" type="AudioStreamPlayer" parent="Audio"]
+unique_name_in_owner = true
+stream = ExtResource("29_ygrqp")
+bus = &"SFX"
+
+[node name="shield_sfx" type="AudioStreamPlayer" parent="Audio"]
+unique_name_in_owner = true
+stream = ExtResource("30_0a0r8")
+bus = &"SFX"

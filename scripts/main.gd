@@ -24,7 +24,7 @@ var enemy_character_state := 0
 @onready var view_deck_button: TextureButton = %ViewDeckButton
 @onready var enemy_character: Character = %EnemyCharacter
 @onready var deck_view_window: DeckViewWindow = %DeckViewWindow
-@onready var deck_view_control: Control = %DeckViewControl
+@onready var deck_view_control: DeckViewControl = %DeckViewControl
 @onready var draw_pile: PlayableDeckUI = %DrawPile
 @onready var discard_pile: PlayableDeckUI = %DiscardPile
 @onready var deck: Deck = Deck.new()
@@ -57,9 +57,9 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("restart"):
 		_restart_game()
 	elif event.is_action_pressed("mouse_click_back") && deck_view_control.visible:
-		deck_view_control.visible = false
+		deck_view_control._on_back_button_pressed()
 	elif event.is_action_pressed("mouse_click_back") && map.visible:
-		map.visible = false
+		map._on_back_button_pressed()
 
 
 func _is_game_over() -> bool:
@@ -89,14 +89,17 @@ func _start_enemy_turn() -> void:
 	match enemy_character_state: # ai logic
 		0:
 			enemy_character.add_defense(0)
+			%attack_action_sfx.play()
 			enemy_character.deal_damage_animation()
 			player_character.take_damage(3)
 		1:
 			enemy_character.add_defense(1)
+			%attack_action_sfx.play()
 			enemy_character.deal_damage_animation()
 			player_character.take_damage(2)
 		2:
 			enemy_character.add_defense(2)
+			%attack_action_sfx.play()
 			enemy_character.deal_damage_animation()
 			player_character.take_damage(1)
 			
@@ -130,8 +133,14 @@ func _on_hand_card_activated(card: PlayableCard) -> void:
 		_is_game_over()
 		
 		for action in card.actions:
-			if action is DrawACard:
+			if action is DrawACardAction:
+				%draw_card_sfxs.play()
 				_draw_a_card_to_hand(null, action.number_of_cards_to_draw)
+		
+		if card.card.type == CardData.Type.ATTACK:
+			%attack_action_sfx.play()
+		if card.card.type == CardData.Type.DEFENSE:
+			%shield_sfx.play()
 		
 		player_character.spend_mana(card_cost)
 		mana_orb.label.text = str(player_character.mana)
@@ -179,6 +188,7 @@ func _restart_game() -> void:
 
 
 func _deal_to_hand() -> void:
+	%deal_to_hand_sfx.play()
 	var tween := create_tween()
 	for i in player_character.number_of_cards_to_be_dealt:
 		_draw_a_card_to_hand(tween, player_character.number_of_cards_to_be_dealt)
@@ -194,11 +204,11 @@ func _draw_a_card_to_hand(tween: Tween, cards_to_be_dealt: int) -> void:
 
 
 func _on_view_deck_button_pressed() -> void:
-	_toggle_deck_view(deck.get_cards(), DeckViewControl.Description.DECK)
+	_toggle_deck_view(deck.get_cards(), DeckViewControl.Type.DECK)
 
 
 func _on_draw_pile_pressed() -> void:
-	_toggle_deck_view(draw_pile.deck.cards, DeckViewControl.Description.DRAW_PILE)
+	_toggle_deck_view(draw_pile.deck.cards, DeckViewControl.Type.DRAW_PILE)
 
 
 func _on_view_map_button_pressed() -> void:
@@ -206,14 +216,15 @@ func _on_view_map_button_pressed() -> void:
 
 
 func _on_discard_pile_pressed() -> void:
-	_toggle_deck_view(discard_pile.deck.cards, DeckViewControl.Description.DISCARD_PILE)
+	_toggle_deck_view(discard_pile.deck.cards, DeckViewControl.Type.DISCARD_PILE)
 
 
-func _toggle_deck_view(deck: Array[CardWithID], type: DeckViewControl.Description) -> void:
+func _toggle_deck_view(deck: Array[CardWithID], type: DeckViewControl.Type) -> void:
 	game_controller.toggle_pause_and_resume()
 	deck_view_control.visible = !deck_view_control.visible
 	deck_view_control.deck_view_window.display_card_list(deck)
-	deck_view_control.set_type(type)
+	(deck_view_control as DeckViewControl).set_type(type)
+	(deck_view_control as DeckViewControl).play_audio(type, game_controller.is_running)
 
 
 func _generate_starting_deck() -> void:
@@ -227,7 +238,6 @@ func _generate_starting_deck() -> void:
 func _check_transfer_from_discard_to_draw_pile(cards_to_be_dealt: int) -> void:
 	if draw_pile.get_number_of_cards() < cards_to_be_dealt:
 		var number_of_cards = discard_pile.get_number_of_cards()
-		print("_check_transfer_from_discard_to_draw_pile")
 		discard_pile.deck.shuffle()
 		for i in number_of_cards:
 			draw_pile.add_card_on_bottom(discard_pile.draw())

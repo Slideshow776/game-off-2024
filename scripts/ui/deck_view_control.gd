@@ -1,11 +1,13 @@
 class_name DeckViewControl
 extends Control
 
-enum Description {
+enum Type {
 	DRAW_PILE,
 	DISCARD_PILE,
 	DECK,
 }
+
+var current_type: Type
 
 @onready var deck_view_window: DeckViewWindow = %DeckViewWindow
 @onready var back_button: Button = %BackButton
@@ -14,30 +16,54 @@ enum Description {
 
 
 func _ready() -> void:
-	back_button.pressed.connect(func() -> void:
-		visible = !visible
-	)
+	back_button.pressed.connect(_on_back_button_pressed)
 
 
-func set_type(type: Description) -> void:
+func play_audio(type: Type, is_open: bool) -> void:
+	if is_open: # open sounds
+		match type:
+			Type.DRAW_PILE:
+				%draw_deck_open.play()
+			Type.DISCARD_PILE:
+				%discard_deck_open.play()
+			Type.DECK:
+				pass # TODO:
+	else: # closing sounds
+		match type:
+			Type.DRAW_PILE:
+				%draw_deck_close.play()
+			Type.DISCARD_PILE:
+				pass # TODO:
+			Type.DECK:
+				pass # TODO:
+
+
+func set_type(type: Type) -> void:
+	current_type = type
 	_set_description(type)
 	_set_title(type)
 
 
-func _set_title(type: Description) -> void:
+func _on_back_button_pressed() -> void:
+	visible = !visible
+	play_audio(current_type, visible)
+
+
+func _set_title(type: Type) -> void:
 	match type:
-		Description.DRAW_PILE:
+		Type.DRAW_PILE:
 			title_label.set_text("Draw Pile")
-		Description.DISCARD_PILE:
+		Type.DISCARD_PILE:
 			title_label.set_text("Discard Pile")
-		Description.DECK:
+		Type.DECK:
 			title_label.set_text("The Deck")
 
-func _set_description(type: Description) -> void:
+
+func _set_description(type: Type) -> void:
 	match type:
-		Description.DRAW_PILE:
+		Type.DRAW_PILE:
 			description_label.set_text("Cards are drawn from here at the start of each turn.")
-		Description.DISCARD_PILE:
+		Type.DISCARD_PILE:
 			description_label.set_text("Cards shuffled into your empty draw pile.")
-		Description.DECK:
+		Type.DECK:
 			description_label.set_text("Cards you start with, each encounter.")

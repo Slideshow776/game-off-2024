@@ -12,5 +12,5 @@ description = "Defend 1. Draw a card"
 cost = 2
 image = ExtResource("2_c1cwo")
 colour = 1
-type = "skill"
+type = 1
 actions = Array[GDScript]([ExtResource("1_5w7n1"), ExtResource("2_fxjxs")])

@@ -1,0 +1,210 @@
+[gd_scene load_steps=30 format=3 uid="uid://ci0unrji7vi3w"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_8pbs6"]
+[ext_resource type="Script" path="res://scripts/game_controller.gd" id="2_lcj48"]
+[ext_resource type="Resource" uid="uid://dgwxaf1naxwdx" path="res://card_data/attack_card.tres" id="2_xbw3r"]
+[ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="2_y60n5"]
+[ext_resource type="Resource" uid="uid://bs3yu15jrsqc4" path="res://card_data/defend_card.tres" id="3_x8w5h"]
+[ext_resource type="PackedScene" uid="uid://cbkph8q1bp178" path="res://scenes/cards/PlayableCard.tscn" id="4_xxjt2"]
+[ext_resource type="Resource" uid="uid://dggmi3yjmi2hs" path="res://card_data/draw_cards.tres" id="4_ywboh"]
+[ext_resource type="Resource" uid="uid://diohlghnp538v" path="res://card_data/defend_and_draw.tres" id="5_2of7i"]
+[ext_resource type="Resource" uid="uid://cnyc12kujqtih" path="res://card_data/more_mana.tres" id="6_a4nex"]
+[ext_resource type="PackedScene" uid="uid://cr1bhgtdf5bal" path="res://scenes/ui/DeckViewControl.tscn" id="6_tjxqj"]
+[ext_resource type="PackedScene" uid="uid://dp25u7ocj871r" path="res://scenes/ui/mana_orb.tscn" id="9_l7107"]
+[ext_resource type="PackedScene" uid="uid://drbayobfjnntg" path="res://scenes/Hand.tscn" id="10_4fja5"]
+[ext_resource type="PackedScene" uid="uid://dyit180vdx2qe" path="res://scenes/Character.tscn" id="10_11voj"]
+[ext_resource type="PackedScene" uid="uid://dbt3cfgdkh528" path="res://scenes/map/Map.tscn" id="11_rhhs2"]
+[ext_resource type="PackedScene" uid="uid://d1ni5upcefubs" path="res://scenes/ui/view_deck_button.tscn" id="14_okd2s"]
+[ext_resource type="Resource" uid="uid://c8g1pfm2qxi0a" path="res://character_data/player.tres" id="15_n4bk4"]
+[ext_resource type="Resource" uid="uid://dmdu673wjnv3i" path="res://character_data/ice_cream_isaac.tres" id="16_me22f"]
+[ext_resource type="Texture2D" uid="uid://bjyjrshsnl4ao" path="res://assets/images/ui/map_normal.png" id="17_k80c8"]
+[ext_resource type="PackedScene" uid="uid://b8cf5ve82x7hv" path="res://scenes/ui/discard_pile.tscn" id="17_qqyw7"]
+[ext_resource type="Texture2D" uid="uid://d1h8u0gquq3x2" path="res://assets/images/backgrounds/background_test.png" id="18_7r4xs"]
+[ext_resource type="Texture2D" uid="uid://dng3qw7ctwls2" path="res://assets/images/ui/map_pressed.png" id="18_w87mo"]
+[ext_resource type="PackedScene" uid="uid://dddavuqmsq4ei" path="res://scenes/ui/draw_pile.tscn" id="18_x2c22"]
+[ext_resource type="Texture2D" uid="uid://chc5rigmc2qya" path="res://assets/images/ui/map_hover.png" id="19_fppyf"]
+[ext_resource type="AudioStream" uid="uid://cf1amttorpsv5" path="res://assets/audio/music/CardGame_Soundtrack.mp3" id="24_2brc4"]
+[ext_resource type="AudioStream" uid="uid://bg2o3fm2y8si8" path="res://assets/audio/sfx/GGA_DeckDeal.wav" id="25_e33yx"]
+[ext_resource type="AudioStream" uid="uid://wuxls2wq8twc" path="res://assets/audio/sfx/GGA_CardFlip_1.wav" id="26_s6vvb"]
+[ext_resource type="AudioStream" uid="uid://ckmvwt1vmi87d" path="res://assets/audio/sfx/GGA_CardFlip_2.wav" id="27_lkp4e"]
+[ext_resource type="AudioStream" uid="uid://dsp4xmuekr2ig" path="res://assets/audio/sfx/GGA_CardFlip_3.wav" id="28_lsw73"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rq1nq"]
+streams_count = 3
+stream_0/stream = ExtResource("26_s6vvb")
+stream_1/stream = ExtResource("27_lkp4e")
+stream_2/stream = ExtResource("28_lsw73")
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("player_character")]
+script = ExtResource("1_8pbs6")
+player_character = NodePath("Characters/PlayerCharacter")
+attack_card_data = ExtResource("2_xbw3r")
+defend_card_data = ExtResource("3_x8w5h")
+draw_a_card_card_data = ExtResource("4_ywboh")
+defend_and_draw_card_data = ExtResource("5_2of7i")
+more_mana_card_data = ExtResource("6_a4nex")
+playable_card_scene = ExtResource("4_xxjt2")
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.82606, 0.82606, 0.82606, 1)
+position = Vector2(576, 324)
+texture = ExtResource("18_7r4xs")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FadeInColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="GameOverColorRect" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25, 0.1225, 0.1905, 0.784314)
+
+[node name="Label" type="Label" parent="CanvasLayer/GameOverColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.5
+offset_top = -37.0
+offset_right = 159.5
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_y60n5")
+text = "Game Over!
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameWonColorRect" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0987, 0.185885, 0.21, 0.784314)
+
+[node name="Label" type="Label" parent="CanvasLayer/GameWonColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -11.5
+offset_right = 45.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_y60n5")
+text = "Game Won!
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DeckViewControl" parent="CanvasLayer" instance=ExtResource("6_tjxqj")]
+unique_name_in_owner = true
+visible = false
+
+[node name="Map" parent="CanvasLayer" instance=ExtResource("11_rhhs2")]
+unique_name_in_owner = true
+visible = false
+
+[node name="GameController" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_lcj48")
+
+[node name="ManaOrb" parent="." instance=ExtResource("9_l7107")]
+unique_name_in_owner = true
+
+[node name="Characters" type="Node2D" parent="."]
+
+[node name="PlayerCharacter" parent="Characters" instance=ExtResource("10_11voj")]
+unique_name_in_owner = true
+position = Vector2(501, 394)
+character_data = ExtResource("15_n4bk4")
+
+[node name="EnemyCharacter" parent="Characters" instance=ExtResource("10_11voj")]
+unique_name_in_owner = true
+position = Vector2(780, 387)
+character_data = ExtResource("16_me22f")
+
+[node name="Hand" parent="." instance=ExtResource("10_4fja5")]
+unique_name_in_owner = true
+position = Vector2(576, 1629)
+card_angle = -91.115
+angle_limit = 30.0
+max_card_spread_angle = 10.0
+
+[node name="EndTurnButton" type="Button" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 888.0
+offset_top = 428.0
+offset_right = 1042.0
+offset_bottom = 522.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.0174533
+scale = Vector2(1, 0.75)
+pivot_offset = Vector2(94, 63)
+theme = ExtResource("2_y60n5")
+text = "End Turn"
+icon_alignment = 1
+vertical_icon_alignment = 2
+
+[node name="ViewDeckButton" parent="." instance=ExtResource("14_okd2s")]
+unique_name_in_owner = true
+
+[node name="ViewMapButton" type="TextureButton" parent="."]
+unique_name_in_owner = true
+offset_left = 908.0
+offset_top = 3.0
+offset_right = 986.0
+offset_bottom = 68.0
+texture_normal = ExtResource("17_k80c8")
+texture_pressed = ExtResource("18_w87mo")
+texture_hover = ExtResource("19_fppyf")
+
+[node name="DrawPile" parent="." instance=ExtResource("18_x2c22")]
+unique_name_in_owner = true
+offset_left = 16.0
+offset_right = 106.0
+
+[node name="DiscardPile" parent="." instance=ExtResource("17_qqyw7")]
+unique_name_in_owner = true
+
+[node name="audio" type="Node2D" parent="."]
+
+[node name="main_music" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("24_2brc4")
+volume_db = -15.0
+autoplay = true
+
+[node name="deal_to_hand_sfx" type="AudioStreamPlayer" parent="audio"]
+unique_name_in_owner = true
+stream = ExtResource("25_e33yx")
+
+[node name="card_sfxs" type="AudioStreamPlayer" parent="audio"]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_rq1nq")

@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cr1bhgtdf5bal"]
+[gd_scene load_steps=8 format=3 uid="uid://cr1bhgtdf5bal"]
 
 [ext_resource type="Script" path="res://scripts/ui/deck_view_control.gd" id="1_5memk"]
 [ext_resource type="PackedScene" uid="uid://bqim5c7s6n81g" path="res://scenes/ui/DeckViewWindow.tscn" id="1_njfl3"]
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="2_6c6mw"]
+[ext_resource type="AudioStream" uid="uid://bsoxtamxn2a7l" path="res://assets/audio/sfx/GGA_DiscardDeck_Open.wav" id="4_oayuj"]
+[ext_resource type="AudioStream" uid="uid://3swvijq03ywg" path="res://assets/audio/sfx/GGA_DrawDeck_Close.wav" id="5_4o1gj"]
+[ext_resource type="AudioStream" uid="uid://bnujs3i2uerem" path="res://assets/audio/sfx/GGA_DrawDeck_Open.wav" id="6_yt556"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v8lml"]
 bg_color = Color(0, 0, 0, 0.815686)
@@ -71,3 +74,20 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_v8lml")
 text = "Fusce a quam. Vestibulum suscipit nulla quis orci. Praesent nec nisl a purus blandit viverra."
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="audio" type="Node2D" parent="."]
+
+[node name="discard_deck_open" type="AudioStreamPlayer" parent="audio"]
+unique_name_in_owner = true
+stream = ExtResource("4_oayuj")
+bus = &"SFX"
+
+[node name="draw_deck_close" type="AudioStreamPlayer" parent="audio"]
+unique_name_in_owner = true
+stream = ExtResource("5_4o1gj")
+bus = &"SFX"
+
+[node name="draw_deck_open" type="AudioStreamPlayer" parent="audio"]
+unique_name_in_owner = true
+stream = ExtResource("6_yt556")
+bus = &"SFX"

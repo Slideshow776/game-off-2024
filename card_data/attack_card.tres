@@ -11,5 +11,5 @@ description = "Deal 1 damage"
 cost = 1
 image = ExtResource("2_ylkoh")
 colour = 0
-type = "attack"
+type = 0
 actions = Array[GDScript]([ExtResource("1_pduny")])

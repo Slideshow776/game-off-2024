@@ -1,4 +1,4 @@
-class_name DrawACard
+class_name DrawACardAction
 extends Action
 
 var number_of_cards_to_draw = 1

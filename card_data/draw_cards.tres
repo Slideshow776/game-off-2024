@@ -11,5 +11,5 @@ description = "Draw one card"
 cost = 1
 image = ExtResource("2_mqs5b")
 colour = 1
-type = "skill"
+type = 2
 actions = Array[GDScript]([ExtResource("1_rnv4t")])

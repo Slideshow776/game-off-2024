@@ -12,7 +12,7 @@ enum Colour { RED, BLUE }
 @export_range(0, 20) var cost: int = 1
 @export var image: Texture2D
 @export var colour: Colour = Colour.RED
-@export var type: String = "TODO: type"
+@export var type: CardData.Type = CardData.Type.ATTACK
 
 var is_highlighted := false
 var tween_unhighlight: Tween
@@ -30,7 +30,7 @@ var _original_position: Vector2
 
 
 func _ready() -> void:
-	set_values(title, description, cost, colour, type)
+	set_values(title, description, cost, colour, CardData.Type.ATTACK)
 	
 	area_2d.mouse_entered.connect(_on_area_2d_mouse_entered)
 	area_2d.mouse_exited.connect(_on_area_2d_mouse_exited)
@@ -45,7 +45,7 @@ func set_values(
 		temp_desription: String = description,
 		temp_cost: int = cost,
 		temp_colour: Colour = colour,
-		temp_type: String = type,
+		temp_type: CardData.Type = CardData.Type.ATTACK,
 		temp_image: Texture2D = image
 	) -> void:
 		
@@ -53,7 +53,7 @@ func set_values(
 	description = temp_desription
 	cost = temp_cost
 	_set_colour(temp_colour)
-	type = temp_type
+	_set_type(temp_type)
 	_set_image(temp_image)
 	
 	_original_scale = scale
@@ -93,9 +93,22 @@ func _get_colour(colour: Colour) -> Color:
 	return Color.WHITE
 
 
-func _set_image(texture: Texture2D):
+func _set_image(texture: Texture2D) -> void:
 	image = texture
 	image_sprite.set_texture(image)
+
+
+func _set_type(card_data_type: CardData.Type) -> String:
+	type = card_data_type
+	match card_data_type:
+		CardData.Type.ATTACK:
+			return "Attack"
+		CardData.Type.DEFENSE:
+			return "Defense"
+		CardData.Type.SKILL:
+			return "Skill"
+		_:
+			return ""
 
 
 func _update_graphics() -> void:
@@ -108,8 +121,8 @@ func _update_graphics() -> void:
 	if description_label != null and description_label.text != description:
 		description_label.text = description
 		
-	if type_label != null and type_label.text != type:
-		type_label.text = type
+	if type_label != null and type_label.text != _set_type(type):
+		type_label.text = _set_type(type)
 		
 	_set_colour(colour)
 	
