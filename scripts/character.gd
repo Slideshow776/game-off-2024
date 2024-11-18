@@ -14,6 +14,7 @@ var number_of_cards_to_be_dealt := 5
 @onready var label: Label = %Label
 @onready var sprite_2d: Sprite2D = %Sprite2D
 @onready var pivot: Node2D = %Pivot
+@onready var health_bar_label: Label = %HealthBarLabel
 
 
 func _ready() -> void:
@@ -46,6 +47,8 @@ func update_health_bar() -> void:
 		health_bar.max_value = character_data.max_health
 	if health_bar.value != health:
 		health_bar.value = health
+		
+	health_bar_label.set_text(str(health_bar.value) + "/" + str(character_data.max_health))
 
 
 func update_defense_icon() -> void:
