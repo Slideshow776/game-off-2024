@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://ci0unrji7vi3w"]
+[gd_scene load_steps=34 format=3 uid="uid://ci0unrji7vi3w"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_8pbs6"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="2_lcj48"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dyit180vdx2qe" path="res://scenes/Character.tscn" id="10_11voj"]
 [ext_resource type="PackedScene" uid="uid://dbt3cfgdkh528" path="res://scenes/map/Map.tscn" id="11_rhhs2"]
 [ext_resource type="PackedScene" uid="uid://meyhny1q32ic" path="res://scenes/ui/turn_announcer.tscn" id="12_v2c5n"]
+[ext_resource type="PackedScene" uid="uid://co42op7ql70qu" path="res://scenes/ui/RewardsContainer.tscn" id="13_f501m"]
 [ext_resource type="PackedScene" uid="uid://d1ni5upcefubs" path="res://scenes/ui/view_deck_button.tscn" id="14_okd2s"]
 [ext_resource type="Resource" uid="uid://c8g1pfm2qxi0a" path="res://character_data/player.tres" id="15_n4bk4"]
 [ext_resource type="Resource" uid="uid://dmdu673wjnv3i" path="res://character_data/ice_cream_isaac.tres" id="16_me22f"]
@@ -133,6 +134,9 @@ visible = false
 
 [node name="TurnAnnouncer" parent="CanvasLayer" instance=ExtResource("12_v2c5n")]
 unique_name_in_owner = true
+
+[node name="RewardsContainer" parent="CanvasLayer" instance=ExtResource("13_f501m")]
+visible = false
 
 [node name="GameController" type="Node2D" parent="."]
 unique_name_in_owner = true

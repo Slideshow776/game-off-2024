@@ -7,6 +7,7 @@ var _original_position: Vector2
 
 func _ready() -> void:
 	_original_position = position
+	visible = true
 
 
 func announce(announcement: String) -> Tween:

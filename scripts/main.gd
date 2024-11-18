@@ -163,14 +163,13 @@ func _on_hand_card_activated(card: PlayableCard) -> void:
 		pass
 
 
-func _restart_game() -> void:	
+func _restart_game() -> void:
 	player_character.reset()
 	enemy_character.reset()
 	hand.empty()
-	mana_orb.empty_animation()
-	mana_orb.label.text = str(0)
+	mana_orb.label.text = str(player_character.mana)
 		
-	view_deck_button.disabled = deck.get_playable_deck().size() == 0	
+	view_deck_button.disabled = deck.get_playable_deck().size() == 0
 	view_deck_button.deck = deck.get_playable_deck()
 	view_deck_button.set_label_deck_size()
 	

@@ -1,0 +1,85 @@
+[gd_scene load_steps=5 format=3 uid="uid://co42op7ql70qu"]
+
+[ext_resource type="Texture2D" uid="uid://bovafqk1cu6ur" path="res://assets/images/ui/panel.png" id="1_ifh8s"]
+[ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="1_sk026"]
+[ext_resource type="Script" path="res://scripts/ui/rewards_container.gd" id="1_ur83s"]
+[ext_resource type="PackedScene" uid="uid://dt81ielvak0a1" path="res://scenes/ui/choose_a_card.tscn" id="2_oovqp"]
+
+[node name="RewardsContainer" type="Control"]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ur83s")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.901961)
+
+[node name="ChooseACard" parent="." instance=ExtResource("2_oovqp")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="RewardsPanel" type="TextureRect" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 250)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -125.0
+offset_right = 200.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_ifh8s")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="RewardsPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_right = 250.0
+offset_bottom = 130.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_right = 128
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RewardsPanel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="RewardsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_sk026")
+text = "Rewards"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChooseACardButton" type="Button" parent="RewardsPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_sk026")
+text = "Choose a card"
