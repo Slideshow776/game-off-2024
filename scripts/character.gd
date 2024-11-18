@@ -2,11 +2,6 @@
 class_name Character
 extends Node2D
 
-#@export var texture2D: Texture2D
-#@export var max_health := 5
-#@export var start_mana := 3
-#@export var base_defense := 0
-#@export var current_mana_cap := 3
 @export var character_data: CharacterData
 
 var health := 5

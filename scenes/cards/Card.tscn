@@ -36,6 +36,7 @@ position = Vector2(-12, -102.667)
 scale = Vector2(0.993631, 1.02342)
 
 [node name="CardSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 texture = ExtResource("3_7kxam")
 
 [node name="TitleLabel" type="Label" parent="."]

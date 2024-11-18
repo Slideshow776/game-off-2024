@@ -26,6 +26,7 @@ var _original_position: Vector2
 @onready var description_label: Label = %descriptionLabel
 @onready var type_label: Label = %TypeLabel
 @onready var area_2d: Area2D = %Area2D
+@onready var card_sprite: Sprite2D = %CardSprite
 
 
 func _ready() -> void:

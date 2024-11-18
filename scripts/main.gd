@@ -202,7 +202,7 @@ func _on_draw_pile_pressed() -> void:
 
 
 func _on_view_map_button_pressed() -> void:
-	map.enable(true)#_is_game_over())
+	map.enable(_is_game_over())
 
 
 func _on_discard_pile_pressed() -> void:

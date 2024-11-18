@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ci0unrji7vi3w"]
+[gd_scene load_steps=25 format=3 uid="uid://ci0unrji7vi3w"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_8pbs6"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="2_lcj48"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://dng3qw7ctwls2" path="res://assets/images/ui/map_pressed.png" id="18_w87mo"]
 [ext_resource type="PackedScene" uid="uid://dddavuqmsq4ei" path="res://scenes/ui/draw_pile.tscn" id="18_x2c22"]
 [ext_resource type="Texture2D" uid="uid://chc5rigmc2qya" path="res://assets/images/ui/map_hover.png" id="19_fppyf"]
+[ext_resource type="AudioStream" uid="uid://qap7btt5hr1g" path="res://assets/audio/music/CardGame_Soundtrack.wav" id="24_7exj3"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("player_character")]
 script = ExtResource("1_8pbs6")
@@ -182,3 +183,8 @@ offset_right = 106.0
 
 [node name="DiscardPile" parent="." instance=ExtResource("17_qqyw7")]
 unique_name_in_owner = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("24_7exj3")
+volume_db = -5.0
+autoplay = true
