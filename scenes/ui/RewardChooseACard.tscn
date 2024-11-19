@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dt81ielvak0a1"]
+[gd_scene load_steps=11 format=3 uid="uid://dt81ielvak0a1"]
 
 [ext_resource type="Script" path="res://scripts/ui/choose_a_card.gd" id="1_ip2sj"]
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="2_0ipra"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://bs3yu15jrsqc4" path="res://card_data/defend_card.tres" id="5_q5cc5"]
 [ext_resource type="Resource" uid="uid://dggmi3yjmi2hs" path="res://card_data/draw_cards.tres" id="6_poe0e"]
 [ext_resource type="Resource" uid="uid://cnyc12kujqtih" path="res://card_data/more_mana.tres" id="7_wbssw"]
+[ext_resource type="Resource" uid="uid://c3go1vgcgl7ow" path="res://card_data/test.tres" id="8_xsosv"]
 
 [node name="RewardChooseACard" type="MarginContainer"]
 anchors_preset = 15
@@ -16,12 +17,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 64
-theme_override_constants/margin_top = 64
-theme_override_constants/margin_right = 64
-theme_override_constants/margin_bottom = 64
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
 script = ExtResource("1_ip2sj")
 card_data = Array[ExtResource("2_ag6t0")]([ExtResource("3_54ry4"), ExtResource("4_7h3lb"), ExtResource("5_q5cc5"), ExtResource("6_poe0e"), ExtResource("7_wbssw")])
+test_card_data = ExtResource("8_xsosv")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -50,3 +52,10 @@ layout_mode = 2
 
 [node name="RewardCardContainer3" parent="VBoxContainer/HBoxContainer" instance=ExtResource("3_nw34h")]
 layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_0ipra")
+text = "actually, no thanks..."

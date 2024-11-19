@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://c3go1vgcgl7ow"]
+
+[ext_resource type="Texture2D" uid="uid://dtajdmxoi1nfl" path="res://assets/images/cards/card images/cocaine.png" id="2_v2slo"]
+[ext_resource type="Script" path="res://scripts/data objects/card_data.gd" id="3_vx2sh"]
+
+[resource]
+script = ExtResource("3_vx2sh")
+title = "Test"
+description = "this is a test card"
+cost = 99
+image = ExtResource("2_v2slo")
+colour = 0
+type = 2
+actions = Array[GDScript]([])

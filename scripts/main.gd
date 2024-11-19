@@ -22,7 +22,7 @@ var enemy_character_state := 0
 @onready var mana_orb: ManaOrb = %ManaOrb
 @onready var game_controller: GameController = %GameController
 @onready var end_turn_button: Button = %EndTurnButton
-@onready var view_deck_button: TextureButton = %ViewDeckButton
+@onready var view_deck_button: PlayableDeckUI = %ViewDeckButton
 @onready var enemy_character: Character = %EnemyCharacter
 @onready var deck_view_window: DeckViewWindow = %DeckViewWindow
 @onready var deck_view_control: DeckViewControl = %DeckViewControl
@@ -35,6 +35,7 @@ var enemy_character_state := 0
 @onready var view_map_button: TextureButton = %ViewMapButton
 @onready var map: Map = %Map
 @onready var turn_announcer: TurnAnnouncer = %TurnAnnouncer
+@onready var rewards: Rewards = %Rewards
 
 
 func _ready() -> void:
@@ -45,6 +46,7 @@ func _ready() -> void:
 	discard_pile.pressed.connect(_on_discard_pile_pressed)
 	view_map_button.pressed.connect(_on_view_map_button_pressed)
 	map.chosen.connect(_on_chosen_received)
+	rewards.chosen.connect(_on_reward_card_chosen)
 	
 	turn_announcer.total_duration = turn_delay
 	_generate_starting_deck()
@@ -71,7 +73,7 @@ func _is_game_over() -> bool:
 	elif(enemy_character.health <= 0):
 		game_controller.transition(GameController.GameState.GAME_WON)
 	
-	game_won_color_rect.visible = game_controller.current_state == GameController.GameState.GAME_WON
+	rewards.visible = game_controller.current_state == GameController.GameState.GAME_WON
 	game_over_color_rect.visible = game_controller.current_state == GameController.GameState.GAME_OVER		
 	return game_over_color_rect.visible or game_won_color_rect.visible
 
@@ -136,7 +138,10 @@ func _on_hand_card_activated(card: PlayableCard) -> void:
 			"targets": [enemy_character],
 			"cost": card_cost,
 		})
-		_is_game_over()
+		
+		var tween := create_tween()
+		tween.tween_interval(turn_announcer.total_duration)
+		tween.finished.connect(_is_game_over)
 		
 		for action in card.actions:
 			if action is DrawACardAction:
@@ -268,11 +273,22 @@ func _draw_card_to_hand() -> void:
 			draw_pile.disabled = true
 
 
-func _on_chosen_received(encounter: Encounter):
+func _on_chosen_received(encounter: Encounter) -> void:
 	enemy_character.character_data = encounter.character_data
 	enemy_character.reset()
 	_restart_game()
 	map.visible = false
+
+
+func _on_reward_card_chosen(playable_card: PlayableCard) -> void:
+	deck.add_card(playable_card.card_data)
+	view_deck_button.deck = deck.get_playable_deck()
+	view_deck_button.set_label_deck_size()
+	
+	rewards.visible = false
+	
+	map.visible = true
+	map.disable(enemy_character)
 
 
 func _fade_out():

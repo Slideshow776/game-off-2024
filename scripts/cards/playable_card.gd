@@ -6,6 +6,7 @@ signal mouse_exited(card: Card)
 
 var actions: Array[Action]
 var id := -1
+var card_data: CardData
 
 @onready var card: Card = %Card
 @onready var attack_action: Node2D = %AttackAction
@@ -18,6 +19,7 @@ func _ready() -> void:
 
 
 func load_card_data(card_data: CardData) -> void:
+	self.card_data = card_data
 	card.set_values(
 		card_data.title,
 		card_data.description,

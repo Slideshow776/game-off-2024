@@ -84,7 +84,10 @@ func take_damage(amount: int) -> void:
 	health -= damage
 	update_health_bar()
 	
-	if damage > 0:
+	if health <= 0:
+		var tween := create_tween()
+		tween.tween_property(self, "modulate:a", 0.0, 1.0)
+	elif damage > 0:
 		var tween := create_tween()
 		tween.tween_property(sprite_2d, "modulate", Color(1.0, 0.8, 0.8, 1.0), 0.1)
 		tween.tween_property(sprite_2d, "modulate", Color.WHITE, 0.1)
@@ -104,6 +107,7 @@ func reset() -> void:
 	health = character_data.max_health
 	mana = character_data.start_mana
 	defense = character_data.base_defense
+	modulate.a = 1.0
 	
 	update_health_bar()
 	update_defense_icon()

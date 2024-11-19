@@ -135,7 +135,9 @@ visible = false
 [node name="TurnAnnouncer" parent="CanvasLayer" instance=ExtResource("12_v2c5n")]
 unique_name_in_owner = true
 
-[node name="RewardsContainer" parent="CanvasLayer" instance=ExtResource("13_f501m")]
+[node name="Rewards" parent="CanvasLayer" instance=ExtResource("13_f501m")]
+unique_name_in_owner = true
+visible = false
 
 [node name="GameController" type="Node2D" parent="."]
 unique_name_in_owner = true

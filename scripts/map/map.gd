@@ -13,16 +13,11 @@ signal chosen(Encounter)
 
 func _ready() -> void:
 	back_button.pressed.connect(_on_back_button_pressed)
-	ice_cream_isaac.pressed.connect(_on_encounter_pressed)
-	muffin_max.pressed.connect(_on_encounter_pressed)
-	donut_daisy.pressed.connect(_on_encounter_pressed)
+	
+	for encounter in get_all_encounters():
+		encounter.pressed.connect(_on_encounter_pressed)
 	
 	_create_connections()
-
-
-func _on_back_button_pressed() -> void:
-	visible = false
-	%map_select.play()
 
 
 func enable(is_win: bool) -> void:
@@ -32,8 +27,19 @@ func enable(is_win: bool) -> void:
 		%map_open.play()	
 	else:
 		%map_select.play()
+	#for encounter in get_all_encounters():
+		#encounter.disabled = !is_win
+
+
+func disable(character: Character):
 	for encounter in get_all_encounters():
-		encounter.disabled = !is_win
+		if encounter.character_data == character.character_data:
+			encounter.disabled = true
+
+
+func _on_back_button_pressed() -> void:
+	visible = false
+	%map_select.play()
 
 
 func _on_encounter_pressed(encounter: Encounter) -> void:

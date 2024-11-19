@@ -6,19 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://dt81ielvak0a1" path="res://scenes/ui/RewardChooseACard.tscn" id="2_oovqp"]
 
 [node name="Rewards" type="Control"]
-custom_minimum_size = Vector2(1152, 648)
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -576.0
-offset_top = -324.0
-offset_right = 576.0
-offset_bottom = 324.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_ur83s")
 
 [node name="Background" type="ColorRect" parent="."]
@@ -29,7 +23,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 0, 0, 0.901961)
+color = Color(0, 0, 0, 0.94902)
 
 [node name="RewardsPanel" type="TextureRect" parent="."]
 unique_name_in_owner = true
