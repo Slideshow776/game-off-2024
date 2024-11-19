@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://bovafqk1cu6ur" path="res://assets/images/ui/panel.png" id="1_ifh8s"]
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="1_sk026"]
 [ext_resource type="Script" path="res://scripts/ui/rewards_container.gd" id="1_ur83s"]
-[ext_resource type="PackedScene" uid="uid://dt81ielvak0a1" path="res://scenes/ui/choose_a_card.tscn" id="2_oovqp"]
+[ext_resource type="PackedScene" uid="uid://dt81ielvak0a1" path="res://scenes/ui/RewardChooseACard.tscn" id="2_oovqp"]
 
-[node name="RewardsContainer" type="Control"]
+[node name="Rewards" type="Control"]
 custom_minimum_size = Vector2(1152, 648)
 layout_mode = 3
 anchors_preset = 8

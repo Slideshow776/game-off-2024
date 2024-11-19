@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://63ourneieubs"]
+
+[ext_resource type="PackedScene" uid="uid://cbkph8q1bp178" path="res://scenes/cards/PlayableCard.tscn" id="1_w01qk"]
+
+[node name="RewardCardContainer" type="Control"]
+custom_minimum_size = Vector2(250, 230)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 250.0
+offset_bottom = 230.0
+
+[node name="PlayableCard" parent="." instance=ExtResource("1_w01qk")]
+position = Vector2(126, 115)

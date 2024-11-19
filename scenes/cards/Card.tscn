@@ -13,7 +13,6 @@ height = 27.3987
 [node name="Card" type="Node2D"]
 scale = Vector2(0.375, 0.375)
 script = ExtResource("1_umjp1")
-type = "TODO: card type"
 
 [node name="Area2D" type="Area2D" parent="."]
 unique_name_in_owner = true
