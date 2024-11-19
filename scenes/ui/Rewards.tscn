@@ -28,12 +28,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 0.901961)
-
-[node name="ChooseACard" parent="." instance=ExtResource("2_oovqp")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
 
 [node name="RewardsPanel" type="TextureRect" parent="."]
 unique_name_in_owner = true
@@ -52,6 +48,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 texture = ExtResource("1_ifh8s")
 expand_mode = 1
 
@@ -83,3 +80,8 @@ unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("1_sk026")
 text = "Choose a card"
+
+[node name="RewardChooseACard" parent="." instance=ExtResource("2_oovqp")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1

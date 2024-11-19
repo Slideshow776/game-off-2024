@@ -1,6 +1,6 @@
 extends Control
 
-@onready var choose_a_card: Control = %ChooseACard
+@onready var reward_choose_a_card: MarginContainer = %RewardChooseACard
 @onready var rewards_panel: TextureRect = %RewardsPanel
 @onready var choose_a_card_button: Button = %ChooseACardButton
 
@@ -10,5 +10,5 @@ func _ready() -> void:
 	
 
 func _on_choose_a_card_button_pressed() -> void:
-	choose_a_card.visible = true
+	reward_choose_a_card.visible = true
 	rewards_panel.visible = false

@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://dt81ielvak0a1"]
+[gd_scene load_steps=10 format=3 uid="uid://dt81ielvak0a1"]
 
 [ext_resource type="Script" path="res://scripts/ui/choose_a_card.gd" id="1_ip2sj"]
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="2_0ipra"]
+[ext_resource type="Script" path="res://scripts/data objects/card_data.gd" id="2_ag6t0"]
+[ext_resource type="Resource" uid="uid://dgwxaf1naxwdx" path="res://card_data/attack_card.tres" id="3_54ry4"]
 [ext_resource type="PackedScene" uid="uid://63ourneieubs" path="res://scenes/ui/RewardCardContainer.tscn" id="3_nw34h"]
+[ext_resource type="Resource" uid="uid://diohlghnp538v" path="res://card_data/defend_and_draw.tres" id="4_7h3lb"]
+[ext_resource type="Resource" uid="uid://bs3yu15jrsqc4" path="res://card_data/defend_card.tres" id="5_q5cc5"]
+[ext_resource type="Resource" uid="uid://dggmi3yjmi2hs" path="res://card_data/draw_cards.tres" id="6_poe0e"]
+[ext_resource type="Resource" uid="uid://cnyc12kujqtih" path="res://card_data/more_mana.tres" id="7_wbssw"]
 
 [node name="RewardChooseACard" type="MarginContainer"]
 anchors_preset = 15
@@ -15,6 +21,7 @@ theme_override_constants/margin_top = 64
 theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 64
 script = ExtResource("1_ip2sj")
+card_data = Array[ExtResource("2_ag6t0")]([ExtResource("3_54ry4"), ExtResource("4_7h3lb"), ExtResource("5_q5cc5"), ExtResource("6_poe0e"), ExtResource("7_wbssw")])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -30,11 +37,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
-[node name="RewardCardContainer" parent="VBoxContainer/HBoxContainer" instance=ExtResource("3_nw34h")]
+[node name="RewardCardContainer1" parent="VBoxContainer/HBoxContainer" instance=ExtResource("3_nw34h")]
 layout_mode = 2
 
 [node name="RewardCardContainer2" parent="VBoxContainer/HBoxContainer" instance=ExtResource("3_nw34h")]
