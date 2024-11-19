@@ -53,9 +53,10 @@ layout_mode = 2
 [node name="RewardCardContainer3" parent="VBoxContainer/HBoxContainer" instance=ExtResource("3_nw34h")]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="SkipButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("2_0ipra")
-text = "actually, no thanks..."
+text = "skip"

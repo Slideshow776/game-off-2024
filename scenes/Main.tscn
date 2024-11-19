@@ -95,35 +95,6 @@ text = "Game Over!
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GameWonColorRect" type="ColorRect" parent="CanvasLayer"]
-unique_name_in_owner = true
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.0987, 0.185885, 0.21, 0.784314)
-
-[node name="Label" type="Label" parent="CanvasLayer/GameWonColorRect"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -45.0
-offset_top = -11.5
-offset_right = 45.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_y60n5")
-text = "Game Won!
-"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="DeckViewControl" parent="CanvasLayer" instance=ExtResource("6_tjxqj")]
 unique_name_in_owner = true
 visible = false

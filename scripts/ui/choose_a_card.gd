@@ -12,9 +12,12 @@ var rewards: Array[RewardCardContainer] = []
 @onready var reward_card_container_1: RewardCardContainer = $VBoxContainer/HBoxContainer/RewardCardContainer1
 @onready var reward_card_container_2: RewardCardContainer = $VBoxContainer/HBoxContainer/RewardCardContainer2
 @onready var reward_card_container_3: RewardCardContainer = $VBoxContainer/HBoxContainer/RewardCardContainer3
+@onready var skip_button: Button = %SkipButton
 
 
 func _ready() -> void:
+	skip_button.pressed.connect(func() -> void: chosen.emit(null))
+	
 	rewards.push_back(reward_card_container_1)
 	rewards.push_back(reward_card_container_2)
 	rewards.push_back(reward_card_container_3)
