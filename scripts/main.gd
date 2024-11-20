@@ -19,6 +19,7 @@ extends Node2D
 var enemy_character_state := 0
 var game_won := false
 
+@onready var _original_music_volume := _get_music_bus_volume()
 @onready var hand: Hand = %Hand
 @onready var mana_orb: ManaOrb = %ManaOrb
 @onready var game_controller: GameController = %GameController
@@ -63,7 +64,7 @@ func _input(event: InputEvent) -> void:
 		_restart_game()
 	elif event.is_action_pressed("mouse_click_back") && deck_view_control.visible:
 		deck_view_control._on_back_button_pressed()
-	elif event.is_action_pressed("mouse_click_back") && map.visible:
+	elif event.is_action_pressed("mouse_click_back") && map.visible && not game_won:
 		map._on_back_button_pressed()
 
 
@@ -141,8 +142,12 @@ func _on_hand_card_activated(card: PlayableCard) -> void:
 		var tween := create_tween()
 		tween.tween_interval(turn_announcer.total_duration)
 		tween.finished.connect(func() -> void:
+			if game_won:
+				return
 			rewards.visible = _is_game_over() and not game_won
-			game_won = true
+			if rewards.visible:
+				_switch_music()
+				game_won = true
 		)
 		
 		for action in card.actions:
@@ -282,6 +287,7 @@ func _on_encounter_chosen_received(encounter: Encounter) -> void:
 	_restart_game()
 	map.visible = false
 	map.back_button.disabled = false
+	_switch_music()
 
 
 func _on_reward_card_chosen(playable_card: PlayableCard) -> void:
@@ -297,10 +303,41 @@ func _on_reward_card_chosen(playable_card: PlayableCard) -> void:
 	map.back_button.disabled = true
 
 
-func _fade_out():
+func _fade_out() -> void:
 	fade_in_color_rect.visible = true
 	fade_in_color_rect.modulate.a = 1.0
 	var tween := create_tween()
 	tween.set_trans(Tween.TRANS_QUAD)
 	tween.set_ease(Tween.EASE_IN)
 	tween.tween_property(fade_in_color_rect, "modulate:a", 0.0, 0.5)
+
+
+func _switch_music() -> void:
+	var main_music = %main_music as AudioStreamPlayer
+	var map_music = %map_music as AudioStreamPlayer
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_SINE)
+	var duration: float = 0.5
+	
+	if main_music.playing:
+		tween.set_ease(Tween.EASE_IN)
+		tween.tween_method(_set_music_bus_volume, _original_music_volume, -80, duration)
+		tween.tween_callback(map_music.play)
+		tween.tween_callback(main_music.stop)
+		tween.set_ease(Tween.EASE_OUT)
+		tween.tween_method(_set_music_bus_volume, -80, _original_music_volume, duration)
+	else:
+		tween.set_ease(Tween.EASE_IN)
+		tween.tween_method(_set_music_bus_volume, _original_music_volume, -80, duration)
+		tween.tween_callback(main_music.play)
+		tween.tween_callback(map_music.stop)
+		tween.set_ease(Tween.EASE_OUT)
+		tween.tween_method(_set_music_bus_volume, -80, _original_music_volume, duration)
+
+
+func _set_music_bus_volume(volume_db: float) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), volume_db)
+
+
+func _get_music_bus_volume() -> float:
+	return AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music"))

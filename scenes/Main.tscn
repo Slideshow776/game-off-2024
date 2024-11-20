@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://ci0unrji7vi3w"]
+[gd_scene load_steps=35 format=3 uid="uid://ci0unrji7vi3w"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_8pbs6"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="2_lcj48"]
@@ -28,6 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://cf1amttorpsv5" path="res://assets/audio/music/CardGame_Soundtrack.mp3" id="24_2brc4"]
 [ext_resource type="AudioStream" uid="uid://bg2o3fm2y8si8" path="res://assets/audio/sfx/GGA_DeckDeal.wav" id="25_e33yx"]
 [ext_resource type="AudioStream" uid="uid://wuxls2wq8twc" path="res://assets/audio/sfx/GGA_CardFlip_1.wav" id="26_s6vvb"]
+[ext_resource type="AudioStream" uid="uid://bg0tx4aruc70t" path="res://assets/audio/music/CardGame_Soundtrack_2.mp3" id="27_hsaq3"]
 [ext_resource type="AudioStream" uid="uid://ckmvwt1vmi87d" path="res://assets/audio/sfx/GGA_CardFlip_2.wav" id="27_lkp4e"]
 [ext_resource type="AudioStream" uid="uid://dsp4xmuekr2ig" path="res://assets/audio/sfx/GGA_CardFlip_3.wav" id="28_lsw73"]
 [ext_resource type="AudioStream" uid="uid://dr27n3daxgjtp" path="res://assets/audio/sfx/GGA_LanternBash.wav" id="29_ygrqp"]
@@ -181,8 +182,14 @@ unique_name_in_owner = true
 [node name="Audio" type="Node2D" parent="."]
 
 [node name="main_music" type="AudioStreamPlayer" parent="Audio"]
+unique_name_in_owner = true
 stream = ExtResource("24_2brc4")
 autoplay = true
+bus = &"Music"
+
+[node name="map_music" type="AudioStreamPlayer" parent="Audio"]
+unique_name_in_owner = true
+stream = ExtResource("27_hsaq3")
 bus = &"Music"
 
 [node name="deal_to_hand_sfx" type="AudioStreamPlayer" parent="Audio"]
