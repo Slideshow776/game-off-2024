@@ -52,6 +52,8 @@ func _ready() -> void:
 	turn_announcer.total_duration = turn_delay
 	_generate_starting_deck()
 	_restart_game()
+	
+	Input.set_custom_mouse_cursor(load("res://assets/images/ui/mouse_cursor.png"))
 
 
 func _process(delta: float) -> void:
