@@ -166,17 +166,17 @@ texture_normal = ExtResource("17_k80c8")
 texture_pressed = ExtResource("18_w87mo")
 texture_hover = ExtResource("19_fppyf")
 
-[node name="Piles" type="Node2D" parent="."]
+[node name="Card Piles" type="Node2D" parent="."]
 
-[node name="ViewDeckButton" parent="Piles" instance=ExtResource("14_okd2s")]
+[node name="ViewDeckButton" parent="Card Piles" instance=ExtResource("14_okd2s")]
 unique_name_in_owner = true
 
-[node name="DrawPile" parent="Piles" instance=ExtResource("18_x2c22")]
+[node name="DrawPile" parent="Card Piles" instance=ExtResource("18_x2c22")]
 unique_name_in_owner = true
 offset_left = 16.0
 offset_right = 106.0
 
-[node name="DiscardPile" parent="Piles" instance=ExtResource("17_qqyw7")]
+[node name="DiscardPile" parent="Card Piles" instance=ExtResource("17_qqyw7")]
 unique_name_in_owner = true
 
 [node name="Audio" type="Node2D" parent="."]

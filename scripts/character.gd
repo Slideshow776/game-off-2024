@@ -80,10 +80,17 @@ func deal_damage_animation() -> Tween:
 
 
 func take_damage(amount: int) -> void:
-	var damage = max(amount - defense, 0)
-	health -= damage
-	update_health_bar()
+	var temp = amount	
+	amount = max(amount - defense, 0)	
+	defense = max(defense - temp, 0)	
+	health -= amount		
 	
+	update_health_bar()
+	update_defense_icon()
+	take_damage_animation(amount)
+
+
+func take_damage_animation(damage: int) -> void:
 	if health <= 0:
 		var tween := create_tween()
 		tween.tween_property(self, "modulate:a", 0.0, 1.0)

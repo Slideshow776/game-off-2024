@@ -181,6 +181,7 @@ func _restart_game() -> void:
 	game_won = false
 	player_character.reset()
 	enemy_character.reset()
+	enemy_character_state = 0
 	hand.empty()
 	mana_orb.label.text = str(player_character.mana)
 		
