@@ -31,7 +31,7 @@ texture = ExtResource("2_fh1hc")
 
 [node name="ImageSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-12, -102.667)
+position = Vector2(4, -129.334)
 scale = Vector2(0.993631, 1.02342)
 
 [node name="CardSprite" type="Sprite2D" parent="."]
@@ -40,10 +40,10 @@ texture = ExtResource("3_7kxam")
 
 [node name="TitleLabel" type="Label" parent="."]
 unique_name_in_owner = true
-offset_left = -246.0
-offset_top = -283.0
-offset_right = 242.0
-offset_bottom = -202.0
+offset_left = -253.333
+offset_top = -309.333
+offset_right = 234.667
+offset_bottom = -235.333
 theme = ExtResource("5_0pxmf")
 text = "TODO: Card Title"
 horizontal_alignment = 1
@@ -70,9 +70,9 @@ vertical_alignment = 1
 [node name="TypeLabel" type="Label" parent="."]
 unique_name_in_owner = true
 offset_left = -155.0
-offset_top = -8.0
+offset_top = -24.0
 offset_right = 154.0
-offset_bottom = 29.0
+offset_bottom = 22.0
 theme = ExtResource("5_0pxmf")
 theme_override_font_sizes/font_size = 40
 text = "Attack"
@@ -81,12 +81,12 @@ vertical_alignment = 1
 
 [node name="descriptionLabel" type="Label" parent="."]
 unique_name_in_owner = true
-offset_left = -160.0
-offset_top = 26.0
-offset_right = 158.0
-offset_bottom = 254.0
+offset_left = -189.0
+offset_top = 21.0
+offset_right = 197.0
+offset_bottom = 326.0
 theme = ExtResource("5_0pxmf")
-text = "TODO: Card Description"
+text = "TODO: The card Description goes here."
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3

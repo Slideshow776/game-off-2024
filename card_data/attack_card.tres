@@ -10,6 +10,5 @@ title = "Gaslight"
 description = "Deal 1 damage"
 cost = 1
 image = ExtResource("2_ylkoh")
-colour = 0
 type = 0
 actions = Array[GDScript]([ExtResource("1_pduny")])

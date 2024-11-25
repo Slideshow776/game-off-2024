@@ -7,9 +7,8 @@
 [resource]
 script = ExtResource("3_ljcdi")
 title = "Cocaine"
-description = "Get two more mana."
+description = "+1 mana"
 cost = 1
 image = ExtResource("2_vrx6a")
-colour = 1
 type = 2
 actions = Array[GDScript]([ExtResource("1_pp1hi")])

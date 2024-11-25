@@ -7,9 +7,8 @@
 [resource]
 script = ExtResource("3_kb5ko")
 title = "Amnesia"
-description = "Draw one card"
+description = "Draw a card"
 cost = 1
 image = ExtResource("2_mqs5b")
-colour = 1
 type = 2
 actions = Array[GDScript]([ExtResource("1_rnv4t")])

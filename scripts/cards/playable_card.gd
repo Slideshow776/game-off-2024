@@ -24,7 +24,6 @@ func load_card_data(card_data: CardData) -> void:
 		card_data.title,
 		card_data.description,
 		card_data.cost,
-		card_data.colour,
 		card_data.type,
 		card_data.image,
 	)

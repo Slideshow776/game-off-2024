@@ -5,8 +5,8 @@ extends Resource
 @export var description: String
 @export var cost: int
 @export var image: CompressedTexture2D
-@export var colour: Card.Colour
 @export var type: Type
 @export var actions: Array[GDScript] = []
 
 enum Type { ATTACK, DEFENSE, SKILL }
+var colour: Card.Colour

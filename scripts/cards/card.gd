@@ -1,11 +1,11 @@
-@tool
+#@tool
 class_name Card
 extends Node2D
 
 signal mouse_entered(card: Card)
 signal mouse_exited(card: Card)
 
-enum Colour { RED, BLUE }
+enum Colour { RED, BLUE, GREEN }
 
 @export var title: String = "TODO: Card Title"
 @export var description: String = "TODO: Card Description"
@@ -30,7 +30,7 @@ var _original_position: Vector2
 
 
 func _ready() -> void:
-	set_values(title, description, cost, colour, CardData.Type.ATTACK)
+	set_values(title, description, cost, CardData.Type.ATTACK)
 	
 	area_2d.mouse_entered.connect(_on_area_2d_mouse_entered)
 	area_2d.mouse_exited.connect(_on_area_2d_mouse_exited)
@@ -44,7 +44,6 @@ func set_values(
 		temp_title:String = title,
 		temp_desription: String = description,
 		temp_cost: int = cost,
-		temp_colour: Colour = colour,
 		temp_type: CardData.Type = CardData.Type.ATTACK,
 		temp_image: Texture2D = image
 	) -> void:
@@ -52,7 +51,7 @@ func set_values(
 	title = temp_title
 	description = temp_desription
 	cost = temp_cost
-	_set_colour(temp_colour)
+	_set_colour(temp_type)
 	_set_type(temp_type)
 	_set_image(temp_image)
 	
@@ -66,7 +65,7 @@ func highlight() -> void:
 		var tween = create_tween()
 		tween.set_parallel()
 		tween.tween_property(self, "scale", _original_scale * 1.25, 0.2)
-		tween.tween_property(self, "position:y", _original_position.y - 125, 0.2)
+		tween.tween_property(self, "position:y", _original_position.y - 135, 0.2)
 
 
 func unhighlight() -> void:
@@ -78,10 +77,17 @@ func unhighlight() -> void:
 		tween_unhighlight.tween_property(self, "position:y", _original_position.y, 0.5)
 
 
-func _set_colour(temp_colour: Colour) -> void:
-	colour = temp_colour
-	if card_border_sprite != null:
-		card_border_sprite.modulate = _get_colour(colour)
+func _set_colour(temp_type: CardData.Type) -> void:
+	if card_border_sprite == null:
+		return
+	
+	match temp_type:
+		CardData.Type.ATTACK:
+			card_border_sprite.modulate = _get_colour(Colour.RED)
+		CardData.Type.DEFENSE:
+			card_border_sprite.modulate = _get_colour(Colour.BLUE)
+		CardData.Type.SKILL:
+			card_border_sprite.modulate = _get_colour(Colour.GREEN)
 
 
 func _get_colour(colour: Colour) -> Color:
@@ -90,6 +96,8 @@ func _get_colour(colour: Colour) -> Color:
 			return Color.INDIAN_RED
 		Colour.BLUE:
 			return Color.STEEL_BLUE
+		Colour.GREEN:
+			return Color.MEDIUM_SEA_GREEN
 	return Color.WHITE
 
 
@@ -124,7 +132,7 @@ func _update_graphics() -> void:
 	if type_label != null and type_label.text != _set_type(type):
 		type_label.text = _set_type(type)
 		
-	_set_colour(colour)
+	_set_colour(type)
 	
 	if image != null:
 		image_sprite.set_texture(image)

@@ -9,6 +9,5 @@ title = "Test"
 description = "this is a test card"
 cost = 99
 image = ExtResource("2_v2slo")
-colour = 0
 type = 2
 actions = Array[GDScript]([])
