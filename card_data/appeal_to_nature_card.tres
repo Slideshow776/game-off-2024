@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://rbkk6al75hiy"]
+
+[ext_resource type="Script" path="res://scripts/cards/actions/defense_action_5.gd" id="1_x7wpu"]
+[ext_resource type="Script" path="res://scripts/data objects/card_data.gd" id="3_jbkue"]
+
+[resource]
+script = ExtResource("3_jbkue")
+title = "Appeal to Nature"
+description = "+10 armor"
+cost = 2
+type = 1
+actions = Array[GDScript]([ExtResource("1_x7wpu"), ExtResource("1_x7wpu")])

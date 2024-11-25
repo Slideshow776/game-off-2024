@@ -42,7 +42,6 @@ vertical_alignment = 1
 
 [node name="DefenseIcon" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-visible = false
 position = Vector2(-95, 7)
 scale = Vector2(0.311688, 0.311688)
 texture = ExtResource("4_2ete1")

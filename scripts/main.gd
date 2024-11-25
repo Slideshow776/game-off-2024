@@ -2,11 +2,16 @@ extends Node2D
 
 @export var player_character: Character
 
-@export var attack_card_data: CardData
-@export var defend_card_data: CardData
-@export var draw_a_card_card_data: CardData
-@export var defend_and_draw_card_data: CardData
+@export var gaslight_card_data: CardData
+@export var overcompensate_card_data: CardData
+@export var amnesia_card_data: CardData
+@export var denial_draw_card_data: CardData
 @export var more_mana_card_data: CardData
+@export var exhaust_test_card_data: CardData
+@export var appeal_to_nature_card_data: CardData
+@export var strawman_card_data: CardData
+@export var ad_hominem_card_data: CardData
+
 @export var turn_delay := 2.0
 
 @export var playable_card_scene: PackedScene
@@ -126,55 +131,65 @@ func _on_end_turn_pressed() -> void:
 
 
 func _empty_hand_to_discard_pile() -> void:
-	for card in hand.empty():
-			card.visible = false
-			discard_pile.add_card_on_top(deck.get_card(card.id))
-			discard_pile.disabled = false
-
-
-func _on_hand_card_activated(card: PlayableCard) -> void:
-	var card_cost := card.get_cost()
-	if card_cost <= player_character.mana:
-		card.activate({
-			"actor": player_character,
-			"targets": [enemy_character],
-			"cost": card_cost,
-		})
-		
-		var tween := create_tween()
-		tween.tween_interval(turn_announcer.total_duration)
-		tween.finished.connect(func() -> void:
-			if game_won:
-				return
-			rewards.visible = _is_game_over() and not game_won
-			if rewards.visible:
-				_switch_music()
-				game_won = true
-		)
-		
-		for action in card.actions:
-			if action is DrawACardAction:
-				%draw_card_sfxs.play()
-				_draw_a_card_to_hand(null, action.number_of_cards_to_draw)
-		
-		if card.card.type == CardData.Type.ATTACK:
-			%attack_action_sfx.play()
-		if card.card.type == CardData.Type.DEFENSE:
-			%shield_sfx.play()
-		
-		player_character.spend_mana(card_cost)
-		mana_orb.label.text = str(player_character.mana)
-		if player_character.mana > 0:
-			mana_orb.spend_animation()
-		else:
-			mana_orb.empty_animation()
-		
-		hand.remove_by_entity(card)
-		discard_pile.add_card_on_top(deck.get_card(card.id))
+	for playable_card in hand.empty():
+		playable_card.visible = false
+		if not playable_card.exhausted:
+			discard_pile.add_card_on_top(deck.get_card(playable_card.id))
 		discard_pile.disabled = false
+
+
+func _on_hand_card_activated(playable_card: PlayableCard) -> void:
+	var card_cost := playable_card.get_cost()
+	if card_cost > player_character.mana:
+		return
+		
+	playable_card.activate({
+		"actor": player_character,
+		"targets": [enemy_character],
+		"cost": card_cost,
+	})
+	_check_if_card_won_the_game()
+	
+	for action in playable_card.actions:
+		if action is DrawACardAction:
+			%draw_card_sfxs.play()
+			_draw_a_card_to_hand(null, action.number_of_cards_to_draw)
+		if action is ExhaustAction:
+			playable_card.exhausted = true
+		if action is ExhaustOtherRandomAction:
+			var random_card = hand.cards.pick_random()
+			(random_card as PlayableCard).exhausted = true
+			hand.remove_by_entity(random_card)
+	
+	if playable_card.card.type == CardData.Type.ATTACK:
+		%attack_action_sfx.play()
+	if playable_card.card.type == CardData.Type.DEFENSE:
+		%shield_sfx.play()
+	
+	player_character.spend_mana(card_cost)
+	mana_orb.label.text = str(player_character.mana)
+	if player_character.mana > 0:
+		mana_orb.spend_animation()
 	else:
-		# TODO: indicate to the player that they're out of mana
-		pass
+		mana_orb.empty_animation()
+	
+	hand.remove_by_entity(playable_card)
+	if not playable_card.exhausted:
+		discard_pile.add_card_on_top(deck.get_card(playable_card.id))
+	discard_pile.disabled = discard_pile.deck.size() <= 0
+
+
+func _check_if_card_won_the_game() -> void:
+	var tween := create_tween()
+	tween.tween_interval(turn_announcer.total_duration)
+	tween.finished.connect(func() -> void:
+		if game_won:
+			return
+		rewards.visible = _is_game_over() and not game_won
+		if rewards.visible:
+			_switch_music()
+			game_won = true
+	)
 
 
 func _restart_game() -> void:
@@ -249,11 +264,15 @@ func _toggle_deck_view(deck: Array[CardWithID], type: DeckViewControl.Type) -> v
 
 
 func _generate_starting_deck() -> void:
-	for i in 2: deck.add_card(attack_card_data.duplicate())
-	for i in 2: deck.add_card(defend_card_data.duplicate())
-	for i in 2: deck.add_card(draw_a_card_card_data.duplicate())
-	for i in 2: deck.add_card(defend_and_draw_card_data.duplicate())
-	for i in 2: deck.add_card(more_mana_card_data.duplicate())
+	for i in 5: deck.add_card(gaslight_card_data.duplicate())
+	for i in 5: deck.add_card(overcompensate_card_data.duplicate())
+	for i in 1: deck.add_card(ad_hominem_card_data.duplicate())
+	#for i in 2: deck.add_card(amnesia_card_data.duplicate())
+	#for i in 2: deck.add_card(denial_draw_card_data.duplicate())
+	#for i in 2: deck.add_card(more_mana_card_data.duplicate())
+	#for i in 2: deck.add_card(exhaust_test_card_data.duplicate())
+	#for i in 2: deck.add_card(appeal_to_nature_card_data.duplicate())
+	#for i in 2: deck.add_card(strawman_card_data.duplicate())
 
 
 func _check_transfer_from_discard_to_draw_pile(cards_to_be_dealt: int) -> void:

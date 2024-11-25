@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://cr68yucq0177l"]
+
+[ext_resource type="Script" path="res://scripts/cards/actions/defense_action_5.gd" id="1_wdpq8"]
+[ext_resource type="Script" path="res://scripts/cards/actions/exhaust_other_random.gd" id="2_0n0ql"]
+[ext_resource type="Script" path="res://scripts/data objects/card_data.gd" id="3_2q5tt"]
+
+[resource]
+script = ExtResource("3_2q5tt")
+title = "Strawman"
+description = "+10 armor. Exhaust random card."
+cost = 1
+type = 1
+actions = Array[GDScript]([ExtResource("1_wdpq8"), ExtResource("1_wdpq8"), ExtResource("2_0n0ql")])

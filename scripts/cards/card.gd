@@ -1,4 +1,4 @@
-#@tool
+@tool
 class_name Card
 extends Node2D
 
@@ -7,15 +7,18 @@ signal mouse_exited(card: Card)
 
 enum Colour { RED, BLUE, GREEN }
 
-@export var title: String = "TODO: Card Title"
-@export var description: String = "TODO: Card Description"
-@export_range(0, 20) var cost: int = 1
-@export var image: Texture2D
-@export var colour: Colour = Colour.RED
-@export var type: CardData.Type = CardData.Type.ATTACK
+@export var card_data: CardData
+
+var title: String = "TODO: Card Title"
+var description: String = "TODO: Card Description"
+var cost: int = 1
+var image: Texture2D
+var colour: Colour = Colour.RED
+var type: CardData.Type = CardData.Type.ATTACK
 
 var is_highlighted := false
 var tween_unhighlight: Tween
+
 var _original_scale: Vector2
 var _original_position: Vector2
 
@@ -30,8 +33,6 @@ var _original_position: Vector2
 
 
 func _ready() -> void:
-	set_values(title, description, cost, CardData.Type.ATTACK)
-	
 	area_2d.mouse_entered.connect(_on_area_2d_mouse_entered)
 	area_2d.mouse_exited.connect(_on_area_2d_mouse_exited)
 
@@ -53,7 +54,10 @@ func set_values(
 	cost = temp_cost
 	_set_colour(temp_type)
 	_set_type(temp_type)
-	_set_image(temp_image)
+	if temp_image:
+		_set_image(temp_image)
+	elif card_data:
+		_set_image(card_data.image)
 	
 	_original_scale = scale
 	_original_position = position
@@ -120,6 +124,9 @@ func _set_type(card_data_type: CardData.Type) -> String:
 
 
 func _update_graphics() -> void:
+	if card_data:
+		set_values(card_data.title, card_data.description, card_data.cost, card_data.type)
+	
 	if cost_label != null and cost_label.text != str(cost):
 		cost_label.text = str(cost)
 		

@@ -49,7 +49,6 @@ func empty() -> Array[PlayableCard]:
 	var temp: Array[PlayableCard] = []
 	for card in cards:
 		temp.push_back(card)
-		#card.queue_free()
 		remove_child(card)
 	cards.clear()
 	touched.clear()
@@ -57,6 +56,10 @@ func empty() -> Array[PlayableCard]:
 
 
 func remove_card(index: int) -> PlayableCard:
+	if index < 0 or index > cards.size() - 1:
+		print(index)
+		return
+	
 	var card = cards[index]
 	cards.remove_at(index)
 	remove_child(card)
@@ -66,7 +69,7 @@ func remove_card(index: int) -> PlayableCard:
 
 
 func remove_by_entity(card: PlayableCard) -> PlayableCard:
-	var remove_index = cards.find(card)	
+	var remove_index = cards.find(card)
 	return remove_card(remove_index)
 
 
