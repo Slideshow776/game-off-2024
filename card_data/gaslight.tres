@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://scripts/cards/actions/attack_action.gd" id="1_pduny"]
 [ext_resource type="Script" path="res://scripts/data objects/card_data.gd" id="1_qhee8"]
-[ext_resource type="Texture2D" uid="uid://deo3losldb63s" path="res://assets/images/cards/card images/image.png" id="2_ylkoh"]
+[ext_resource type="Texture2D" uid="uid://dv1mi27qk1nve" path="res://assets/images/cards/card images/gaslight.png" id="2_h0n0o"]
 
 [resource]
 script = ExtResource("1_qhee8")
 title = "Gaslight"
 description = "Deal 1 damage"
 cost = 1
-image = ExtResource("2_ylkoh")
+image = ExtResource("2_h0n0o")
 type = 0
 actions = Array[GDScript]([ExtResource("1_pduny")])

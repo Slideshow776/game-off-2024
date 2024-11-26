@@ -30,7 +30,7 @@ position = Vector2(749, 152)
 card_data = ExtResource("5_6o4h2")
 
 [node name="Gaslight" parent="." instance=ExtResource("1_3biq0")]
-position = Vector2(961, 148)
+position = Vector2(947, 149)
 card_data = ExtResource("6_hgjwh")
 
 [node name="Overcompensate" parent="." instance=ExtResource("1_3biq0")]

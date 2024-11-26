@@ -278,13 +278,13 @@ func _generate_starting_deck() -> void:
 	for i in 5: deck.add_card(gaslight_card_data.duplicate())
 	for i in 5: deck.add_card(overcompensate_card_data.duplicate())
 	for i in 1: deck.add_card(ad_hominem_card_data.duplicate())
-	#for i in 2: deck.add_card(amnesia_card_data.duplicate())
-	#for i in 2: deck.add_card(denial_draw_card_data.duplicate())
-	#for i in 2: deck.add_card(more_mana_card_data.duplicate())
-	#for i in 2: deck.add_card(exhaust_test_card_data.duplicate())
+	for i in 2: deck.add_card(amnesia_card_data.duplicate())
+	for i in 2: deck.add_card(denial_draw_card_data.duplicate())
+	for i in 2: deck.add_card(more_mana_card_data.duplicate())
+	for i in 2: deck.add_card(exhaust_test_card_data.duplicate())
 	for i in 2: deck.add_card(appeal_to_nature_card_data.duplicate())
-	#for i in 2: deck.add_card(strawman_card_data.duplicate())
-	#for i in 2: deck.add_card(bandwagon_card_data.duplicate())
+	for i in 2: deck.add_card(strawman_card_data.duplicate())
+	for i in 2: deck.add_card(bandwagon_card_data.duplicate())
 
 
 func _check_transfer_from_discard_to_draw_pile(cards_to_be_dealt: int) -> void:
