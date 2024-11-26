@@ -89,9 +89,18 @@ func _is_game_over() -> bool:
 
 
 func _start_player_turn() -> void:
-	turn_announcer.announce("Player Turn")
-	game_controller.transition(GameController.GameState.PLAYER_TURN)
+	view_map_button.disabled = true
+	view_deck_button.disabled = true
+	draw_pile.disabled = true
+	discard_pile.disabled = true
+	turn_announcer.announce("Player Turn").finished.connect(func() -> void:		
+		view_map_button.disabled = false
+		view_deck_button.disabled = false
+		draw_pile.disabled = false
+		discard_pile.disabled = false
+	)
 	end_turn_button.disabled = true
+	game_controller.transition(GameController.GameState.PLAYER_TURN)
 	player_character.start_turn()
 	mana_orb.fill_up_animation()
 	mana_orb.label.text = str(player_character.mana)
@@ -135,10 +144,16 @@ func _start_enemy_turn() -> void:
 
 
 func _on_end_turn_pressed() -> void:
-	if game_controller.current_state == GameController.GameState.PLAYER_TURN:
-		end_turn_button.disabled = true
-		_empty_hand_to_discard_pile()
-		turn_announcer.announce("Enemy Turn").finished.connect(_start_enemy_turn)
+	if game_controller.current_state != GameController.GameState.PLAYER_TURN:
+		return
+	
+	end_turn_button.disabled = true		
+	view_map_button.disabled = true
+	view_deck_button.disabled = true
+	draw_pile.disabled = true
+	discard_pile.disabled = true
+	_empty_hand_to_discard_pile()
+	turn_announcer.announce("Enemy Turn").finished.connect(_start_enemy_turn)
 
 
 func _empty_hand_to_discard_pile() -> void:
