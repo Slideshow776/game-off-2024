@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=3 format=3 uid="uid://drxo4nuhvg3q5"]
+
+[ext_resource type="Script" path="res://scripts/data objects/character_data.gd" id="1_88iob"]
+[ext_resource type="Texture2D" uid="uid://cmb200nf4yyrd" path="res://assets/images/characters/laban_lars.png" id="2_cf3r3"]
+
+[resource]
+script = ExtResource("1_88iob")
+name = "Laban Lars"
+texture = ExtResource("2_cf3r3")
+max_health = 10
+start_mana = 3
+base_defense = 0
+current_mana_cap = 3

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dbt3cfgdkh528"]
+[gd_scene load_steps=13 format=3 uid="uid://dbt3cfgdkh528"]
 
 [ext_resource type="Script" path="res://scripts/map/map.gd" id="1_r0fvt"]
 [ext_resource type="Texture2D" uid="uid://c6y8ocfgu5uqi" path="res://assets/images/map/map.png" id="2_dld2r"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://bfjhjehgmwvkr" path="res://character_data/muffin_max.tres" id="6_rx2ty"]
 [ext_resource type="Resource" uid="uid://7neydhttfjw1" path="res://character_data/donut_daisy.tres" id="8_l04i0"]
 [ext_resource type="AudioStream" uid="uid://c6bxgdfleyq10" path="res://assets/audio/sfx/GGA_Map_Open.wav" id="9_b2ajp"]
+[ext_resource type="Resource" uid="uid://drxo4nuhvg3q5" path="res://character_data/laban_lars.tres" id="9_tv5u0"]
 [ext_resource type="AudioStream" uid="uid://dm5mier1tg3ic" path="res://assets/audio/sfx/GGA_Map_Select.wav" id="10_h1lhw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wjya"]
@@ -79,31 +80,36 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="IceCreamIsaac" parent="." node_paths=PackedStringArray("connections") instance=ExtResource("4_387ij")]
-layout_mode = 0
-offset_left = 407.0
-offset_top = 132.0
-offset_right = 447.0
-offset_bottom = 176.0
+offset_left = 275.0
+offset_top = 133.0
+offset_right = 315.0
+offset_bottom = 177.0
 character_data = ExtResource("5_iw1j2")
 connections = [NodePath("../MuffinMax")]
 
 [node name="MuffinMax" parent="." node_paths=PackedStringArray("connections") instance=ExtResource("4_387ij")]
-layout_mode = 0
-offset_left = 772.0
-offset_top = 250.0
-offset_right = 812.0
-offset_bottom = 294.0
+offset_left = 671.0
+offset_top = 144.0
+offset_right = 711.0
+offset_bottom = 188.0
 character_data = ExtResource("6_rx2ty")
 connections = [NodePath("../IceCreamIsaac")]
 
 [node name="DonutDaisy" parent="." node_paths=PackedStringArray("connections") instance=ExtResource("4_387ij")]
-layout_mode = 0
-offset_left = 425.0
-offset_top = 381.0
-offset_right = 465.0
-offset_bottom = 425.0
+offset_left = 348.0
+offset_top = 374.0
+offset_right = 388.0
+offset_bottom = 418.0
 character_data = ExtResource("8_l04i0")
 connections = [NodePath("../IceCreamIsaac")]
+
+[node name="LabanLars" parent="." node_paths=PackedStringArray("connections") instance=ExtResource("4_387ij")]
+offset_left = 809.0
+offset_top = 381.0
+offset_right = 849.0
+offset_bottom = 425.0
+character_data = ExtResource("9_tv5u0")
+connections = [NodePath("../DonutDaisy"), NodePath("../MuffinMax")]
 
 [node name="map_open" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

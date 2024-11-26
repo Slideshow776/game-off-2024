@@ -147,7 +147,7 @@ func _on_end_turn_pressed() -> void:
 	if game_controller.current_state != GameController.GameState.PLAYER_TURN:
 		return
 	
-	end_turn_button.disabled = true		
+	end_turn_button.disabled = true
 	view_map_button.disabled = true
 	view_deck_button.disabled = true
 	draw_pile.disabled = true
