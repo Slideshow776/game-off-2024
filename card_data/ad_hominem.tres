@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=5 format=3 uid="uid://blaycm7luhqkl"]
+[gd_resource type="Resource" script_class="CardData" load_steps=6 format=3 uid="uid://blaycm7luhqkl"]
 
 [ext_resource type="Script" path="res://scripts/cards/actions/attack_action.gd" id="1_q87bd"]
 [ext_resource type="Script" path="res://scripts/cards/actions/defense_action_5.gd" id="1_w5b7e"]
 [ext_resource type="Script" path="res://scripts/cards/actions/defense_action_1.gd" id="3_q1hqf"]
 [ext_resource type="Script" path="res://scripts/data objects/card_data.gd" id="3_yhs0n"]
+[ext_resource type="Texture2D" uid="uid://dlgfktv77efg3" path="res://assets/images/cards/card images/ad hominem.png" id="4_58g21"]
 
 [resource]
 script = ExtResource("3_yhs0n")
 title = "Ad Hominem"
 description = "Deal 3 damage. +6 armor."
 cost = 1
+image = ExtResource("4_58g21")
 type = 0
 actions = Array[GDScript]([ExtResource("1_q87bd"), ExtResource("1_q87bd"), ExtResource("1_q87bd"), ExtResource("1_w5b7e"), ExtResource("3_q1hqf")])

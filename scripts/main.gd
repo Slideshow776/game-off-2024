@@ -11,6 +11,7 @@ extends Node2D
 @export var appeal_to_nature_card_data: CardData
 @export var strawman_card_data: CardData
 @export var ad_hominem_card_data: CardData
+@export var bandwagon_card_data: CardData
 
 @export var turn_delay := 2.0
 
@@ -81,8 +82,10 @@ func _is_game_over() -> bool:
 	elif(enemy_character.health <= 0):
 		game_controller.transition(GameController.GameState.GAME_WON)
 		
-	game_over_color_rect.visible = game_controller.current_state == GameController.GameState.GAME_OVER		
-	return game_over_color_rect.visible or enemy_character.health <= 0
+	var game_over = game_controller.current_state == GameController.GameState.GAME_OVER
+	
+	#game_over_color_rect.visible =
+	return game_over or enemy_character.health <= 0
 
 
 func _start_player_turn() -> void:
@@ -121,6 +124,14 @@ func _start_enemy_turn() -> void:
 	if not _is_game_over():
 		tween.tween_interval(turn_announcer.total_duration / 2)
 		tween.finished.connect(_start_player_turn)
+	else:
+		tween.tween_interval(turn_announcer.total_duration / 2)
+		tween.finished.connect(func() -> void:
+			turn_announcer.announce("Defeated!").finished.connect(func() -> void:
+				map.visible = true
+				map.back_button.visible = false
+			)
+		)
 
 
 func _on_end_turn_pressed() -> void:
@@ -272,7 +283,8 @@ func _generate_starting_deck() -> void:
 	#for i in 2: deck.add_card(more_mana_card_data.duplicate())
 	#for i in 2: deck.add_card(exhaust_test_card_data.duplicate())
 	#for i in 2: deck.add_card(appeal_to_nature_card_data.duplicate())
-	for i in 2: deck.add_card(strawman_card_data.duplicate())
+	#for i in 2: deck.add_card(strawman_card_data.duplicate())
+	#for i in 2: deck.add_card(bandwagon_card_data.duplicate())
 
 
 func _check_transfer_from_discard_to_draw_pile(cards_to_be_dealt: int) -> void:

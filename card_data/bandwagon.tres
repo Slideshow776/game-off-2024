@@ -1,14 +1,15 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=5 format=3 uid="uid://d2u3e4rw37fxf"]
 
-[ext_resource type="Script" path="res://scripts/cards/actions/defense_action_5.gd" id="1_1pkc0"]
 [ext_resource type="Script" path="res://scripts/cards/actions/defense_action_1.gd" id="2_bhxgu"]
 [ext_resource type="Script" path="res://scripts/cards/actions/draw_a_card.gd" id="3_88of2"]
 [ext_resource type="Script" path="res://scripts/data objects/card_data.gd" id="3_ycib0"]
+[ext_resource type="Texture2D" uid="uid://dvpsgg3xcdmsk" path="res://assets/images/cards/card images/bandwagon.png" id="4_3y7gl"]
 
 [resource]
 script = ExtResource("3_ycib0")
 title = "Bandwagon"
 description = "Draw 2 cards. +4 armor"
 cost = 1
+image = ExtResource("4_3y7gl")
 type = 2
-actions = Array[GDScript]([ExtResource("1_1pkc0"), ExtResource("1_1pkc0"), ExtResource("2_bhxgu"), ExtResource("2_bhxgu"), ExtResource("3_88of2"), ExtResource("3_88of2")])
+actions = Array[GDScript]([ExtResource("2_bhxgu"), ExtResource("2_bhxgu"), ExtResource("3_88of2"), ExtResource("3_88of2"), ExtResource("2_bhxgu"), ExtResource("2_bhxgu")])

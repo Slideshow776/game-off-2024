@@ -7,7 +7,7 @@
 script = ExtResource("1_bcggb")
 name = "Rascal"
 texture = ExtResource("2_47rku")
-max_health = 10
+max_health = 1
 start_mana = 3
 base_defense = 0
 current_mana_cap = 3

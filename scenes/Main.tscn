@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://ci0unrji7vi3w"]
+[gd_scene load_steps=40 format=3 uid="uid://ci0unrji7vi3w"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_8pbs6"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="2_lcj48"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://drbayobfjnntg" path="res://scenes/Hand.tscn" id="10_4fja5"]
 [ext_resource type="PackedScene" uid="uid://dyit180vdx2qe" path="res://scenes/Character.tscn" id="10_11voj"]
 [ext_resource type="Resource" uid="uid://blaycm7luhqkl" path="res://card_data/ad_hominem.tres" id="10_x8int"]
+[ext_resource type="Resource" uid="uid://d2u3e4rw37fxf" path="res://card_data/bandwagon.tres" id="11_0g7t2"]
 [ext_resource type="PackedScene" uid="uid://dbt3cfgdkh528" path="res://scenes/map/Map.tscn" id="11_rhhs2"]
 [ext_resource type="PackedScene" uid="uid://meyhny1q32ic" path="res://scenes/ui/TurnAnnouncer.tscn" id="12_v2c5n"]
 [ext_resource type="PackedScene" uid="uid://co42op7ql70qu" path="res://scenes/ui/Rewards.tscn" id="13_f501m"]
@@ -56,6 +57,7 @@ exhaust_test_card_data = ExtResource("7_0q7k0")
 appeal_to_nature_card_data = ExtResource("8_uuxjy")
 strawman_card_data = ExtResource("9_t00p3")
 ad_hominem_card_data = ExtResource("10_x8int")
+bandwagon_card_data = ExtResource("11_0g7t2")
 playable_card_scene = ExtResource("4_xxjt2")
 
 [node name="Background" type="Sprite2D" parent="."]

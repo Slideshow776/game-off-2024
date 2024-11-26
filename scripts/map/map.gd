@@ -24,14 +24,15 @@ func enable(is_win: bool) -> void:
 	visible = !visible
 	
 	if visible:
-		%map_open.play()	
+		%map_open.play()
 	else:
 		%map_select.play()
+		
 	#for encounter in get_all_encounters():
 		#encounter.disabled = !is_win
 
 
-func disable(character: Character):
+func disable(character: Character) -> void:
 	for encounter in get_all_encounters():
 		if encounter.character_data == character.character_data:
 			encounter.disabled = true
