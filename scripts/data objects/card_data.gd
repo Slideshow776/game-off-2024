@@ -8,5 +8,5 @@ extends Resource
 @export var type: Type
 @export var actions: Array[GDScript] = []
 
-enum Type { ATTACK, DEFENSE, SKILL }
+enum Type { ATTACK, DEFENSE, SKILL, SECRET }
 var colour: Card.Colour

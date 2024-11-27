@@ -80,6 +80,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="IceCreamIsaac" parent="." node_paths=PackedStringArray("connections") instance=ExtResource("4_387ij")]
+layout_mode = 0
 offset_left = 275.0
 offset_top = 133.0
 offset_right = 315.0
@@ -88,6 +89,7 @@ character_data = ExtResource("5_iw1j2")
 connections = [NodePath("../MuffinMax")]
 
 [node name="MuffinMax" parent="." node_paths=PackedStringArray("connections") instance=ExtResource("4_387ij")]
+layout_mode = 0
 offset_left = 671.0
 offset_top = 144.0
 offset_right = 711.0
@@ -96,6 +98,7 @@ character_data = ExtResource("6_rx2ty")
 connections = [NodePath("../IceCreamIsaac")]
 
 [node name="DonutDaisy" parent="." node_paths=PackedStringArray("connections") instance=ExtResource("4_387ij")]
+layout_mode = 0
 offset_left = 348.0
 offset_top = 374.0
 offset_right = 388.0
@@ -104,6 +107,7 @@ character_data = ExtResource("8_l04i0")
 connections = [NodePath("../IceCreamIsaac")]
 
 [node name="LabanLars" parent="." node_paths=PackedStringArray("connections") instance=ExtResource("4_387ij")]
+layout_mode = 0
 offset_left = 809.0
 offset_top = 381.0
 offset_right = 849.0

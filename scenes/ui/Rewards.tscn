@@ -37,7 +37,7 @@ anchor_bottom = 0.5
 offset_left = -200.0
 offset_top = -125.0
 offset_right = 200.0
-offset_bottom = 125.0
+offset_bottom = 178.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -74,6 +74,19 @@ unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("1_sk026")
 text = "Choose a card"
+
+[node name="Label2" type="Label" parent="RewardsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_sk026")
+text = "or"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChooseASecretButton" type="Button" parent="RewardsPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_sk026")
+text = "Choose a secret"
 
 [node name="RewardChooseACard" parent="." instance=ExtResource("2_oovqp")]
 unique_name_in_owner = true

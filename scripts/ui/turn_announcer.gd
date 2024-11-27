@@ -2,6 +2,8 @@ class_name TurnAnnouncer
 extends Label
 
 var total_duration := 2.0
+
+var _tween: Tween
 var _original_position: Vector2
 
 
@@ -10,7 +12,7 @@ func _ready() -> void:
 	visible = true
 
 
-func announce(announcement: String) -> Tween:
+func announce(announcement: String, duration: float = total_duration) -> Tween:
 	set_text(announcement)
 	
 	# slide in animation
@@ -18,21 +20,24 @@ func announce(announcement: String) -> Tween:
 	position = _original_position
 	scale.y = 0.0
 	position.x += offset
-	var tween := create_tween()
-	tween.set_trans(Tween.TRANS_EXPO)
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_parallel(true)
-	tween.tween_property(self, "scale:y", 1.0, total_duration * 2 / 5)
-	tween.tween_property(self, "position:x", position.x - offset, total_duration / 3)
+	
+	if _tween:
+		_tween.kill()
+	_tween = create_tween()
+	_tween.set_trans(Tween.TRANS_EXPO)
+	_tween.set_ease(Tween.EASE_OUT)
+	_tween.set_parallel(true)
+	_tween.tween_property(self, "scale:y", 1.0, duration * 2 / 5)
+	_tween.tween_property(self, "position:x", position.x - offset, duration / 3)
 	
 	# pause
-	tween.set_parallel(false)
-	tween.tween_interval(total_duration / 3)
+	_tween.set_parallel(false)
+	_tween.tween_interval(duration / 3)
 	
 	# slide out
-	tween.set_ease(Tween.EASE_IN)
-	tween.set_parallel(true)
-	tween.tween_property(self, "scale:y", 0.0, total_duration * 2 / 5)
-	tween.tween_property(self, "position:x", position.x - 2*offset, total_duration / 3)
+	_tween.set_ease(Tween.EASE_IN)
+	_tween.set_parallel(true)
+	_tween.tween_property(self, "scale:y", 0.0, duration * 2 / 5)
+	_tween.tween_property(self, "position:x", position.x - 2*offset, duration / 3)
 	
-	return tween
+	return _tween

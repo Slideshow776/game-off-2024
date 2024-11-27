@@ -26,7 +26,7 @@ shape = SubResource("CapsuleShape2D_4wvrc")
 
 [node name="CardBorderSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-modulate = Color(0.803922, 0.360784, 0.360784, 1)
+modulate = Color(1, 0.419608, 0.419608, 1)
 texture = ExtResource("2_fh1hc")
 
 [node name="ImageSprite" type="Sprite2D" parent="."]
@@ -82,10 +82,10 @@ vertical_alignment = 1
 
 [node name="descriptionLabel" type="Label" parent="."]
 unique_name_in_owner = true
-offset_left = -195.0
+offset_left = -187.0
 offset_top = 8.0
-offset_right = 203.0
-offset_bottom = 313.0
+offset_right = 195.0
+offset_bottom = 267.0
 theme = ExtResource("5_0pxmf")
 text = "TODO: Card Description"
 horizontal_alignment = 1

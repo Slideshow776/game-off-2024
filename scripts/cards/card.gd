@@ -5,7 +5,7 @@ extends Node2D
 signal mouse_entered(card: Card)
 signal mouse_exited(card: Card)
 
-enum Colour { RED, BLUE, GREEN }
+enum Colour { RED, BLUE, GREEN, PURPLE }
 
 @export var card_data: CardData
 
@@ -92,16 +92,20 @@ func _set_colour(temp_type: CardData.Type) -> void:
 			card_border_sprite.modulate = _get_colour(Colour.BLUE)
 		CardData.Type.SKILL:
 			card_border_sprite.modulate = _get_colour(Colour.GREEN)
+		CardData.Type.SECRET:
+			card_border_sprite.modulate = _get_colour(Colour.PURPLE)
 
 
 func _get_colour(colour: Colour) -> Color:
 	match colour:
 		Colour.RED:
-			return Color.INDIAN_RED
+			return Color("#ff6b6b")
 		Colour.BLUE:
-			return Color.STEEL_BLUE
+			return Color("#5ac8fa")
 		Colour.GREEN:
-			return Color.MEDIUM_SEA_GREEN
+			return Color("#5dc89d")
+		Colour.PURPLE:
+			return Color("#aa8cee")
 	return Color.WHITE
 
 

@@ -8,6 +8,7 @@ var health := 5
 var mana := 5
 var defense := 0
 var number_of_cards_to_be_dealt := 5
+var num_secrets := 3
 
 @onready var defense_icon: Sprite2D = %DefenseIcon
 @onready var health_bar: ProgressBar = %HealthBar
@@ -25,7 +26,13 @@ func _process(delta: float) -> void:
 	sprite_2d.offset.y = pivot.position.y - (sprite_2d.position.y + sprite_2d.texture.get_height() / 2) * 0.95
 	update_health_bar()
 	update_defense_icon()
-	sprite_2d.texture = character_data.texture
+	if sprite_2d and sprite_2d.texture and character_data and character_data.texture:
+		sprite_2d.texture = character_data.texture
+
+
+func load_data(data: CharacterData) -> void:	
+	character_data = data
+	reset()
 
 
 func set_health_values(new_health: int, new_max_health: int) -> void:
@@ -43,12 +50,13 @@ func update_health_bar() -> void:
 		print("Character.gd => Error: health bar is null")
 		return
 		
-	if health_bar.max_value != character_data.max_health:
+	if health_bar and character_data and health_bar.max_value != character_data.max_health:
 		health_bar.max_value = character_data.max_health
-	if health_bar.value != health:
+	if health_bar and health_bar.value != health:
 		health_bar.value = health
-		
-	health_bar_label.set_text(str(health_bar.value) + "/" + str(character_data.max_health))
+	
+	if health_bar_label and character_data:
+		health_bar_label.set_text(str(health_bar.value) + "/" + str(character_data.max_health))
 
 
 func update_defense_icon() -> void:
@@ -111,6 +119,7 @@ func add_defense(amount: int) -> void:
 
 
 func reset() -> void:
+	name = character_data.name
 	health = character_data.max_health
 	mana = character_data.start_mana
 	defense = character_data.base_defense

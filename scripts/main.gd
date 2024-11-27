@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var player_character: Character
+@export var enemy_character: Character
 
 @export var gaslight_card_data: CardData
 @export var overcompensate_card_data: CardData
@@ -12,6 +13,7 @@ extends Node2D
 @export var strawman_card_data: CardData
 @export var ad_hominem_card_data: CardData
 @export var bandwagon_card_data: CardData
+@export var false_lead_card_data: CardData
 
 @export var turn_delay := 2.0
 
@@ -31,7 +33,6 @@ var game_won := false
 @onready var game_controller: GameController = %GameController
 @onready var end_turn_button: Button = %EndTurnButton
 @onready var view_deck_button: PlayableDeckUI = %ViewDeckButton
-@onready var enemy_character: Character = %EnemyCharacter
 @onready var deck_view_window: DeckViewWindow = %DeckViewWindow
 @onready var deck_view_control: DeckViewControl = %DeckViewControl
 @onready var draw_pile: PlayableDeckUI = %DrawPile
@@ -43,6 +44,7 @@ var game_won := false
 @onready var map: Map = %Map
 @onready var turn_announcer: TurnAnnouncer = %TurnAnnouncer
 @onready var rewards: Rewards = %Rewards
+@onready var secrecy_bar: SecrecyBar = %SecrecyBar
 
 
 func _ready() -> void:
@@ -57,9 +59,11 @@ func _ready() -> void:
 	
 	turn_announcer.total_duration = turn_delay
 	_generate_starting_deck()
-	_restart_game()
+	turn_announcer.announce("Steal the secrets of sugar city!", turn_announcer.total_duration * 2.5)
 	
 	Input.set_custom_mouse_cursor(load("res://assets/images/ui/mouse_cursor.png"))
+	map.visible = true
+	map.back_button.visible = false
 
 
 func _process(delta: float) -> void:
@@ -186,6 +190,10 @@ func _on_hand_card_activated(playable_card: PlayableCard) -> void:
 			var random_card = hand.cards.pick_random()
 			(random_card as PlayableCard).exhausted = true
 			hand.remove_by_entity(random_card)
+		if action is RevealSecretAction:
+			secrecy_bar.update(action.num_secrets_revealed)
+		if action is HealAction:
+			player_character.health += action.num_heal
 	
 	if playable_card.card.type == CardData.Type.ATTACK:
 		%attack_action_sfx.play()
@@ -202,7 +210,7 @@ func _on_hand_card_activated(playable_card: PlayableCard) -> void:
 	hand.remove_by_entity(playable_card)
 	if not playable_card.exhausted:
 		discard_pile.add_card_on_top(deck.get_card(playable_card.id))
-	discard_pile.disabled = discard_pile.deck.size() <= 0
+	discard_pile.disabled = discard_pile.deck.size() <= 0	
 
 
 func _check_if_card_won_the_game() -> void:
@@ -220,6 +228,8 @@ func _check_if_card_won_the_game() -> void:
 
 func _restart_game() -> void:
 	game_won = false
+	secrecy_bar.restart()
+	map.back_button.visible = true
 	player_character.reset()
 	enemy_character.reset()
 	enemy_character_state = 0
@@ -292,14 +302,16 @@ func _toggle_deck_view(deck: Array[CardWithID], type: DeckViewControl.Type) -> v
 func _generate_starting_deck() -> void:
 	for i in 5: deck.add_card(gaslight_card_data.duplicate())
 	for i in 5: deck.add_card(overcompensate_card_data.duplicate())
-	for i in 1: deck.add_card(ad_hominem_card_data.duplicate())
-	for i in 2: deck.add_card(amnesia_card_data.duplicate())
-	for i in 2: deck.add_card(denial_draw_card_data.duplicate())
-	for i in 2: deck.add_card(more_mana_card_data.duplicate())
-	for i in 2: deck.add_card(exhaust_test_card_data.duplicate())
-	for i in 2: deck.add_card(appeal_to_nature_card_data.duplicate())
-	for i in 2: deck.add_card(strawman_card_data.duplicate())
-	for i in 2: deck.add_card(bandwagon_card_data.duplicate())
+	for i in 1: deck.add_card(false_lead_card_data.duplicate())
+	
+	#for i in 1: deck.add_card(ad_hominem_card_data.duplicate())
+	#for i in 2: deck.add_card(amnesia_card_data.duplicate())
+	#for i in 2: deck.add_card(denial_draw_card_data.duplicate())
+	#for i in 2: deck.add_card(more_mana_card_data.duplicate())
+	#for i in 2: deck.add_card(exhaust_test_card_data.duplicate())
+	#for i in 2: deck.add_card(appeal_to_nature_card_data.duplicate())
+	#for i in 2: deck.add_card(strawman_card_data.duplicate())
+	#for i in 2: deck.add_card(bandwagon_card_data.duplicate())
 
 
 func _check_transfer_from_discard_to_draw_pile(cards_to_be_dealt: int) -> void:
@@ -331,12 +343,12 @@ func _draw_card_to_hand() -> void:
 
 
 func _on_encounter_chosen_received(encounter: Encounter) -> void:
-	enemy_character.character_data = encounter.character_data
-	enemy_character.reset()
-	_restart_game()
+	enemy_character.load_data(encounter.character_data)
+	secrecy_bar.initialize(enemy_character.name, enemy_character.num_secrets)
 	map.visible = false
 	map.back_button.disabled = false
 	_switch_music()
+	_restart_game()
 
 
 func _on_reward_card_chosen(playable_card: PlayableCard) -> void:
@@ -348,7 +360,8 @@ func _on_reward_card_chosen(playable_card: PlayableCard) -> void:
 	rewards.visible = false
 	
 	map.visible = true
-	map.disable(enemy_character)
+	if secrecy_bar.is_secret_revealed():
+		map.disable(enemy_character)
 	map.back_button.disabled = true
 
 

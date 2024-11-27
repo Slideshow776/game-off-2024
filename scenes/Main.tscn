@@ -1,24 +1,25 @@
-[gd_scene load_steps=40 format=3 uid="uid://ci0unrji7vi3w"]
+[gd_scene load_steps=42 format=3 uid="uid://ci0unrji7vi3w"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_8pbs6"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="2_lcj48"]
-[ext_resource type="Resource" uid="uid://dgwxaf1naxwdx" path="res://card_data/gaslight.tres" id="2_xbw3r"]
+[ext_resource type="Resource" uid="uid://dgwxaf1naxwdx" path="res://card_data/attack/gaslight.tres" id="2_xbw3r"]
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="2_y60n5"]
-[ext_resource type="Resource" uid="uid://bs3yu15jrsqc4" path="res://card_data/overcompensate.tres" id="3_x8w5h"]
+[ext_resource type="Resource" uid="uid://bs3yu15jrsqc4" path="res://card_data/defense/overcompensate.tres" id="3_x8w5h"]
 [ext_resource type="PackedScene" uid="uid://cbkph8q1bp178" path="res://scenes/cards/PlayableCard.tscn" id="4_xxjt2"]
-[ext_resource type="Resource" uid="uid://dggmi3yjmi2hs" path="res://card_data/amnesia.tres" id="4_ywboh"]
-[ext_resource type="Resource" uid="uid://diohlghnp538v" path="res://card_data/denial.tres" id="5_2of7i"]
-[ext_resource type="Resource" uid="uid://cnyc12kujqtih" path="res://card_data/cocaine.tres" id="6_a4nex"]
+[ext_resource type="Resource" uid="uid://dggmi3yjmi2hs" path="res://card_data/skill/amnesia.tres" id="4_ywboh"]
+[ext_resource type="Resource" uid="uid://diohlghnp538v" path="res://card_data/defense/denial.tres" id="5_2of7i"]
+[ext_resource type="Resource" uid="uid://cnyc12kujqtih" path="res://card_data/skill/cocaine.tres" id="6_a4nex"]
 [ext_resource type="PackedScene" uid="uid://cr1bhgtdf5bal" path="res://scenes/ui/DeckViewControl.tscn" id="6_tjxqj"]
 [ext_resource type="Resource" uid="uid://goquvxjh3p8y" path="res://card_data/tests/exhaust_test_card.tres" id="7_0q7k0"]
-[ext_resource type="Resource" uid="uid://rbkk6al75hiy" path="res://card_data/appeal_to_nature_card.tres" id="8_uuxjy"]
+[ext_resource type="Resource" uid="uid://rbkk6al75hiy" path="res://card_data/defense/appeal_to_nature_card.tres" id="8_uuxjy"]
 [ext_resource type="PackedScene" uid="uid://dp25u7ocj871r" path="res://scenes/ui/mana_orb.tscn" id="9_l7107"]
-[ext_resource type="Resource" uid="uid://cr68yucq0177l" path="res://card_data/strawman.tres" id="9_t00p3"]
+[ext_resource type="Resource" uid="uid://cr68yucq0177l" path="res://card_data/defense/strawman.tres" id="9_t00p3"]
 [ext_resource type="PackedScene" uid="uid://drbayobfjnntg" path="res://scenes/Hand.tscn" id="10_4fja5"]
 [ext_resource type="PackedScene" uid="uid://dyit180vdx2qe" path="res://scenes/Character.tscn" id="10_11voj"]
-[ext_resource type="Resource" uid="uid://blaycm7luhqkl" path="res://card_data/ad_hominem.tres" id="10_x8int"]
-[ext_resource type="Resource" uid="uid://d2u3e4rw37fxf" path="res://card_data/bandwagon.tres" id="11_0g7t2"]
+[ext_resource type="Resource" uid="uid://blaycm7luhqkl" path="res://card_data/attack/ad_hominem.tres" id="10_x8int"]
+[ext_resource type="Resource" uid="uid://d2u3e4rw37fxf" path="res://card_data/skill/bandwagon.tres" id="11_0g7t2"]
 [ext_resource type="PackedScene" uid="uid://dbt3cfgdkh528" path="res://scenes/map/Map.tscn" id="11_rhhs2"]
+[ext_resource type="Resource" uid="uid://csycik0pxrnh3" path="res://card_data/secret/false_lead.tres" id="12_gake5"]
 [ext_resource type="PackedScene" uid="uid://meyhny1q32ic" path="res://scenes/ui/TurnAnnouncer.tscn" id="12_v2c5n"]
 [ext_resource type="PackedScene" uid="uid://co42op7ql70qu" path="res://scenes/ui/Rewards.tscn" id="13_f501m"]
 [ext_resource type="PackedScene" uid="uid://d1ni5upcefubs" path="res://scenes/ui/ViewDeckButton.tscn" id="14_okd2s"]
@@ -30,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://dng3qw7ctwls2" path="res://assets/images/ui/map_pressed.png" id="18_w87mo"]
 [ext_resource type="PackedScene" uid="uid://dddavuqmsq4ei" path="res://scenes/ui/draw_pile.tscn" id="18_x2c22"]
 [ext_resource type="Texture2D" uid="uid://chc5rigmc2qya" path="res://assets/images/ui/map_hover.png" id="19_fppyf"]
+[ext_resource type="PackedScene" uid="uid://d3udvqgwbws15" path="res://scenes/ui/SecrecyBar.tscn" id="19_lcpvo"]
 [ext_resource type="AudioStream" uid="uid://cf1amttorpsv5" path="res://assets/audio/music/CardGame_Soundtrack.mp3" id="24_2brc4"]
 [ext_resource type="AudioStream" uid="uid://bg2o3fm2y8si8" path="res://assets/audio/sfx/GGA_DeckDeal.wav" id="25_e33yx"]
 [ext_resource type="AudioStream" uid="uid://wuxls2wq8twc" path="res://assets/audio/sfx/GGA_CardFlip_1.wav" id="26_s6vvb"]
@@ -45,9 +47,10 @@ stream_0/stream = ExtResource("26_s6vvb")
 stream_1/stream = ExtResource("27_lkp4e")
 stream_2/stream = ExtResource("28_lsw73")
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("player_character")]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("player_character", "enemy_character")]
 script = ExtResource("1_8pbs6")
-player_character = NodePath("Characters/PlayerCharacter")
+player_character = NodePath("Characters/Rascal")
+enemy_character = NodePath("Characters/Ice Cream Isaac")
 gaslight_card_data = ExtResource("2_xbw3r")
 overcompensate_card_data = ExtResource("3_x8w5h")
 amnesia_card_data = ExtResource("4_ywboh")
@@ -58,6 +61,7 @@ appeal_to_nature_card_data = ExtResource("8_uuxjy")
 strawman_card_data = ExtResource("9_t00p3")
 ad_hominem_card_data = ExtResource("10_x8int")
 bandwagon_card_data = ExtResource("11_0g7t2")
+false_lead_card_data = ExtResource("12_gake5")
 playable_card_scene = ExtResource("4_xxjt2")
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -106,6 +110,13 @@ text = "Game Over!
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SecrecyBar" parent="CanvasLayer" instance=ExtResource("19_lcpvo")]
+unique_name_in_owner = true
+offset_left = 256.0
+offset_top = 16.0
+offset_right = 869.0
+offset_bottom = 43.0
+
 [node name="DeckViewControl" parent="CanvasLayer" instance=ExtResource("6_tjxqj")]
 unique_name_in_owner = true
 visible = false
@@ -130,12 +141,12 @@ unique_name_in_owner = true
 
 [node name="Characters" type="Node2D" parent="."]
 
-[node name="PlayerCharacter" parent="Characters" instance=ExtResource("10_11voj")]
+[node name="Rascal" parent="Characters" instance=ExtResource("10_11voj")]
 unique_name_in_owner = true
 position = Vector2(501, 394)
 character_data = ExtResource("15_n4bk4")
 
-[node name="EnemyCharacter" parent="Characters" instance=ExtResource("10_11voj")]
+[node name="Ice Cream Isaac" parent="Characters" instance=ExtResource("10_11voj")]
 unique_name_in_owner = true
 position = Vector2(780, 387)
 character_data = ExtResource("16_me22f")

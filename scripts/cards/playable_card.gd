@@ -10,8 +10,6 @@ var card_data: CardData
 var exhausted := false
 
 @onready var card: Card = %Card
-@onready var attack_action: Node2D = %AttackAction
-@onready var defense_action: Node2D = %DefenseAction
 
 
 func _ready() -> void:

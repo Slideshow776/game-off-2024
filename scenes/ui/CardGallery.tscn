@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://lq2u3rc8e2qb"]
+[gd_scene load_steps=12 format=3 uid="uid://lq2u3rc8e2qb"]
 
 [ext_resource type="PackedScene" uid="uid://c4sdhdmmxwye6" path="res://scenes/cards/Card.tscn" id="1_3biq0"]
-[ext_resource type="Resource" uid="uid://dggmi3yjmi2hs" path="res://card_data/amnesia.tres" id="2_ak6k6"]
-[ext_resource type="Resource" uid="uid://cnyc12kujqtih" path="res://card_data/cocaine.tres" id="3_25nll"]
-[ext_resource type="Resource" uid="uid://rbkk6al75hiy" path="res://card_data/appeal_to_nature_card.tres" id="4_oaxt3"]
-[ext_resource type="Resource" uid="uid://diohlghnp538v" path="res://card_data/denial.tres" id="5_6o4h2"]
-[ext_resource type="Resource" uid="uid://dgwxaf1naxwdx" path="res://card_data/gaslight.tres" id="6_hgjwh"]
-[ext_resource type="Resource" uid="uid://bs3yu15jrsqc4" path="res://card_data/overcompensate.tres" id="7_tk4iy"]
-[ext_resource type="Resource" uid="uid://cr68yucq0177l" path="res://card_data/strawman.tres" id="8_2eltt"]
-[ext_resource type="Resource" uid="uid://blaycm7luhqkl" path="res://card_data/ad_hominem.tres" id="9_bwso3"]
-[ext_resource type="Resource" uid="uid://d2u3e4rw37fxf" path="res://card_data/bandwagon.tres" id="10_ivklk"]
+[ext_resource type="Resource" uid="uid://dggmi3yjmi2hs" path="res://card_data/skill/amnesia.tres" id="2_ak6k6"]
+[ext_resource type="Resource" uid="uid://cnyc12kujqtih" path="res://card_data/skill/cocaine.tres" id="3_25nll"]
+[ext_resource type="Resource" uid="uid://rbkk6al75hiy" path="res://card_data/defense/appeal_to_nature_card.tres" id="4_oaxt3"]
+[ext_resource type="Resource" uid="uid://diohlghnp538v" path="res://card_data/defense/denial.tres" id="5_6o4h2"]
+[ext_resource type="Resource" uid="uid://dgwxaf1naxwdx" path="res://card_data/attack/gaslight.tres" id="6_hgjwh"]
+[ext_resource type="Resource" uid="uid://bs3yu15jrsqc4" path="res://card_data/defense/overcompensate.tres" id="7_tk4iy"]
+[ext_resource type="Resource" uid="uid://cr68yucq0177l" path="res://card_data/defense/strawman.tres" id="8_2eltt"]
+[ext_resource type="Resource" uid="uid://blaycm7luhqkl" path="res://card_data/attack/ad_hominem.tres" id="9_bwso3"]
+[ext_resource type="Resource" uid="uid://d2u3e4rw37fxf" path="res://card_data/skill/bandwagon.tres" id="10_ivklk"]
+[ext_resource type="Resource" uid="uid://csycik0pxrnh3" path="res://card_data/secret/false_lead.tres" id="11_eu82g"]
 
 [node name="CardGallery" type="Node2D"]
 
@@ -48,3 +49,7 @@ card_data = ExtResource("9_bwso3")
 [node name="Bandwagon" parent="." instance=ExtResource("1_3biq0")]
 position = Vector2(754, 422)
 card_data = ExtResource("10_ivklk")
+
+[node name="FalseLead" parent="." instance=ExtResource("1_3biq0")]
+position = Vector2(955, 419)
+card_data = ExtResource("11_eu82g")

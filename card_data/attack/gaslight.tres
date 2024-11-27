@@ -7,8 +7,8 @@
 [resource]
 script = ExtResource("1_qhee8")
 title = "Gaslight"
-description = "Deal 1 damage"
+description = "Deal 2 damage"
 cost = 1
 image = ExtResource("2_h0n0o")
 type = 0
-actions = Array[GDScript]([ExtResource("1_pduny")])
+actions = Array[GDScript]([ExtResource("1_pduny"), ExtResource("1_pduny")])
