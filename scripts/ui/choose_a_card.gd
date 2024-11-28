@@ -19,8 +19,7 @@ var _chosen_rewards: Array[CardData]
 
 
 func _ready() -> void:
-	_chosen_rewards.clear()
-	skip_button.pressed.connect(func() -> void: chosen.emit(null))
+	skip_button.pressed.connect(func() -> void: _on_chosen(null))
 	
 	_reward_card_containers.push_back(reward_card_container_1)
 	_reward_card_containers.push_back(reward_card_container_2)
@@ -29,6 +28,7 @@ func _ready() -> void:
 
 func activate(is_revealed_secret: bool) -> void:
 	visible = true
+	_chosen_rewards.clear()
 	for reward_card_container in _reward_card_containers:
 		var reward := _get_reward(is_revealed_secret)
 		reward_card_container.playable_card.load_card_data(reward)
@@ -42,7 +42,6 @@ func _on_chosen(playable_card: PlayableCard):
 
 func _get_reward(is_revealed_secret: bool) -> CardData:
 	var reward: CardData = null
-	_chosen_rewards.clear()
 	while not reward:
 		# select type of reward
 		if is_revealed_secret:

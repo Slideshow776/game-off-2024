@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://co42op7ql70qu"]
+[gd_scene load_steps=20 format=3 uid="uid://co42op7ql70qu"]
 
 [ext_resource type="Texture2D" uid="uid://bovafqk1cu6ur" path="res://assets/images/ui/panel.png" id="1_ifh8s"]
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="1_sk026"]
@@ -20,6 +20,15 @@
 bg_color = Color(0.398021, 0.690674, 0.581229, 1)
 border_width_bottom = 8
 border_color = Color(0.230357, 0.446607, 0.367644, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1kl1l"]
+bg_color = Color(0.421134, 0.511465, 0.46116, 1)
+border_width_bottom = 8
+border_color = Color(0.342611, 0.42336, 0.381382, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
@@ -123,6 +132,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("1_sk026")
 theme_override_styles/focus = SubResource("StyleBoxFlat_ibk5n")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_1kl1l")
 theme_override_styles/hover = SubResource("StyleBoxFlat_56shr")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ibk5n")
 theme_override_styles/normal = SubResource("StyleBoxFlat_a5l8r")

@@ -26,6 +26,7 @@ extends Node2D
 
 var enemy_character_state := 0
 var game_won := false
+var rewards_received := 0
 
 @onready var _original_music_volume := _get_music_bus_volume()
 @onready var hand: Hand = %Hand
@@ -231,6 +232,7 @@ func _check_if_card_won_the_game() -> void:
 func _restart_game() -> void:
 	game_won = false
 	secrecy_bar.restart()
+	rewards_received = 0
 	map.back_button.visible = true
 	player_character.reset()
 	enemy_character.reset()
@@ -359,12 +361,17 @@ func _on_reward_card_chosen(playable_card: PlayableCard) -> void:
 		view_deck_button.deck = deck.get_playable_deck()
 		view_deck_button.set_label_deck_size()
 	
+	rewards_received += 1
+	
+	if rewards_received < rewards.num_rewards:
+		return
+	
 	rewards.visible = false
 	
 	map.visible = true
 	if secrecy_bar.is_secret_revealed():
 		map.disable(enemy_character)
-	map.back_button.disabled = true
+	map.back_button.visible = false
 
 
 func _fade_out() -> void:
