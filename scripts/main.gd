@@ -219,8 +219,9 @@ func _check_if_card_won_the_game() -> void:
 	tween.finished.connect(func() -> void:
 		if game_won:
 			return
-		rewards.visible = _is_game_over() and not game_won
-		rewards.show_secret_reward(secrecy_bar.is_secret_revealed())
+		
+		if _is_game_over() and not game_won:
+			rewards.activate(secrecy_bar.is_secret_revealed())
 		if rewards.visible:
 			_switch_music()
 			game_won = true

@@ -3,7 +3,8 @@ extends MarginContainer
 
 signal chosen(playable_card: PlayableCard)
 
-@export var possible_rewards: Array[CardData]
+@export var normal_possible_rewards: Array[CardData]
+@export var secret_possible_rewards: Array[CardData]
 @export var test_card_data: CardData
 
 var _reward_card_containers: Array[RewardCardContainer] = []
@@ -23,21 +24,33 @@ func _ready() -> void:
 	
 	_reward_card_containers.push_back(reward_card_container_1)
 	_reward_card_containers.push_back(reward_card_container_2)
-	_reward_card_containers.push_back(reward_card_container_3)
-	
+	_reward_card_containers.push_back(reward_card_container_3)	
+
+
+func activate(is_revealed_secret: bool) -> void:
+	visible = true
 	for reward_card_container in _reward_card_containers:
-		reward_card_container.playable_card.load_card_data(_get_reward())
+		var reward := _get_reward(is_revealed_secret)
+		reward_card_container.playable_card.load_card_data(reward)
 		reward_card_container.chosen.connect(_on_chosen)
 
 
 func _on_chosen(playable_card: PlayableCard):
 	chosen.emit(playable_card)
+	visible = false
 
 
-func _get_reward() -> CardData:
+func _get_reward(is_revealed_secret: bool) -> CardData:
 	var reward: CardData = null
+	_chosen_rewards.clear()
 	while not reward:
-		reward = possible_rewards.pick_random()
+		# select type of reward
+		if is_revealed_secret:
+			reward = secret_possible_rewards.pick_random()
+		else:
+			reward = normal_possible_rewards.pick_random()
+			
+		# ensure no duplicates
 		if not _chosen_rewards.has(reward):
 			_chosen_rewards.push_back(reward)
 		else:

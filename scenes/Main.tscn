@@ -49,8 +49,6 @@ stream_2/stream = ExtResource("28_lsw73")
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("player_character", "enemy_character")]
 script = ExtResource("1_8pbs6")
-player_character = NodePath("Characters/Rascal")
-enemy_character = NodePath("Characters/Ice Cream Isaac")
 gaslight_card_data = ExtResource("2_xbw3r")
 overcompensate_card_data = ExtResource("3_x8w5h")
 amnesia_card_data = ExtResource("4_ywboh")
@@ -62,7 +60,11 @@ strawman_card_data = ExtResource("9_t00p3")
 ad_hominem_card_data = ExtResource("10_x8int")
 bandwagon_card_data = ExtResource("11_0g7t2")
 false_lead_card_data = ExtResource("12_gake5")
+turn_delay = null
 playable_card_scene = ExtResource("4_xxjt2")
+debug_mode = null
+player_character = NodePath("Characters/Rascal")
+enemy_character = NodePath("Characters/Ice Cream Isaac")
 
 [node name="Background" type="Sprite2D" parent="."]
 modulate = Color(0.82606, 0.82606, 0.82606, 1)

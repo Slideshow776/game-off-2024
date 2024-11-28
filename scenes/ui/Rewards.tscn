@@ -1,9 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://co42op7ql70qu"]
+[gd_scene load_steps=19 format=3 uid="uid://co42op7ql70qu"]
 
 [ext_resource type="Texture2D" uid="uid://bovafqk1cu6ur" path="res://assets/images/ui/panel.png" id="1_ifh8s"]
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="1_sk026"]
 [ext_resource type="Script" path="res://scripts/ui/rewards_container.gd" id="1_ur83s"]
 [ext_resource type="PackedScene" uid="uid://dt81ielvak0a1" path="res://scenes/ui/RewardChooseACard.tscn" id="2_oovqp"]
+[ext_resource type="Script" path="res://scripts/data objects/card_data.gd" id="5_34x1h"]
+[ext_resource type="Resource" uid="uid://dggmi3yjmi2hs" path="res://card_data/skill/amnesia.tres" id="6_810ng"]
+[ext_resource type="Resource" uid="uid://cnyc12kujqtih" path="res://card_data/skill/cocaine.tres" id="7_lqklb"]
+[ext_resource type="Resource" uid="uid://csycik0pxrnh3" path="res://card_data/secret/false_lead.tres" id="8_6yx6s"]
+[ext_resource type="Resource" uid="uid://dgwxaf1naxwdx" path="res://card_data/attack/gaslight.tres" id="9_u3hur"]
+[ext_resource type="Resource" uid="uid://bs3yu15jrsqc4" path="res://card_data/defense/overcompensate.tres" id="10_qieks"]
+[ext_resource type="Resource" uid="uid://rbkk6al75hiy" path="res://card_data/defense/appeal_to_nature_card.tres" id="11_j1r5k"]
+[ext_resource type="Resource" uid="uid://diohlghnp538v" path="res://card_data/defense/denial.tres" id="12_gl4cg"]
+[ext_resource type="Resource" uid="uid://cr68yucq0177l" path="res://card_data/defense/strawman.tres" id="13_46nuh"]
+[ext_resource type="Resource" uid="uid://blaycm7luhqkl" path="res://card_data/attack/ad_hominem.tres" id="14_3h6cs"]
+[ext_resource type="Resource" uid="uid://d2u3e4rw37fxf" path="res://card_data/skill/bandwagon.tres" id="15_qv07v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ibk5n"]
 bg_color = Color(0.398021, 0.690674, 0.581229, 1)
@@ -121,3 +132,5 @@ text = " Choose a secret "
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
+normal_possible_rewards = Array[ExtResource("5_34x1h")]([ExtResource("6_810ng"), ExtResource("7_lqklb"), ExtResource("9_u3hur"), ExtResource("10_qieks"), ExtResource("8_6yx6s")])
+secret_possible_rewards = Array[ExtResource("5_34x1h")]([ExtResource("11_j1r5k"), ExtResource("12_gl4cg"), ExtResource("13_46nuh"), ExtResource("14_3h6cs"), ExtResource("15_qv07v")])

@@ -15,18 +15,22 @@ func _ready() -> void:
 	reward_choose_a_card.chosen.connect(_on_chosen)
 
 
-func show_secret_reward(is_revealed_secret: bool) -> void:
-	choose_a_secret_button.visible = is_revealed_secret and visible
+func activate(is_revealed_secret: bool) -> void:
+	visible = true
+	rewards_panel.visible = true
+	choose_a_secret_button.visible = is_revealed_secret
 
 
 func _on_choose_a_card_button_pressed() -> void:
 	reward_choose_a_card.visible = true
 	rewards_panel.visible = false
+	reward_choose_a_card.activate(false)
 
 
 func _on_choose_a_secret_button_pressed() -> void:
 	reward_choose_a_card.visible = true
 	rewards_panel.visible = false
+	reward_choose_a_card.activate(true)
 
 
 func _on_chosen(playable_card: PlayableCard):
