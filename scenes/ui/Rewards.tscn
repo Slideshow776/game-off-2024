@@ -1,9 +1,36 @@
-[gd_scene load_steps=5 format=3 uid="uid://co42op7ql70qu"]
+[gd_scene load_steps=8 format=3 uid="uid://co42op7ql70qu"]
 
 [ext_resource type="Texture2D" uid="uid://bovafqk1cu6ur" path="res://assets/images/ui/panel.png" id="1_ifh8s"]
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="1_sk026"]
 [ext_resource type="Script" path="res://scripts/ui/rewards_container.gd" id="1_ur83s"]
 [ext_resource type="PackedScene" uid="uid://dt81ielvak0a1" path="res://scenes/ui/RewardChooseACard.tscn" id="2_oovqp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ibk5n"]
+bg_color = Color(0.398021, 0.690674, 0.581229, 1)
+border_width_bottom = 8
+border_color = Color(0.230357, 0.446607, 0.367644, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56shr"]
+bg_color = Color(0.553797, 0.842355, 0.729938, 1)
+border_width_bottom = 8
+border_color = Color(0.306055, 0.565562, 0.470031, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a5l8r"]
+bg_color = Color(0.398021, 0.690674, 0.581229, 1)
+border_width_bottom = 8
+border_color = Color(0.230357, 0.446607, 0.367644, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [node name="Rewards" type="Control"]
 layout_mode = 3
@@ -45,22 +72,27 @@ size_flags_vertical = 4
 mouse_filter = 2
 texture = ExtResource("1_ifh8s")
 expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="RewardsPanel"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -250.0
-offset_right = 250.0
-offset_bottom = 130.0
+offset_left = -252.0
+offset_right = 252.0
+offset_bottom = 186.0
 grow_horizontal = 2
 theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="RewardsPanel/MarginContainer"]
 layout_mode = 2
-size_flags_vertical = 4
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/separation = 16
 
 [node name="Label" type="Label" parent="RewardsPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -75,18 +107,15 @@ layout_mode = 2
 theme = ExtResource("1_sk026")
 text = "Choose a card"
 
-[node name="Label2" type="Label" parent="RewardsPanel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("1_sk026")
-text = "or"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="ChooseASecretButton" type="Button" parent="RewardsPanel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("1_sk026")
-text = "Choose a secret"
+theme_override_styles/focus = SubResource("StyleBoxFlat_ibk5n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_56shr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ibk5n")
+theme_override_styles/normal = SubResource("StyleBoxFlat_a5l8r")
+text = " Choose a secret "
 
 [node name="RewardChooseACard" parent="." instance=ExtResource("2_oovqp")]
 unique_name_in_owner = true

@@ -18,7 +18,11 @@ func initialize(name: String, num_secrets: int) -> void:
 
 func update(revealed_secrets: int) -> void:
 	_num_revealed_secrets += revealed_secrets
-	value = _num_revealed_secrets
+	
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_BOUNCE)
+	tween.EASE_IN_OUT
+	tween.tween_property(self, "value", _num_revealed_secrets, 0.5)
 	
 	if _num_revealed_secrets == max_value:
 		label.set_text(_character_name + "'s secret revealed!")
