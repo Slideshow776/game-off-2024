@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://ci0unrji7vi3w"]
+[gd_scene load_steps=45 format=3 uid="uid://ci0unrji7vi3w"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_8pbs6"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="2_lcj48"]
@@ -40,6 +40,9 @@
 [ext_resource type="AudioStream" uid="uid://dsp4xmuekr2ig" path="res://assets/audio/sfx/GGA_CardFlip_3.wav" id="28_lsw73"]
 [ext_resource type="AudioStream" uid="uid://dr27n3daxgjtp" path="res://assets/audio/sfx/GGA_LanternBash.wav" id="29_ygrqp"]
 [ext_resource type="AudioStream" uid="uid://dca864uolx4rb" path="res://assets/audio/sfx/GGA_ShieldSelf.wav" id="30_0a0r8"]
+[ext_resource type="AudioStream" uid="uid://v8m5qlphupm6" path="res://assets/audio/sfx/GGA_Button.wav" id="41_tpu84"]
+[ext_resource type="AudioStream" uid="uid://da3ik74da5sil" path="res://assets/audio/sfx/GGA_CardBurn.wav" id="42_ldoe1"]
+[ext_resource type="AudioStream" uid="uid://d1ss7tplvbndx" path="res://assets/audio/sfx/GGA_SecretCard.wav" id="43_7rr3w"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rq1nq"]
 streams_count = 3
@@ -202,33 +205,49 @@ unique_name_in_owner = true
 
 [node name="Audio" type="Node2D" parent="."]
 
-[node name="main_music" type="AudioStreamPlayer" parent="Audio"]
+[node name="MainMusic" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("24_2brc4")
 autoplay = true
 bus = &"Music"
 
-[node name="map_music" type="AudioStreamPlayer" parent="Audio"]
+[node name="MapMusic" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("27_hsaq3")
 bus = &"Music"
 
-[node name="deal_to_hand_sfx" type="AudioStreamPlayer" parent="Audio"]
+[node name="DealToHandSFX" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("25_e33yx")
 bus = &"SFX"
 
-[node name="draw_card_sfxs" type="AudioStreamPlayer" parent="Audio"]
+[node name="DrawCardSFX" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_rq1nq")
 bus = &"SFX"
 
-[node name="attack_action_sfx" type="AudioStreamPlayer" parent="Audio"]
+[node name="AttackActionSFX" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("29_ygrqp")
 bus = &"SFX"
 
-[node name="shield_sfx" type="AudioStreamPlayer" parent="Audio"]
+[node name="ShieldSFX" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("30_0a0r8")
+bus = &"SFX"
+
+[node name="ButtonSFX" type="AudioStreamPlayer" parent="Audio"]
+unique_name_in_owner = true
+stream = ExtResource("41_tpu84")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="CardBurnSFX" type="AudioStreamPlayer" parent="Audio"]
+unique_name_in_owner = true
+stream = ExtResource("42_ldoe1")
+bus = &"SFX"
+
+[node name="SecretCardSFX" type="AudioStreamPlayer" parent="Audio"]
+unique_name_in_owner = true
+stream = ExtResource("43_7rr3w")
 bus = &"SFX"

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dp25u7ocj871r"]
+[gd_scene load_steps=5 format=3 uid="uid://dp25u7ocj871r"]
 
 [ext_resource type="Texture2D" uid="uid://c1y6sqgrl0bc" path="res://assets/images/ui/mana_orb.png" id="1_7yo2o"]
 [ext_resource type="Script" path="res://scripts/ui/mana_orb.gd" id="2_1yqwk"]
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="2_ehypq"]
+[ext_resource type="AudioStream" uid="uid://bnookiaccsmor" path="res://assets/audio/sfx/GGA_ManaGlass.wav" id="4_kyiq6"]
 
 [node name="ManaOrb" type="Sprite2D"]
 position = Vector2(146, 492)
@@ -20,3 +21,8 @@ theme_override_font_sizes/font_size = 32
 text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ManaGlassSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_kyiq6")
+bus = &"SFX"

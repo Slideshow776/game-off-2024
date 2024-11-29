@@ -79,6 +79,10 @@ func _input(event: InputEvent) -> void:
 		deck_view_control._on_back_button_pressed()
 	elif event.is_action_pressed("mouse_click_back") && map.visible && not game_won:
 		map._on_back_button_pressed()
+	
+	if event.is_action_pressed("mouse_click") or event.is_action_pressed("mouse_click_back"):
+		%ButtonSFX.play()
+		
 
 
 func _is_game_over() -> bool:
@@ -120,17 +124,17 @@ func _start_enemy_turn() -> void:
 	match enemy_character_state: # ai logic
 		0:
 			enemy_character.add_defense(0)
-			%attack_action_sfx.play()
+			%AttackActionSFX.play()
 			tween = enemy_character.deal_damage_animation()
 			player_character.take_damage(3)
 		1:
 			enemy_character.add_defense(1)
-			%attack_action_sfx.play()
+			%AttackActionSFX.play()
 			tween = enemy_character.deal_damage_animation()
 			player_character.take_damage(2)
 		2:
 			enemy_character.add_defense(2)
-			%attack_action_sfx.play()
+			%AttackActionSFX.play()
 			tween = enemy_character.deal_damage_animation()
 			player_character.take_damage(1)
 			
@@ -183,23 +187,26 @@ func _on_hand_card_activated(playable_card: PlayableCard) -> void:
 	
 	for action in playable_card.actions:
 		if action is DrawACardAction:
-			%draw_card_sfxs.play()
+			%DrawCardSFX.play()
 			_draw_a_card_to_hand(null, action.number_of_cards_to_draw)
 		if action is ExhaustAction:
 			playable_card.exhausted = true
+			%CardBurnSFX.play()
 		if action is ExhaustOtherRandomAction:
 			var random_card = hand.cards.pick_random()
 			(random_card as PlayableCard).exhausted = true
 			hand.remove_by_entity(random_card)
+			%CardBurnSFX.play()
 		if action is RevealSecretAction:
 			secrecy_bar.update(action.num_secrets_revealed)
+			%SecretCardSFX.play()
 		if action is HealAction:
 			player_character.health += action.num_heal
 	
 	if playable_card.card.type == CardData.Type.ATTACK:
-		%attack_action_sfx.play()
+		%AttackActionSFX.play()
 	if playable_card.card.type == CardData.Type.DEFENSE:
-		%shield_sfx.play()
+		%ShieldSFX.play()
 	
 	player_character.spend_mana(card_cost)
 	mana_orb.label.text = str(player_character.mana)
@@ -264,7 +271,7 @@ func _restart_game() -> void:
 
 
 func _deal_to_hand() -> void:
-	%deal_to_hand_sfx.play()
+	%DealToHandSFX.play()
 	var tween := create_tween()
 	for i in player_character.number_of_cards_to_be_dealt:
 		_draw_a_card_to_hand(tween, player_character.number_of_cards_to_be_dealt)
@@ -384,8 +391,8 @@ func _fade_out() -> void:
 
 
 func _switch_music() -> void:
-	var main_music = %main_music as AudioStreamPlayer
-	var map_music = %map_music as AudioStreamPlayer
+	var main_music = %MainMusic as AudioStreamPlayer
+	var map_music = %MapMusic as AudioStreamPlayer
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_SINE)
 	var duration: float = 0.5

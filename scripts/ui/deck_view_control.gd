@@ -27,15 +27,15 @@ func play_audio(type: Type, is_open: bool) -> void:
 			Type.DISCARD_PILE:
 				%discard_deck_open.play()
 			Type.DECK:
-				pass # TODO:
+				%draw_deck_open.play()
 	else: # closing sounds
 		match type:
 			Type.DRAW_PILE:
 				%draw_deck_close.play()
 			Type.DISCARD_PILE:
-				pass # TODO:
+				%draw_deck_close.play()
 			Type.DECK:
-				pass # TODO:
+				%draw_deck_close.play()
 
 
 func set_type(type: Type) -> void:

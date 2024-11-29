@@ -17,6 +17,8 @@ func _ready() -> void:
 func fill_up_animation() -> void:
 	if _empty_tween:
 		_empty_tween.kill()
+		
+	%ManaGlassSFX.play()
 	
 	_fill_up_tween = create_tween()
 	_fill_up_tween.set_parallel(true)	
@@ -42,7 +44,6 @@ func spend_animation() -> void:
 	_spend_tween.tween_property(self, "rotation", -amount, duration)
 	_spend_tween.tween_property(self, "rotation", amount, duration)
 	_spend_tween.tween_property(self, "rotation", 0, duration)
-
 
 func empty_animation() -> void:
 	_empty_tween = create_tween()
