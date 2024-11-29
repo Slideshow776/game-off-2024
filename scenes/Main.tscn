@@ -229,6 +229,7 @@ bus = &"SFX"
 [node name="AttackActionSFX" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("29_ygrqp")
+volume_db = -5.0
 bus = &"SFX"
 
 [node name="ShieldSFX" type="AudioStreamPlayer" parent="Audio"]

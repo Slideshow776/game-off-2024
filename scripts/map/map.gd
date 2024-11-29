@@ -9,6 +9,7 @@ signal chosen(Encounter)
 @onready var ice_cream_isaac: Encounter = $IceCreamIsaac
 @onready var muffin_max: Encounter = $MuffinMax
 @onready var donut_daisy: Encounter = $DonutDaisy
+@onready var ascension_label: Label = %AscensionLabel
 
 
 func _ready() -> void:
@@ -18,6 +19,14 @@ func _ready() -> void:
 		encounter.pressed.connect(_on_encounter_pressed)
 	
 	_create_connections()
+
+
+func return_to_map():
+	visible = true
+	
+	get_tree().paused = true
+	await get_tree().create_timer(0.25).timeout
+	get_tree().paused = false
 
 
 func enable(is_win: bool) -> void:
@@ -36,6 +45,22 @@ func disable(character: Character) -> void:
 	for encounter in get_all_encounters():
 		if encounter.character_data == character.character_data:
 			encounter.disabled = true
+
+
+func is_all_encounters_defeated() -> bool:
+	var defeated := 0
+	for encounter in get_all_encounters():
+		if encounter.disabled:
+			defeated += 1
+			
+	if defeated == get_all_encounters().size():
+		return true
+	return false
+
+
+func enable_all_encounters() -> void:	
+	for encounter in get_all_encounters():
+		encounter.disabled = false
 
 
 func _on_back_button_pressed() -> void:

@@ -7,3 +7,4 @@ extends Resource
 @export var start_mana: int
 @export var base_defense: int
 @export var current_mana_cap: int
+@export var num_secrets: int

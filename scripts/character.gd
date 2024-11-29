@@ -19,7 +19,7 @@ var num_secrets := 3
 
 
 func _ready() -> void:
-	reset()
+	hard_reset()
 
 
 func _process(delta: float) -> void:
@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 
 func load_data(data: CharacterData) -> void:	
 	character_data = data
-	reset()
+	hard_reset()
 
 
 func set_health_values(new_health: int, new_max_health: int) -> void:
@@ -118,9 +118,26 @@ func add_defense(amount: int) -> void:
 	update_defense_icon()
 
 
-func reset() -> void:
+func heal_up_a_little() -> void:
+	var diff = character_data.max_health - health
+	var random_heals = randi_range(1, diff)
+	health += random_heals
+
+
+func hard_reset() -> void:
 	name = character_data.name
 	health = character_data.max_health
+	mana = character_data.start_mana
+	defense = character_data.base_defense
+	modulate.a = 1.0
+	
+	update_health_bar()
+	update_defense_icon()
+
+
+func soft_reset() -> void:
+	name = character_data.name
+	#health = character_data.max_health
 	mana = character_data.start_mana
 	defense = character_data.base_defense
 	modulate.a = 1.0

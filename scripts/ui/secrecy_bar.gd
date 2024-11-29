@@ -7,10 +7,10 @@ var _num_revealed_secrets := 0
 var _character_name := ""
 
 
-func initialize(name: String, num_secrets: int) -> void:
-	_character_name = name
-	label.set_text(_character_name + "'s Secret!")
-	max_value = num_secrets
+func initialize(character_data: CharacterData) -> void:
+	_character_name = character_data.name
+	label.set_text("Steal " + _get_name_name(_character_name) + "'s Secret!")
+	max_value = character_data.num_secrets
 	value = max_value
 	
 	_start_animation()
@@ -25,12 +25,13 @@ func update(revealed_secrets: int) -> void:
 	tween.tween_property(self, "value", _num_revealed_secrets, 0.5)
 	
 	if _num_revealed_secrets == max_value:
-		label.set_text(_character_name + "'s secret revealed!")
+		label.set_text(_get_name_name(_character_name) + "'s secret revealed!")
 
 
 func restart() -> void:
 	_num_revealed_secrets = 0
 	update(0)
+	label.set_text("Steal " + _get_name_name(_character_name) + "'s Secret!")
 	_start_animation()
 
 
@@ -49,3 +50,8 @@ func _start_animation() -> void:
 	scale_tween.tween_property(self, "scale", Vector2(1 - scale_amount, 1 + scale_amount), total_duration / 3)
 	scale_tween.tween_property(self, "scale", Vector2(1 + scale_amount, 1 - scale_amount), total_duration / 3)
 	scale_tween.tween_property(self, "scale", Vector2.ONE, total_duration / 3)
+
+
+func _get_name_name(name: String) -> String:
+	var words = name.split(" ")
+	return words[words.size() - 1]

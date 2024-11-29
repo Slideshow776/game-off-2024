@@ -57,7 +57,6 @@ func empty() -> Array[PlayableCard]:
 
 func remove_card(index: int) -> PlayableCard:
 	if index < 0 or index > cards.size() - 1:
-		print(index)
 		return
 	
 	var card = cards[index]

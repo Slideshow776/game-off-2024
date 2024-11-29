@@ -11,3 +11,4 @@ max_health = 10
 start_mana = 3
 base_defense = 0
 current_mana_cap = 3
+num_secrets = 2

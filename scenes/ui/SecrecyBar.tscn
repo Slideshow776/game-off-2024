@@ -30,6 +30,6 @@ offset_right = 613.0
 offset_bottom = 27.0
 theme = ExtResource("1_mo0pv")
 theme_override_font_sizes/font_size = 23
-text = "Donec's Secret!"
+text = "Steal Donec's Secret!"
 horizontal_alignment = 1
 vertical_alignment = 1

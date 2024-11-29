@@ -26,6 +26,8 @@ func activate(is_revealed_secret: bool) -> void:
 	
 	if is_revealed_secret:
 		num_rewards = 2
+	else:
+		num_rewards = 1
 
 
 func _on_choose_a_card_button_pressed() -> void:
@@ -44,6 +46,6 @@ func _on_choose_a_secret_button_pressed() -> void:
 	reward_choose_a_card.activate(true)
 
 
-func _on_chosen(playable_card: PlayableCard):	
+func _on_chosen(playable_card: PlayableCard):
 	chosen.emit(playable_card)
 	rewards_panel.visible = true

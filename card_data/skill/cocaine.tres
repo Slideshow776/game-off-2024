@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("3_ljcdi")
-title = "Cocaine"
+title = "Sugar"
 description = "+1 mana"
 cost = 1
 image = ExtResource("2_vrx6a")

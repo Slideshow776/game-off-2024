@@ -27,6 +27,8 @@ extends Node2D
 var enemy_character_state := 0
 var game_won := false
 var rewards_received := 0
+var ascension_level := 0
+var ascension_modifier := 1.1
 
 @onready var _original_music_volume := _get_music_bus_volume()
 @onready var hand: Hand = %Hand
@@ -63,7 +65,7 @@ func _ready() -> void:
 	turn_announcer.announce("Steal the secrets of sugar city!", turn_announcer.total_duration * 2.5)
 	
 	Input.set_custom_mouse_cursor(load("res://assets/images/ui/mouse_cursor.png"))
-	map.visible = true
+	map.return_to_map()
 	map.back_button.visible = false
 
 
@@ -82,7 +84,6 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("mouse_click") or event.is_action_pressed("mouse_click_back"):
 		%ButtonSFX.play()
-		
 
 
 func _is_game_over() -> bool:
@@ -98,6 +99,9 @@ func _is_game_over() -> bool:
 
 
 func _start_player_turn() -> void:
+	if _is_game_over():
+		return
+	
 	view_map_button.disabled = true
 	view_deck_button.disabled = true
 	draw_pile.disabled = true
@@ -123,20 +127,20 @@ func _start_enemy_turn() -> void:
 	
 	match enemy_character_state: # ai logic
 		0:
-			enemy_character.add_defense(0)
+			enemy_character.add_defense(0 * ascension_modifier)
 			%AttackActionSFX.play()
 			tween = enemy_character.deal_damage_animation()
-			player_character.take_damage(3)
+			player_character.take_damage(3 * ascension_modifier)
 		1:
-			enemy_character.add_defense(1)
+			enemy_character.add_defense(1 * ascension_modifier)
 			%AttackActionSFX.play()
 			tween = enemy_character.deal_damage_animation()
-			player_character.take_damage(2)
+			player_character.take_damage(2 * ascension_modifier)
 		2:
-			enemy_character.add_defense(2)
+			enemy_character.add_defense(2 * ascension_modifier)
 			%AttackActionSFX.play()
 			tween = enemy_character.deal_damage_animation()
-			player_character.take_damage(1)
+			player_character.take_damage(1 * ascension_modifier)
 			
 	enemy_character_state = posmod(enemy_character_state + 1, 3)
 	if not _is_game_over():
@@ -145,6 +149,9 @@ func _start_enemy_turn() -> void:
 	else:
 		tween.tween_interval(turn_announcer.total_duration / 2)
 		tween.finished.connect(func() -> void:
+			if _is_game_over():
+				return
+	
 			turn_announcer.announce("Defeated!").finished.connect(func() -> void:
 				map.visible = true
 				map.back_button.visible = false
@@ -154,6 +161,9 @@ func _start_enemy_turn() -> void:
 
 func _on_end_turn_pressed() -> void:
 	if game_controller.current_state != GameController.GameState.PLAYER_TURN:
+		return
+		
+	if _is_game_over():
 		return
 	
 	end_turn_button.disabled = true
@@ -174,6 +184,9 @@ func _empty_hand_to_discard_pile() -> void:
 
 
 func _on_hand_card_activated(playable_card: PlayableCard) -> void:
+	if rewards.visible or _is_game_over():
+		return
+	
 	var card_cost := playable_card.get_cost()
 	if card_cost > player_character.mana:
 		return
@@ -230,6 +243,7 @@ func _check_if_card_won_the_game() -> void:
 		
 		if _is_game_over() and not game_won:
 			rewards.activate(secrecy_bar.is_secret_revealed())
+		
 		if rewards.visible:
 			_switch_music()
 			game_won = true
@@ -241,8 +255,9 @@ func _restart_game() -> void:
 	secrecy_bar.restart()
 	rewards_received = 0
 	map.back_button.visible = true
-	player_character.reset()
-	enemy_character.reset()
+	player_character.soft_reset()
+	player_character.heal_up_a_little()
+	enemy_character.hard_reset()
 	enemy_character_state = 0
 	hand.empty()
 	mana_orb.label.text = str(player_character.mana)
@@ -260,8 +275,7 @@ func _restart_game() -> void:
 	discard_pile.deck = PlayableDeck.new()
 	discard_pile.set_label_deck_size()
 	discard_pile.disabled = true
-	
-	
+		
 	rewards.visible = false
 	game_over_color_rect.visible = false
 	
@@ -355,7 +369,7 @@ func _draw_card_to_hand() -> void:
 
 func _on_encounter_chosen_received(encounter: Encounter) -> void:
 	enemy_character.load_data(encounter.character_data)
-	secrecy_bar.initialize(enemy_character.name, enemy_character.num_secrets)
+	secrecy_bar.initialize(enemy_character.character_data)
 	map.visible = false
 	map.back_button.disabled = false
 	_switch_music()
@@ -375,10 +389,22 @@ func _on_reward_card_chosen(playable_card: PlayableCard) -> void:
 	
 	rewards.visible = false
 	
-	map.visible = true
+	map.return_to_map()
 	if secrecy_bar.is_secret_revealed():
 		map.disable(enemy_character)
 	map.back_button.visible = false
+	
+	if map.is_all_encounters_defeated():
+		map.enable_all_encounters()
+		ascension_level += 1
+		map.ascension_label.visible = true
+		map.ascension_label.set_text("Ascension: " + str(ascension_level))
+		
+		for encounter in map.get_all_encounters():
+			encounter.character_data.max_health *= ascension_modifier
+			encounter.character_data.num_secrets *= ascension_modifier
+		
+		ascension_modifier *= ascension_modifier
 
 
 func _fade_out() -> void:
