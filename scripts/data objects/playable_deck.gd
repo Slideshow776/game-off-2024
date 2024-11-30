@@ -26,3 +26,7 @@ func put_card_on_top(card: CardWithID) -> void:
 
 func put_card_on_bottom(card: CardWithID) -> void:
 	cards.push_front(card)
+
+
+func get_random_card() -> CardWithID:
+	return cards.pick_random()

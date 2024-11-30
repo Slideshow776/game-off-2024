@@ -48,6 +48,7 @@ var ascension_modifier := 1.1
 @onready var turn_announcer: TurnAnnouncer = %TurnAnnouncer
 @onready var rewards: Rewards = %Rewards
 @onready var secrecy_bar: SecrecyBar = %SecrecyBar
+@onready var remove_choose_a_card: ChoiceRemoveCards = %RemoveChooseACard
 
 
 func _ready() -> void:
@@ -59,6 +60,7 @@ func _ready() -> void:
 	view_map_button.pressed.connect(_on_view_map_button_pressed)
 	map.chosen.connect(_on_encounter_chosen_received)
 	rewards.chosen.connect(_on_reward_card_chosen)
+	remove_choose_a_card.chosen.connect(_on_remove_card_chosen)
 	
 	turn_announcer.total_duration = turn_delay
 	_generate_starting_deck()
@@ -98,7 +100,7 @@ func _is_game_over() -> bool:
 	return game_over or enemy_character.health <= 0
 
 
-func _start_player_turn() -> void:
+func _start_player_turn() -> void:	
 	if _is_game_over():
 		return
 	
@@ -375,6 +377,13 @@ func _on_encounter_chosen_received(encounter: Encounter) -> void:
 	_restart_game()
 
 
+func _on_remove_card_chosen(playable_card: PlayableCard) -> void:
+	if playable_card:
+		deck.remove_card_by_data(playable_card.card_data)
+		view_deck_button.deck = deck.get_playable_deck()
+		view_deck_button.set_label_deck_size()
+
+
 func _on_reward_card_chosen(playable_card: PlayableCard) -> void:
 	if playable_card:
 		deck.add_card(playable_card.card_data)
@@ -395,7 +404,8 @@ func _on_reward_card_chosen(playable_card: PlayableCard) -> void:
 	
 	if map.is_all_encounters_defeated():
 		map.enable_all_encounters()
-		ascension_level += 1
+		ascension_level += 1	
+		remove_choose_a_card.activate(deck)
 		map.ascension_label.visible = true
 		map.ascension_label.set_text("Ascension: " + str(ascension_level))
 		

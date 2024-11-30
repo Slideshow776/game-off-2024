@@ -7,7 +7,7 @@
 script = ExtResource("1_u1mmt")
 name = "Muffin Max"
 texture = ExtResource("2_yewbm")
-max_health = 10
+max_health = 11
 start_mana = 3
 base_defense = 0
 current_mana_cap = 3

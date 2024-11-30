@@ -1,15 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://dt81ielvak0a1"]
+[gd_scene load_steps=5 format=3 uid="uid://dt81ielvak0a1"]
 
 [ext_resource type="Script" path="res://scripts/ui/choose_a_card.gd" id="1_ip2sj"]
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="2_0ipra"]
-[ext_resource type="Script" path="res://scripts/data objects/card_data.gd" id="2_ag6t0"]
 [ext_resource type="PackedScene" uid="uid://63ourneieubs" path="res://scenes/ui/RewardCardContainer.tscn" id="3_nw34h"]
-[ext_resource type="Resource" uid="uid://diohlghnp538v" path="res://card_data/defense/denial.tres" id="4_7h3lb"]
-[ext_resource type="Resource" uid="uid://blaycm7luhqkl" path="res://card_data/attack/ad_hominem.tres" id="4_52y2c"]
-[ext_resource type="Resource" uid="uid://rbkk6al75hiy" path="res://card_data/defense/appeal_to_nature_card.tres" id="5_46l2m"]
-[ext_resource type="Resource" uid="uid://cr68yucq0177l" path="res://card_data/defense/strawman.tres" id="6_m0ain"]
-[ext_resource type="Resource" uid="uid://csycik0pxrnh3" path="res://card_data/secret/false_lead.tres" id="7_v07dm"]
-[ext_resource type="Resource" uid="uid://d2u3e4rw37fxf" path="res://card_data/skill/bandwagon.tres" id="8_g0jpo"]
 [ext_resource type="Resource" uid="uid://c3go1vgcgl7ow" path="res://card_data/tests/test.tres" id="8_xsosv"]
 
 [node name="RewardChooseACard" type="MarginContainer"]
@@ -23,7 +16,6 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 script = ExtResource("1_ip2sj")
-possible_rewards = Array[ExtResource("2_ag6t0")]([ExtResource("4_7h3lb"), ExtResource("4_52y2c"), ExtResource("5_46l2m"), ExtResource("6_m0ain"), ExtResource("7_v07dm"), ExtResource("8_g0jpo")])
 test_card_data = ExtResource("8_xsosv")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]

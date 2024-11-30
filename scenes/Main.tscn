@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://ci0unrji7vi3w"]
+[gd_scene load_steps=45 format=3 uid="uid://ci0unrji7vi3w"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_8pbs6"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="2_lcj48"]
@@ -32,6 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://dddavuqmsq4ei" path="res://scenes/ui/draw_pile.tscn" id="18_x2c22"]
 [ext_resource type="Texture2D" uid="uid://chc5rigmc2qya" path="res://assets/images/ui/map_hover.png" id="19_fppyf"]
 [ext_resource type="PackedScene" uid="uid://d3udvqgwbws15" path="res://scenes/ui/SecrecyBar.tscn" id="19_lcpvo"]
+[ext_resource type="PackedScene" uid="uid://y6pa31sr5nt5" path="res://scenes/ui/RemoveChooseACard.tscn" id="21_uc3gi"]
 [ext_resource type="AudioStream" uid="uid://cf1amttorpsv5" path="res://assets/audio/music/CardGame_Soundtrack.mp3" id="24_2brc4"]
 [ext_resource type="AudioStream" uid="uid://bg2o3fm2y8si8" path="res://assets/audio/sfx/GGA_DeckDeal.wav" id="25_e33yx"]
 [ext_resource type="AudioStream" uid="uid://wuxls2wq8twc" path="res://assets/audio/sfx/GGA_CardFlip_1.wav" id="26_s6vvb"]
@@ -131,6 +132,10 @@ visible = false
 unique_name_in_owner = true
 
 [node name="Rewards" parent="CanvasLayer" instance=ExtResource("13_f501m")]
+unique_name_in_owner = true
+visible = false
+
+[node name="RemoveChooseACard" parent="CanvasLayer" instance=ExtResource("21_uc3gi")]
 unique_name_in_owner = true
 visible = false
 

@@ -1,0 +1,73 @@
+[gd_scene load_steps=4 format=3 uid="uid://y6pa31sr5nt5"]
+
+[ext_resource type="Script" path="res://scripts/ui/remove_a_card.gd" id="1_v4sl6"]
+[ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="3_kfkft"]
+[ext_resource type="PackedScene" uid="uid://63ourneieubs" path="res://scenes/ui/RewardCardContainer.tscn" id="4_lnw5j"]
+
+[node name="RemoveChooseACard" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("1_v4sl6")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.94902)
+
+[node name="MarginContainer" type="MarginContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Background/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("3_kfkft")
+theme_override_colors/font_color = Color(0.913725, 0.913725, 0.913725, 1)
+text = "Remove a Card!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="RewardCardContainer1" parent="Background/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_lnw5j")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RewardCardContainer2" parent="Background/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_lnw5j")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RewardCardContainer3" parent="Background/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_lnw5j")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SkipButton" type="Button" parent="Background/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_kfkft")
+text = "skip"

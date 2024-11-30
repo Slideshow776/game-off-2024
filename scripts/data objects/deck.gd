@@ -10,6 +10,14 @@ func add_card(card: CardData) -> void:
 	_card_collection[card_id] = CardWithID.new(card_id, card)
 
 
+func remove_card_by_data(card_data: CardData) -> void:
+	for card_id in _card_collection.keys():
+		var card_with_id = _card_collection[card_id]
+		if card_with_id.card.title == card_data.title:
+			_card_collection.erase(card_id)
+			break
+
+
 func remove_card(card_id: int) -> void:
 	_card_collection.erase(card_id)
 
