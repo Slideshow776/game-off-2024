@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3udvqgwbws15"]
+[gd_scene load_steps=7 format=3 uid="uid://d3udvqgwbws15"]
 
 [ext_resource type="Theme" uid="uid://c8r8cjb1at4wg" path="res://assets/resources/main_theme.tres" id="1_mo0pv"]
 [ext_resource type="Script" path="res://scripts/ui/secrecy_bar.gd" id="2_3f6s0"]
+[ext_resource type="AudioStream" uid="uid://df3is3dsgx8f2" path="res://assets/audio/sfx/GGA_SecretBarFull.mp3" id="3_vga2h"]
+[ext_resource type="AudioStream" uid="uid://d1ss7tplvbndx" path="res://assets/audio/sfx/GGA_SecretCard.wav" id="4_eipm7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e7een"]
 bg_color = Color(0.831373, 0.760784, 0.988235, 1)
@@ -33,3 +35,13 @@ theme_override_font_sizes/font_size = 23
 text = "Steal Donec's Secret!"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SecretBarFullSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_vga2h")
+bus = &"SFX"
+
+[node name="SecretUpdateSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_eipm7")
+bus = &"SFX"

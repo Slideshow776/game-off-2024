@@ -212,7 +212,6 @@ func _on_hand_card_activated(playable_card: PlayableCard) -> void:
 			%CardBurnSFX.play()
 		if action is RevealSecretAction:
 			secrecy_bar.update(action.num_secrets_revealed)
-			%SecretCardSFX.play()
 		if action is HealAction:
 			player_character.health += action.num_heal
 	

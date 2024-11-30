@@ -25,7 +25,10 @@ func update(revealed_secrets: int) -> void:
 	tween.tween_property(self, "value", _num_revealed_secrets, 0.5)
 	
 	if _num_revealed_secrets == max_value:
+		%SecretBarFullSFX.play()
 		label.set_text(_get_name_name(_character_name) + "'s secret revealed!")
+	elif revealed_secrets > 0 and _num_revealed_secrets != max_value:
+		%SecretUpdateSFX.play()
 
 
 func restart() -> void:

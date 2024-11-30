@@ -45,7 +45,10 @@ func spend_animation() -> void:
 	_spend_tween.tween_property(self, "rotation", amount, duration)
 	_spend_tween.tween_property(self, "rotation", 0, duration)
 
+
 func empty_animation() -> void:
+	%ManaGlassEMPTYSFX.play()
+	
 	_empty_tween = create_tween()
 	_empty_tween.set_parallel()
 	_empty_tween.set_trans(Tween.TRANS_EXPO)
