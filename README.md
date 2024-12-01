@@ -4,7 +4,8 @@
 > Game Off is an annual game jam challenging individuals and teams to build a game during the month of November.
 >
 > This year's Game Off theme is **SECRETS**.
-[kanban board](https://trello.com/b/Kbo7RItS/game-off-2024)
+
+The [kanban board](https://trello.com/b/Kbo7RItS/game-off-2024).
 
 ## Credits
 * Followed [this Godot deckbuilding tutorial](https://www.youtube.com/watch?v=HF8A0OuyHho&t=4088s) by [DeveloperEzra](https://www.youtube.com/@ezthedev).
